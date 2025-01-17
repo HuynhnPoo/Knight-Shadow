@@ -6,18 +6,17 @@ using UnityEngine;
 public class ChaseStateEnemy : IState
 {
 
-    [SerializeField] private EnemyMove enemyMove;
+    [SerializeField] private EnemyStateCrtl enemyMove;
 
-    public ChaseStateEnemy(EnemyMove enemyMove)
+    public ChaseStateEnemy(EnemyStateCrtl enemyMove)
     {
         this.enemyMove = enemyMove;
     }
 
     public void Enter()
     {
-        // throw new System.NotImplementedException();
 
-        Debug.Log("enter enenmy");
+       // Debug.Log("enter enenmy");
     }
 
     public void Execute()
@@ -28,6 +27,6 @@ public class ChaseStateEnemy : IState
     public void Exit()
     {
      
-        Debug.Log("exit enenmy");
+       // Debug.Log("exit enenmy");
     }
 }

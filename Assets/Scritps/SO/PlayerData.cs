@@ -6,9 +6,9 @@ using UnityEngine;
 [CreateAssetMenu (fileName ="NewPlayerData",menuName = "ScriptableObject/Player")]
 public class PlayerData : ScriptableObject
 {
-    public new string name;
+    public string characterName;
     public float hp;
     public float mp;
     public float speed;
-    public float dame;
+    public int dame;
 }

@@ -9,6 +9,4 @@ public class ButtonPlay : ButtonBase
         UIManager.Instance.ChangeScene(UIManager.SceneType.GAMEPLAY);
     }
 
-    
-    
 }

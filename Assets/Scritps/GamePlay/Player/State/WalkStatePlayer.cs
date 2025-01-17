@@ -7,6 +7,8 @@ public class WalkStatePlayer : IState
     private CharacterInfo characterInfo;
     private float horizontal=0;
     private float vertical=0;
+
+    PlayerController playerController;
     public WalkStatePlayer(CharacterInfo characterInfo)
     {
        this.characterInfo = characterInfo;
@@ -19,13 +21,14 @@ public class WalkStatePlayer : IState
     public void Execute()
     {
         if (characterInfo == null) return;
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
-        characterInfo.Moving(horizontal,vertical);
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
+        characterInfo.Moving(horizontal, vertical);
     }
 
     public void Exit()
     {
         Debug.Log("exit walk state");
     }
+
 }

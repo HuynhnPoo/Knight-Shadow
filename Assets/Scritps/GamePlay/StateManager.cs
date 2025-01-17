@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : MonoBehaviour
 {
-    [SerializeField] private IState currentState;
+    private IState currentState;
 
     // Start is called before the first frame update
     void Start()

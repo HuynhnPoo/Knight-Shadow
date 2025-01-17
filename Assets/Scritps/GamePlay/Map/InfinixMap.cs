@@ -90,11 +90,7 @@ public class InfinixMap : MonoBehaviour
         float centerX = player.transform.position.x;
         float centerY = player.transform.position.y;
 
-        return new Vector3(
-            centerX + (x - 1) * (tileSize * 3),
-            centerY + (y - 1) * tileSize,
-            0
-        );
+        return new Vector3(centerX + (x - 1) * (tileSize * 3), centerY + (y - 1) * tileSize,0);
     }
 
     void CheckAndMoveTile()

@@ -9,9 +9,12 @@ public class GameManager : SingletonBase<GameManager>
         base.Awake();
     }
 
-    public void Game()
-    {
-        Debug.Log("hien thij game manager");
+    public void GameStart()
+    { 
     }
-   
+
+    public void GameOver() 
+    {
+        Debug.Log("game over");
+    }
 }

@@ -6,16 +6,16 @@ public class IdleStatePlayer : IState
 {
     public void Enter()
     {
-        Debug.Log("enter idle state ");
+      // Debug.Log("enter idle state ");
     }
 
     public void Exit()
     {
-        Debug.Log("exit ilde state");
+       //Debug.Log("exit ilde state");
     }
 
     public void Execute()
     {
-        Debug.Log("update ilde state");
+       // Debug.Log("update ilde state");
     }
 }

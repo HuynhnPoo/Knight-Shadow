@@ -5,16 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField]private StateManager stateManager;
-    [HideInInspector]public CharacterInfo characterInfo;
+    [SerializeField] private StateManager stateManager;
+    [SerializeField] private CharacterInfo characterInfo;
+
     int speed = 20;
+
+    [Range(0.1f, 5f)] public float rangeAttack;
+    [SerializeField]private LayerMask enemy;
+   
     // Start is called before the first frame update
     void Start()
     {
         this.stateManager = GetComponent<StateManager>();
         this.characterInfo = GetComponentInChildren<CharacterInfo>();
         stateManager.ChangeState(new IdleStatePlayer());
-
     }
 
     // Update is called once per frame
@@ -26,9 +30,16 @@ public class PlayerController : MonoBehaviour
     //ham kie tra va thuc cac trang thai nhan vat
     public void PlayerState()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        if ( horizontal!= 0 || vertical!= 0)
         {
             stateManager.ChangeState(new WalkStatePlayer(characterInfo));
+        }
+        else if (Input.GetKeyUp(KeyCode.H))
+        {
+            stateManager.ChangeState(new AttackStatePlayer(this));
         }
         else
         {
@@ -39,9 +50,26 @@ public class PlayerController : MonoBehaviour
     //ham thuc hien di chuyen
     public void Moving(float directionX, float directionY)
     {
-        Vector3 playerDirection = new Vector3(directionX,directionY);
+        Vector3 playerDirection = new Vector3(directionX, directionY);
         transform.Translate(playerDirection * speed * Time.deltaTime);
     }
 
+
+    public void Attack()
+    {
+
+        Collider2D[] hitEnemis = Physics2D.OverlapCircleAll(this.transform.position, rangeAttack, enemy);
+
+        foreach (Collider2D enemies in hitEnemis)
+        {
+            Debug.LogWarning("hien thi enemy" + enemies.name);
+            enemies.GetComponent<EnemyInfo>().TakeDame(characterInfo.Dame);
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.DrawWireSphere(this.transform.position, rangeAttack);
+    }
 }
  

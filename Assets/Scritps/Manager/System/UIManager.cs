@@ -10,11 +10,8 @@ public class UIManager : SingletonBase<UIManager>
     {
         base.Awake();
     }
-    public void UINN()
-    {
-        Debug.Log("hien thi ra UINNI");
-    }
 
+    //danh sach cac scene
     public enum SceneType
     {
         MAINMENU,
@@ -22,6 +19,7 @@ public class UIManager : SingletonBase<UIManager>
         LOADING
     }
 
+    //ham thuc hien thya doi scene
     public void ChangeScene(SceneType scene)
     {
         SceneManager.LoadScene(scene.ToString());

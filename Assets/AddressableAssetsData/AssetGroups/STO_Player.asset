@@ -16,17 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 904344f9ee793f94a81a4195917ca917
-  m_SerializeEntries:
-  - m_GUID: 8b03890a8e9da93408aed706b0fed3f0
-    m_Address: Assets/ScritpsTableObject/Player/Player1.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ca7e35e95dd8ff3409298b2a7e92c958
-    m_Address: Assets/ScritpsTableObject/Player/Player2.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6522c6fefbed93542a69a40ef1b374d6, type: 2}
   m_SchemaSet:
