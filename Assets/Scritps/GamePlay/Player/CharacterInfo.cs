@@ -57,12 +57,12 @@ public class CharacterInfo : MonoBehaviour, IDameable
     {
        currentHp -= dame;
 
-        Debug.Log("hien thi current dame"+ currentHp);
+       // Debug.Log("hien thi current dame"+ currentHp);
         if (currentHp<=0)
         {
             GameManager.Instance.GameOver();
         }
 
     }
-    
+
 }

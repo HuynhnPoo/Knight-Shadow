@@ -6,24 +6,25 @@ public class AttackStatePlayer :IState
 {
     private PlayerController playerController;
     int cooldown = 2;
-    float timer = 0;
+    float timer;
     public AttackStatePlayer(PlayerController playerController)
     {
-        this.playerController = playerController;
+
+    
+     this.playerController = playerController;
     }
 
     public void Enter()
     {
-        timer -= Time.deltaTime;
-        if (timer >+ 0) return;
-        this.playerController.Attack();
-        timer = cooldown;
-     
+        timer = 0;
     }
 
     public void Execute()
     {
-       // Debug.Log("thuc hien attack");
+        timer -= Time.deltaTime;
+        if (timer >= 0) return;
+        this.playerController.Attack();
+        timer = cooldown;   
     }
 
     public void Exit()

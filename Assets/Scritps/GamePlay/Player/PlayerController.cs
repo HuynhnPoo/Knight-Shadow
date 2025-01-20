@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     int speed = 20;
 
     [Range(0.1f, 5f)] public float rangeAttack;
-    [SerializeField]private LayerMask enemy;
-   
+    [SerializeField] private LayerMask enemy;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,11 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        if ( horizontal!= 0 || vertical!= 0)
+         if (Input.GetKeyDown(KeyCode.U) && (horizontal != 0 || vertical != 0))
+        {
+                stateManager.ChangeState(new DashStatePlayer(this,horizontal,vertical));
+        }
+        else if (horizontal != 0 || vertical != 0)
         {
             stateManager.ChangeState(new WalkStatePlayer(characterInfo));
         }
@@ -53,7 +57,12 @@ public class PlayerController : MonoBehaviour
         Vector3 playerDirection = new Vector3(directionX, directionY);
         transform.Translate(playerDirection * speed * Time.deltaTime);
     }
+    public void Dash(float directionX, float directionY)
+    {
+        Vector2 dashDirection = new Vector2(directionX, directionY).normalized;
 
+        transform.Translate(dashDirection * 2);
+    }
 
     public void Attack()
     {
@@ -72,4 +81,3 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawWireSphere(this.transform.position, rangeAttack);
     }
 }
- 

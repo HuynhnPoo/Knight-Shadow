@@ -49,7 +49,7 @@ public class EnemyStateCrtl : MonoBehaviour
 
         foreach (Collider2D player in hitPlayers)
         {
-            Debug.Log("hirn thi"+player.name);
+           // Debug.Log("hirn thi"+player.name);
 
             player.GetComponentInChildren<CharacterInfo>().TakeDame(4);
         }
