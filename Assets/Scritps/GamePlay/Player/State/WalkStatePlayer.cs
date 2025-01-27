@@ -4,30 +4,40 @@ using UnityEngine;
 
 public class WalkStatePlayer : IState
 {
-    private CharacterInfo characterInfo;
+    private PlayerPhysics player;
+    private AnimationManager characterAni;
     private float horizontal=0;
     private float vertical=0;
-
-    PlayerController playerController;
-    public WalkStatePlayer(CharacterInfo characterInfo)
+    private bool isMove=false;
+    Vector2 direction;
+    public WalkStatePlayer(PlayerPhysics player,AnimationManager characterAni)
     {
-       this.characterInfo = characterInfo;
+       this.player = player;
+        this.characterAni = characterAni;
     }
     public void Enter()
     {
+        isMove = true;
         Debug.Log("enter walk state");
     }
 
     public void Execute()
     {
-        if (characterInfo == null) return;
+        if (player == null) return;
+        if (isMove) {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-        characterInfo.Moving(horizontal, vertical);
+        direction=new Vector2 (horizontal, vertical);
+        player.Moving(horizontal, vertical);
+        characterAni.MoveAni(isMove,direction);
+        }
     }
 
     public void Exit()
     {
+        isMove = false;
+        direction = Vector2.zero;
+        characterAni.MoveAni(isMove,direction);
         Debug.Log("exit walk state");
     }
 

@@ -9,7 +9,10 @@ public class CharacterInfo : MonoBehaviour, IDameable
     [SerializeField] private PlayerData player;
 
     private int dame;
+
     public int Dame { get => dame; }
+    public float Speed { get => player.speed; }
+    public float Mana { get => player.mp; }
 
     private float currentHp;
    // public float CurrentHP { get => currentHp; set => currentHp = value; }
@@ -44,15 +47,8 @@ public class CharacterInfo : MonoBehaviour, IDameable
     // Update is called once per frame
     void Update()
     {
-
     }
-    public void Moving(float directionX, float directionY)
-    {
-        Vector3 playerDirection = new Vector3(directionX, directionY);
-
-        transform.parent.parent.Translate(playerDirection * player.speed * Time.deltaTime);
-    }
-
+   
     public void TakeDame(int dame)
     {
        currentHp -= dame;

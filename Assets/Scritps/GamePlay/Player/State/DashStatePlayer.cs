@@ -4,17 +4,16 @@ using UnityEngine;
 
 public class DashStatePlayer : IState
 {
-    private PlayerController PlayerController;
+    private PlayerPhysics player;
     float horizontal;
     float vertical;
-    private float dashSpeed = 6f;
-    private float dashDuration = 0.2f;
+    private float dashDuration = 0.5f;
     private float dashTimer = 0f;
     private bool isDashing = false;
 
-    public DashStatePlayer(PlayerController playerController,float horizontal,float vertical)
+    public DashStatePlayer(PlayerPhysics player,float horizontal,float vertical)
     { 
-        this.PlayerController = playerController; 
+        this.player = player; 
 
         this.horizontal = horizontal;   
         this.vertical = vertical;
@@ -34,11 +33,7 @@ public class DashStatePlayer : IState
         {
             if (dashTimer > 0)
             {
-                //// Chuẩn hóa vector để dash có tốc độ đồng nhất
-                //Vector2 direction = new Vector2(horizontal, vertical).normalized;
-
-                // Thực hiện dash
-                PlayerController.Dash(horizontal,vertical);
+                player.Dashing(horizontal,vertical);
 
                 dashTimer -= Time.deltaTime;
             }

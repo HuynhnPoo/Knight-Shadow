@@ -7,7 +7,7 @@ public class TextBase : MonoBehaviour
 {
     [SerializeField] protected TextMeshProUGUI text;
     // Start is called before the first frame update
-    private void Awake()
+    protected virtual void Awake()
     {
         LoadComponment();
         

@@ -6,9 +6,7 @@ using UnityEngine.UI;
 public abstract class ButtonBase : MonoBehaviour
 {
     [SerializeField] protected Button Button;
-    private void Awake()
-    {
-    }
+   
 
     // Start is called before the first frame update
     protected virtual void Start()

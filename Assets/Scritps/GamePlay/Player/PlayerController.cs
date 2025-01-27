@@ -7,9 +7,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private StateManager stateManager;
     [SerializeField] private CharacterInfo characterInfo;
-
-    int speed = 20;
-
+    [SerializeField] private PlayerPhysics playerPhysics;
+    [SerializeField] private AnimationManager characterAni;
     [Range(0.1f, 5f)] public float rangeAttack;
     [SerializeField] private LayerMask enemy;
 
@@ -17,8 +16,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         this.stateManager = GetComponent<StateManager>();
+        this.playerPhysics = GetComponent<PlayerPhysics>();
         this.characterInfo = GetComponentInChildren<CharacterInfo>();
-        stateManager.ChangeState(new IdleStatePlayer());
+        this.characterAni = GetComponentInChildren<AnimationManager>();
+        this.stateManager.ChangeState(new IdleStatePlayer());
     }
 
     // Update is called once per frame
@@ -33,17 +34,21 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-         if (Input.GetKeyDown(KeyCode.U) && (horizontal != 0 || vertical != 0))
+        if (Input.GetKeyDown(KeyCode.U) && (horizontal != 0 || vertical != 0))
         {
-                stateManager.ChangeState(new DashStatePlayer(this,horizontal,vertical));
+            stateManager.ChangeState(new DashStatePlayer(playerPhysics, horizontal, vertical));
         }
         else if (horizontal != 0 || vertical != 0)
         {
-            stateManager.ChangeState(new WalkStatePlayer(characterInfo));
+            stateManager.ChangeState(new WalkStatePlayer(playerPhysics,characterAni));
         }
         else if (Input.GetKeyUp(KeyCode.H))
         {
             stateManager.ChangeState(new AttackStatePlayer(this));
+        }
+        else if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            UIManager.Instance.ChangeScene(UIManager.SceneType.MAINMENU);
         }
         else
         {
@@ -51,12 +56,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //ham thuc hien di chuyen
-    public void Moving(float directionX, float directionY)
-    {
-        Vector3 playerDirection = new Vector3(directionX, directionY);
-        transform.Translate(playerDirection * speed * Time.deltaTime);
-    }
     public void Dash(float directionX, float directionY)
     {
         Vector2 dashDirection = new Vector2(directionX, directionY).normalized;

@@ -20,8 +20,15 @@ public class UIManager : SingletonBase<UIManager>
     }
 
     //ham thuc hien thya doi scene
-    public void ChangeScene(SceneType scene)
+   /* public void ChangeScene(SceneType scene)
     {
-        SceneManager.LoadScene(scene.ToString());
+       
+         SceneManager.LoadScene(scene.ToString());
+        
+    }*/
+
+    public AsyncOperation ChangeScene(SceneType scene)
+    {
+        return SceneManager.LoadSceneAsync(scene.ToString());
     }
 }
