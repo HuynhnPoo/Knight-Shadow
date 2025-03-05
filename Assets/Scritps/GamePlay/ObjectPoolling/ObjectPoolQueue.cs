@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class ObjectPoolQueue : ObjectPoolBase
 {
     private Queue<GameObject> queue = new Queue<GameObject>();
-
+    [SerializeField] protected GameObject objectsPrefabs;
+    int size = 100;
     // Start is called before the first frame update
     protected override void Start()
     {

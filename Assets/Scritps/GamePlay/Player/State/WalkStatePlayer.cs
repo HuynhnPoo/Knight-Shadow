@@ -5,12 +5,12 @@ using UnityEngine;
 public class WalkStatePlayer : IState
 {
     private PlayerPhysics player;
-    private AnimationManager characterAni;
+    private AnimationCharacter characterAni;
     private float horizontal=0;
     private float vertical=0;
     private bool isMove=false;
     Vector2 direction;
-    public WalkStatePlayer(PlayerPhysics player,AnimationManager characterAni)
+    public WalkStatePlayer(PlayerPhysics player,AnimationCharacter characterAni)
     {
        this.player = player;
         this.characterAni = characterAni;

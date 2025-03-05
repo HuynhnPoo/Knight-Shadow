@@ -11,7 +11,7 @@ public class PlayerPhysics : MonoBehaviour
 
     //dash
 
-    private float timeDashing = .5f;
+    private float timeDashing = .2f;
     private float dashPower = 5;
     // Start is called before the first frame update
     void Start()

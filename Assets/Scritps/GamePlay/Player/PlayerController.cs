@@ -1,25 +1,40 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private StateManager stateManager;
-    [SerializeField] private CharacterInfo characterInfo;
+    [SerializeField] private StateManager stateManager; // trang thai cua nhan vat 
+    [SerializeField] private CharacterInfo characterInfo;// thong chi so nhan vat
     [SerializeField] private PlayerPhysics playerPhysics;
-    [SerializeField] private AnimationManager characterAni;
-    [Range(0.1f, 5f)] public float rangeAttack;
+    [SerializeField] private AnimationCharacter characterAni;
+    [SerializeField] private Weapon weapon;
     [SerializeField] private LayerMask enemy;
+    [Range(0.1f, 5f)] public float rangeAttack;
+
+
+    private void OnEnable()
+    {
+        GetComponents();
+
+        this.stateManager.ChangeState(new IdleStatePlayer());
+    }
+
+    void GetComponents()
+    {
+        this.stateManager = GetComponent<StateManager>();
+        this.playerPhysics = GetComponent<PlayerPhysics>();
+
+        this.characterInfo = GetComponentInChildren<CharacterInfo>();
+        this.characterAni = GetComponentInChildren<AnimationCharacter>();
+        this.weapon = GetComponentInChildren<Weapon>();
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        this.stateManager = GetComponent<StateManager>();
-        this.playerPhysics = GetComponent<PlayerPhysics>();
-        this.characterInfo = GetComponentInChildren<CharacterInfo>();
-        this.characterAni = GetComponentInChildren<AnimationManager>();
-        this.stateManager.ChangeState(new IdleStatePlayer());
+        
     }
 
     // Update is called once per frame
@@ -36,7 +51,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U) && (horizontal != 0 || vertical != 0))
         {
-            stateManager.ChangeState(new DashStatePlayer(playerPhysics, horizontal, vertical));
+            stateManager.ChangeState(new DashStatePlayer(playerPhysics,characterInfo, horizontal, vertical));
         }
         else if (horizontal != 0 || vertical != 0)
         {
@@ -44,11 +59,15 @@ public class PlayerController : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.H))
         {
-            stateManager.ChangeState(new AttackStatePlayer(this));
+            characterAni.AtkAni(); 
+            stateManager.ChangeState(new AttackStatePlayer(weapon));
+
+            //this.weapon.Attacking();
         }
         else if (Input.GetKeyUp(KeyCode.Escape))
         {
-            UIManager.Instance.ChangeScene(UIManager.SceneType.MAINMENU);
+            UIManager.Instance.currentScene = UIManager.SceneType.GAMEPLAY;
+            UIManager.Instance.ChangeScene(UIManager.SceneType.LOADING);
         }
         else
         {
@@ -63,16 +82,9 @@ public class PlayerController : MonoBehaviour
         transform.Translate(dashDirection * 2);
     }
 
-    public void Attack()
+    public int DameAttack()
     {
-
-        Collider2D[] hitEnemis = Physics2D.OverlapCircleAll(this.transform.position, rangeAttack, enemy);
-
-        foreach (Collider2D enemies in hitEnemis)
-        {
-            Debug.LogWarning("hien thi enemy" + enemies.name);
-            enemies.GetComponent<EnemyInfo>().TakeDame(characterInfo.Dame);
-        }
+        return characterInfo.Dame;   
     }
 
     private void OnDrawGizmosSelected()

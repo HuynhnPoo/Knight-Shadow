@@ -4,9 +4,7 @@ using UnityEngine;
 
 public abstract class ObjectPoolBase : MonoBehaviour
 {
-
-    [SerializeField] protected GameObject objectsPrefabs;
-    protected int size = 20;
+    [SerializeField]protected Transform holdObject;
     // Start is called before the first frame update
     protected virtual void Start()
     {

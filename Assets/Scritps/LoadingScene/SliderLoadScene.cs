@@ -11,6 +11,8 @@ public class SliderLoadScene : SliderBase
         StartCoroutine(LoadSceneAsync());
 
     }
+
+    //hiện thay đổi ra giá trị bằng slider
     protected override void OnChange(float amount)
     {
 
@@ -27,8 +29,16 @@ public class SliderLoadScene : SliderBase
 
     IEnumerator LoadSceneAsync()
     {
-
-        AsyncOperation asyncOperation = UIManager.Instance.ChangeScene(UIManager.SceneType.GAMEPLAY);
+        AsyncOperation asyncOperation=null;
+        if (UIManager.Instance.currentScene == UIManager.SceneType.MAINMENU)
+        {
+            asyncOperation = UIManager.Instance.ChangeScene(UIManager.SceneType.GAMEPLAY);
+        }
+        else if (UIManager.Instance.currentScene == UIManager.SceneType.GAMEPLAY)
+        {
+             asyncOperation = UIManager.Instance.ChangeScene(UIManager.SceneType.MAINMENU);
+        }
+        //AsyncOperation asyncOperation = UIManager.Instance.ChangeScene(UIManager.SceneType.GAMEPLAY);
         asyncOperation.allowSceneActivation = false;
         while (!asyncOperation.isDone)
         {
@@ -40,7 +50,7 @@ public class SliderLoadScene : SliderBase
                 yield return new WaitForSeconds(2);
                 asyncOperation.allowSceneActivation = true;
             }
-           // Cập nhật tiến trình vào thanh trượt hoặc UI
+            // Cập nhật tiến trình vào thanh trượt hoặc UI
             yield return null;
 
         }

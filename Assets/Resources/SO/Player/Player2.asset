@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: 
   hp: 150
-  mp: 80
+  mp: 200
   speed: 20
   dame: 30

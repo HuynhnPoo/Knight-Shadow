@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class AttackStatePlayer :IState
 {
-    private PlayerController playerController;
+    private Weapon weapon;
     int cooldown = 2;
     float timer;
-    public AttackStatePlayer(PlayerController playerController)
+    public AttackStatePlayer(Weapon weapon)
     {
 
     
-     this.playerController = playerController;
+     this.weapon = weapon;
     }
 
     public void Enter()
@@ -23,12 +23,12 @@ public class AttackStatePlayer :IState
     {
         timer -= Time.deltaTime;
         if (timer >= 0) return;
-        this.playerController.Attack();
-        timer = cooldown;   
+        this.weapon.Attacking();
     }
 
     public void Exit()
     {
+        timer = cooldown;   
        // Debug.Log("thuc hien eixt attack");
     }
 

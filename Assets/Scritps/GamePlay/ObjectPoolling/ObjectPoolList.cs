@@ -4,46 +4,62 @@ using UnityEngine;
 
 public class ObjectPoolList : ObjectPoolBase
 {
-    private List <GameObject> list= new List <GameObject> ();
-   
-
+    private List<GameObject> list = new List<GameObject>();
+    [SerializeField] protected GameObject[] objectsPrefabs;
+    private int size = 100;
 
     // Start is called before the first frame update
-   protected override void Start()
+    protected override void Start()
     {
-       base.Start();
+        base.Start();
     }
 
     public override void InitializedToPool()
     {
-        for (int i = 0; i < size; i++) 
+        for (int i = 0; i < size; i++)
         {
-            GameObject obj = Instantiate(objectsPrefabs);
-            obj.SetActive (false);
-            list.Add (obj);  
+            int index = Random.Range(0, objectsPrefabs.Length);
+            GameObject obj = Instantiate(objectsPrefabs[index]);
+            obj.transform.parent = holdObject;
+            obj.SetActive(false);
+            list.Add(obj);
         }
     }
 
-    public override GameObject GetObjectPool() 
+    public override GameObject GetObjectPool()
     {
-            foreach (GameObject obj in list) 
+        foreach (GameObject obj in list)
+        {
+            if (!obj.activeInHierarchy)
             {
-                if (!obj.activeInHierarchy)
-                {
-                    obj.SetActive (true);
-
-                    return obj;
-                }
+                obj.SetActive(true);
+                return obj;
             }
-
-        GameObject newObj = Instantiate(objectsPrefabs);
+        }
+        int randomIndex = Random.Range(0, objectsPrefabs.Length);
+        GameObject newObj = Instantiate(objectsPrefabs[randomIndex]);
         newObj.SetActive(false);
         list.Add(newObj);
         return newObj;
     }
 
+    public bool HasActiveObject()
+    {
 
-    public  override void ReturnToPool(GameObject obj)
+        bool isEmpty = false;
+        foreach (GameObject obj in list)
+        {
+            if (obj.activeSelf)
+            {
+                isEmpty = true;
+                break;
+            }
+
+        }
+        return isEmpty;
+    }
+
+    public override void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false);
     }

@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 0c4d940636df61841833298576a57837
   m_currentHash:
     serializedVersion: 2
-    Hash: 11ffeeec43c3fce4ea43c66c1c5e21ad
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
-    - UIShop
+    - item
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 40a5057ceb6cde947b8ff47a7853b7e5, type: 2}

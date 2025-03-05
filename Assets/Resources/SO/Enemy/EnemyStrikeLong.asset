@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7e6127c2883504fb89d3e93725cfa6, type: 3}
   m_Name: EnemyStrikeLong
   m_EditorClassIdentifier: 
-  name: 
-  HP: 0
-  Speed: 0
-  dame: 0
+  enemyName: 
+  HP: 150
+  Speed: 10
+  dame: 100

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class UIManager : SingletonBase<UIManager>
 {
 
+    public SceneType currentScene = SceneType.NONE;
+
     protected override void Awake()
     {
         base.Awake();
@@ -14,6 +16,7 @@ public class UIManager : SingletonBase<UIManager>
     //danh sach cac scene
     public enum SceneType
     {
+        NONE,
         MAINMENU,
         GAMEPLAY,
         LOADING

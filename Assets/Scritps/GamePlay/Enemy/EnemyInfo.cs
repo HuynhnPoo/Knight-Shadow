@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour,IDameable
 {
-    private EnemyData enemyData;
-
+    [SerializeField]private EnemyData enemyData;
+    [SerializeField] private ObjectPoolList poolList;
     private float currentHeath;
 
 
     private void Awake()
     {
-        if (enemyData == null) enemyData = Resources.Load<EnemyData>( "SO/Enemy/EnemyStrikeShort"); 
+        if (enemyData == null) enemyData = Resources.Load<EnemyData>( "SO/Enemy/EnemyStrikeShort");
+        
     }
-
+    private void OnEnable()
+    {
+        if (poolList == null)
+            poolList = GetComponentInParent<ObjectPoolList>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        currentHeath = enemyData.HP;   
+        currentHeath = enemyData.HP;
     }
 
     // Update is called once per frame
@@ -39,6 +44,10 @@ public class EnemyInfo : MonoBehaviour,IDameable
 
     void DisableEnemy()
     {
-        Debug.Log("enemy bi chet");
+
+        Debug.Log("giet quais thanh cong");
+       
+       poolList.ReturnToPool(this.gameObject);  
     }
+
 }

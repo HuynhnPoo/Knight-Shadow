@@ -6,7 +6,10 @@ public class ButtonPlay : ButtonBase
 {
     protected override void OnClick()
     {
-        UIManager.Instance.ChangeScene(UIManager.SceneType.LOADING);
+
+        UIManager.Instance.currentScene = UIManager.SceneType.MAINMENU;
+        UIManager.Instance.ChangeScene(UIManager.SceneType.LOADING);// chuyen sang scene loading6
+       
     }
 
 }
