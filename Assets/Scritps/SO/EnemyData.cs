@@ -7,7 +7,10 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     public string enemyName;
-    public float HP;
-    public float Speed;
-    public float dame;
+    public int HP;
+    public int Speed;
+    public int dame;
+
+    public float rapidAttack;
+    public float rangeAttack;
 }

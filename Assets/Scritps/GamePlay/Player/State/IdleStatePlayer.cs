@@ -4,18 +4,37 @@ using UnityEngine;
 
 public class IdleStatePlayer : IState
 {
+
+    private int threshholdScore = 10;
+
+    private bool isIdle = false;
+
+   private  CharacterInfo characterInfo;
+   
+
+    public IdleStatePlayer(CharacterInfo characterInfo)
+    { 
+        this.characterInfo = characterInfo; 
+    }
+
+
     public void Enter()
     {
-       Debug.Log("enter idle state ");
+        isIdle = true;
+    }
+
+
+    public void Execute()
+    {
+        if (characterInfo.Mana<threshholdScore  && isIdle)
+        {
+            characterInfo.RegenMana();
+        }
     }
 
     public void Exit()
     {
-       Debug.Log("exit ilde state");
+        isIdle = false;
     }
 
-    public void Execute()
-    {
-        Debug.Log("update ilde state");
-    }
 }

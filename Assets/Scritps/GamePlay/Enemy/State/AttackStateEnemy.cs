@@ -1,31 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackStateEnemy : IState
 {
     private EnemyStateCrtl enemyStateCrtl;
+    private int time = 3;
+    private float coolDown = 0;
+    private bool isAtack = false;
 
-    public AttackStateEnemy(EnemyStateCrtl enemyStateCrtl) 
+    public AttackStateEnemy(EnemyStateCrtl enemyStateCrtl)
     {
         this.enemyStateCrtl = enemyStateCrtl;
-    }  
+    }
 
     public void Enter()
     {
-        Debug.Log("hien thi bat ddau state");
+        isAtack = true;
+        coolDown = 0;
     }
 
     public void Execute()
     {
-        Debug.Log("hien thi dang thuc hien state");
-        this.enemyStateCrtl.AttackPlayer();
+        if (isAtack)
+        {
+            coolDown -= Time.deltaTime;
+            if (coolDown > 0) return;
+            this.enemyStateCrtl.AttackPlayer();
+            coolDown = time;
+        }
     }
 
     public void Exit()
     {
-        Debug.Log("hien thi ket thuc state");
+        isAtack = false;
     }
 
-    
+
 }

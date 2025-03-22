@@ -36,16 +36,16 @@ public class AimWeapon : MonoBehaviour
         //int target = 0;
         if (direction.x > 0)
         {
-            offset =  Vector3.right * distance;
+            offset = Vector3.right * distance;
         }
 
         if (direction.x < 0)
         {
-            offset = Vector3.left * distance; 
+            offset = Vector3.left * distance;
         }
         if (direction.y > 0)
         {
-            offset =Vector3.up * distance;
+            offset = Vector3.up * distance;
         }
 
         if (direction.y < 0)

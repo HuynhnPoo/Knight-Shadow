@@ -29,13 +29,11 @@ public class ButtonShop : ButtonBase
         if (!isOpenShop)
         {
             isOpenShop = true;
-            Debug.Log("hirn thi shop");
             shopPanel.SetActive(true);
         }
         else
         {
             isOpenShop= false;
-            Debug.Log("tawt shop ra shop");
             shopPanel.SetActive(false);
         }
     }

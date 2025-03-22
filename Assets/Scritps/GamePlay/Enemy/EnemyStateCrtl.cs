@@ -5,63 +5,71 @@ using UnityEngine;
 public class EnemyStateCrtl : MonoBehaviour
 {
     [SerializeField] private Transform playerPos;
+    [SerializeField]private AnimationEnity enemyAni;
+    private EnemyInfo enemyInfo;
     private StateManager stateManager;
    
-    private int speed = 10;
+//private int speed = 10;
 
-    [Range(0.1f, 5f)] public float rangeAttack=3;
-    [Range(0.1f, 10f)] public float rangeDetection=5;
+  //  [Range(0.1f, 5f)] public float rangeAttack=3;
     [SerializeField]private LayerMask playerLM;
-
+    Vector3 direction;
+    public Vector3 DirectionEnemy { get => direction; set => direction = value; }
+    private void OnEnable()
+    {
+       GetComponentsEnity();
+    }
+    void GetComponentsEnity() 
+    {
+        playerPos = GameObject.FindGameObjectWithTag(TagInGame.player).transform;
+        enemyInfo = GetComponent<EnemyInfo>();
+        stateManager = GetComponent<StateManager>();
+        enemyAni = GetComponent<AnimationEnity>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        playerPos = GameObject.FindGameObjectWithTag(TagInGame.player).transform;
         
-        stateManager = GetComponent<StateManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        
         float distanceToPlayer = Vector2.Distance(transform.position,playerPos.transform.position);
-
-
-        if (distanceToPlayer <= rangeAttack)
+        if (distanceToPlayer <= enemyInfo.RangeAttack)
         {
+           // Debug.Log("hien thi distance"+ distanceToPlayer);
             stateManager.ChangeState(new AttackStateEnemy(this));
         }
         //if (distanceToPlayer < rangeDetection) { }
         else 
         { 
-            stateManager.ChangeState(new ChaseStateEnemy(this));
+            stateManager.ChangeState(new ChaseStateEnemy(this,enemyAni));
         }
     }
 
     public void chaseToPlayer()
     {
-        Vector3 direction = (playerPos.transform.position - transform.position).normalized;
+         direction = (playerPos.transform.position - transform.position).normalized;
 
-        transform.Translate(direction * speed * Time.deltaTime);
+    //    Debug.Log("hien thi direction" + direction.x+"hgfgfg"+ direction.y);
+        transform.Translate(direction * enemyInfo.Speed * Time.deltaTime);
     }
 
     public void AttackPlayer()
     {
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position,rangeAttack,playerLM);
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position,enemyInfo.RangeAttack,playerLM);
 
         foreach (Collider2D player in hitPlayers)
         {
            // Debug.Log("hirn thi"+player.name);
 
-            player.GetComponentInChildren<CharacterInfo>().TakeDame(4);
+            player.GetComponentInChildren<CharacterInfo>().TakeDame(enemyInfo.Dame);
         }
     }
 
-    private void OnDrawGizmosSelected()
+   /* private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position,rangeAttack);
-       
-    }
+     //   Gizmos.DrawWireSphere(transform.position,enemyInfo.RangeAttack); 
+    }*/
 }

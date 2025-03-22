@@ -5,14 +5,14 @@ using UnityEngine;
 public class WalkStatePlayer : IState
 {
     private PlayerPhysics player;
-    private AnimationCharacter characterAni;
-    private float horizontal=0;
-    private float vertical=0;
-    private bool isMove=false;
+    private AnimationEnity characterAni;
+    private float horizontal = 0;
+    private float vertical = 0;
+    private bool isMove = false;
     Vector2 direction;
-    public WalkStatePlayer(PlayerPhysics player,AnimationCharacter characterAni)
+    public WalkStatePlayer(PlayerPhysics player, AnimationEnity characterAni)
     {
-       this.player = player;
+        this.player = player;
         this.characterAni = characterAni;
     }
     public void Enter()
@@ -24,12 +24,13 @@ public class WalkStatePlayer : IState
     public void Execute()
     {
         if (player == null) return;
-        if (isMove) {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
-        direction=new Vector2 (horizontal, vertical);
-        player.Moving(horizontal, vertical);
-        characterAni.MoveAni(isMove,direction);
+        if (isMove)
+        {
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+            direction = new Vector2(horizontal, vertical);
+            player.Moving(horizontal, vertical);
+            characterAni.MoveAni(isMove, direction);
         }
     }
 
@@ -37,7 +38,8 @@ public class WalkStatePlayer : IState
     {
         isMove = false;
         direction = Vector2.zero;
-        characterAni.MoveAni(isMove,direction);
+        player.Moving(0, 0);
+        characterAni.MoveAni(isMove, direction);
         Debug.Log("exit walk state");
     }
 

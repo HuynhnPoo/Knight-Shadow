@@ -1,5 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 
 
@@ -14,29 +15,23 @@ public class CharacterInfo : MonoBehaviour, IDameable
 
     private int currentDame;
     private float currentMana, currentSpeed, currentHp;
+
+    private float manaRate = 5, maxMana;
+    private bool isRegenRating = false;
     // public float CurrentHP { get => currentHp; set => currentHp = value; }
 
     int index;
-    // [SerializeField]private AssetReference asset;
-    //bool active=false;
-
+   
     private void Awake()
     {
         index = PlayerPrefs.GetInt(StringSave.selectionCharacter);
         index++;
         string playerStr = "Player" + index;
-        if (player == null)
-            /*asset.LoadAssetAsync<PlayerData>().Completed += (AsyncOperationHandle<PlayerData> obj) =>
-            {
-                player = obj.Result;
-                active = true;            
-            };*/
-            //Debug.Log("hien thi game object"+);
-            player = Resources.Load<PlayerData>("SO/Player/" + playerStr + "");
+        if (player == null) player = Resources.Load<PlayerData>("SO/Player/" + playerStr + "");
     }
     private void OnEnable()
     {
-        UpdateDataforCharacter();   
+        UpdateDataforCharacter();
     }
     void UpdateDataforCharacter()
     {
@@ -44,31 +39,31 @@ public class CharacterInfo : MonoBehaviour, IDameable
         currentHp = player.hp;
         currentMana = player.mp;
         currentSpeed = player.speed;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
 
+
+        maxMana = currentMana;
+    }
 
     // Update is called once per frame
     void Update()
     {
+        //if (currentMana < maxMana && currentMana<20 )
+        //{
+        //    RegenMana();
+        //}
     }
 
     public void TakeDame(int dame)
     {
-        currentHp -= dame;
+        currentHp -= dame; // trừ máu hiện tại theo dame
 
         // Debug.Log("hien thi current dame"+ currentHp);
         if (currentHp <= 0)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.GameOver(); //máu bằng 0 sẽ game over
         }
 
     }
-
 
     public void ReductionMana(int mana)
     {
@@ -79,9 +74,42 @@ public class CharacterInfo : MonoBehaviour, IDameable
             if (currentMana <= 0)
             {
                 currentMana = 0;
+
             }
         }
-        Debug.Log(currentMana);
+    }
+
+    public void RegenMana()
+    {
+
+
+        isRegenRating = true;
+
+        StartCoroutine(RegenManaCoroutine());
 
     }
+
+    IEnumerator RegenManaCoroutine()
+    {
+        // nếu đúng  điều kiện  và isRegenRating bằng true
+        while (currentDame < maxMana && isRegenRating)
+        {
+            yield return new WaitForSeconds(0.5f);  
+            currentMana += manaRate * Time.deltaTime;
+            if (currentMana >= maxMana)
+            {
+                currentMana = maxMana; // nếu mana bằng hoặc hơn maxMana thì sẽ cho bằng maxMana
+
+                isRegenRating= false;
+            } 
+
+            Debug.Log(currentMana);
+
+            yield return null;
+        }
+
+        isRegenRating = false;
+    }
 }
+
+

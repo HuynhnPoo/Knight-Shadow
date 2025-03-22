@@ -1,60 +1,68 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-
 
 [System.Serializable]
 public class TileRow
 {
     public GameObject[] columns = new GameObject[3];
 }
+
 public class InfinixMap : MonoBehaviour
 {
-
     [SerializeField]
     private TileRow[] rows = new TileRow[3];
 
-    private GameObject[] tiles = new GameObject[3];
     public GameObject player;
+    private int tileSize = 10;
 
-    private Vector2 lastPlayerPos;
+    // Khoảng cách để kích hoạt việc di chuyển tile
+    private int horizontalTriggerDistance = 15;
+    private int verticalTriggerDistance = 5;
 
-    public int tileSize = 20;
-    int count = 0;
+    // Mảng lưu trữ các ngưỡng kích hoạt theo cả hai hướng
+    private int[] horizontalThresholds = new int[2]; // [0] là ngưỡng âm, [1] là ngưỡng dương
+    private int[] verticalThresholds = new int[2];   // [0] là ngưỡng âm, [1] là ngưỡng dương
 
-    private GameObject centerTile;
+
 
     private void Awake()
     {
-        AddTiles();
+        InitializeTiles();
+
     }
 
-    void AddTiles()
+    private void OnEnable()
     {
-        tiles = new GameObject[transform.childCount];
-        for (int i = 0; i < tiles.Length; i++)
-        {
-            tiles[i] = transform.GetChild(i).gameObject;
-        }
 
+    }
+
+    void InitializeTiles()
+    {
+        int count = 0;
         for (int i = 0; i < rows.Length; i++)
         {
-            for (int j = 0; j < rows.Length; j++)
+            for (int j = 0; j < rows[i].columns.Length; j++)
             {
-                rows[j].columns[i] = tiles[count];
-                count++;
+                if (count < transform.childCount)
+                {
+                    rows[i].columns[j] = transform.GetChild(count).gameObject;
+                    count++;
+                }
             }
-
         }
-
     }
 
     void Start()
     {
-        // Lưu lại bounds của tilemap gốc
-        // lastPlayerPosition = player.transform.position;
-        lastPlayerPos = player.transform.position;
+        if (player == null) player = GameManager.Instance.PlayerCrtl.transform.gameObject;
+
         ArrangeInitialTiles();
+
+        // Khởi tạo các ngưỡng kích hoạt ban đầu cho cả hai hướng
+        horizontalThresholds[0] = -horizontalTriggerDistance;  // Ngưỡng âm bên trái
+        horizontalThresholds[1] = horizontalTriggerDistance;   // Ngưỡng dương bên phải
+        verticalThresholds[0] = -verticalTriggerDistance;      // Ngưỡng âm bên dưới
+        verticalThresholds[1] = verticalTriggerDistance;       // Ngưỡng dương been trên
     }
 
     void Update()
@@ -64,8 +72,6 @@ public class InfinixMap : MonoBehaviour
 
     void ArrangeInitialTiles()
     {
-
-
         // Sắp xếp 9 tile theo grid 3x3
         for (int y = 0; y < 3; y++)
         {
@@ -75,61 +81,64 @@ public class InfinixMap : MonoBehaviour
                 {
                     Vector3 newPos = CalculateTilePosition(x, y);
                     rows[y].columns[x].transform.position = newPos;
-                }    
-
-                  //  rows[y].columns[x].transform.position = new Vector3((x - 1) * (tileSize * 3), (y - 1) * tileSize, 0);
+                }
             }
         }
-
-       
     }
 
-    // Hàm mới để tính toán vị trí chính xác của tile
+    // Hàm tính toán vị trí chính xác của tile
     Vector3 CalculateTilePosition(int x, int y)
     {
-        float centerX = player.transform.position.x;
-        float centerY = player.transform.position.y;
-
-        return new Vector3(centerX + (x - 1) * (tileSize * 3), centerY + (y - 1) * tileSize,0);
+        float worldX = (x - 1) * tileSize * 3;
+        float worldY = (y - 1) * tileSize;
+        return new Vector3(worldX, worldY, 0);
     }
 
     void CheckAndMoveTile()
     {
         Vector2 currentPosition = player.transform.position;
-        Vector2 movement = currentPosition - lastPlayerPos;
 
-        if (movement.x > tileSize+20)
+        // Kiểm tra và di chuyển tile theo chiều ngang
+        if (currentPosition.x > horizontalThresholds[1])
         {
             MoveTileHorizontally(1);
-            lastPlayerPos = currentPosition;
+            horizontalThresholds[1] += horizontalTriggerDistance;
+            horizontalThresholds[0] += horizontalTriggerDistance;
+            Debug.Log($"Moved tiles right, new thresholds: {horizontalThresholds[0]} / {horizontalThresholds[1]}");
         }
-        else if (movement.x < -tileSize-20)
+        else if (currentPosition.x < horizontalThresholds[0])
         {
             MoveTileHorizontally(-1);
-            lastPlayerPos = currentPosition;
+            horizontalThresholds[0] -= horizontalTriggerDistance;
+            horizontalThresholds[1] -= horizontalTriggerDistance;
+            Debug.Log($"Moved tiles left, new thresholds: {horizontalThresholds[0]} / {horizontalThresholds[1]}");
         }
 
-        if (movement.y > tileSize+10)
+        // Kiểm tra và di chuyển tile theo chiều dọc
+        if (currentPosition.y > verticalThresholds[1])
         {
             MoveTileVertically(1);
-            lastPlayerPos = currentPosition;
+            verticalThresholds[1] += verticalTriggerDistance;
+            verticalThresholds[0] += verticalTriggerDistance;
+            Debug.Log($"Moved tiles up, new thresholds: {verticalThresholds[0]} / {verticalThresholds[1]}");
         }
-        else if (movement.y < -tileSize-10)
+        else if (currentPosition.y < verticalThresholds[0])
         {
             MoveTileVertically(-1);
-            lastPlayerPos = currentPosition;
+            verticalThresholds[0] -= verticalTriggerDistance;
+            verticalThresholds[1] -= verticalTriggerDistance;
+            Debug.Log($"Moved tiles down, new thresholds: {verticalThresholds[0]} / {verticalThresholds[1]}");
         }
-
     }
-    
 
-    // ham di chuyen tile theo chieu ngang
+    // Hàm di chuyển tile theo chiều ngang
     void MoveTileHorizontally(int direction)
     {
 
         for (int y = 0; y < 3; y++)
         {
             GameObject tempTile;
+
             if (direction > 0) // Di chuyển sang phải
             {
                 // Lưu tile ở cột trái
@@ -147,8 +156,8 @@ public class InfinixMap : MonoBehaviour
                 // Di chuyển vị trí của tile
                 if (tempTile != null)
                 {
-                   // Đặt vị trí mới dựa trên vị trí của tile trung tâm
-                    tempTile.transform.position = CalculateTilePosition(2, y);
+                    tempTile.transform.position = new Vector3(tempTile.transform.position.x + 9 * tileSize/2 , tempTile.transform.position.y, 0);
+
                 }
             }
             else // Di chuyển sang trái
@@ -168,57 +177,58 @@ public class InfinixMap : MonoBehaviour
                 // Di chuyển vị trí của tile
                 if (tempTile != null)
                 {
-                    // Đặt vị trí mới dựa trên vị trí của tile trung tâm
-                    tempTile.transform.position = CalculateTilePosition(0, y);
+                    tempTile.transform.position = new Vector3(tempTile.transform.position.x - 9 * tileSize/2 , tempTile.transform.position.y, 0);
                 }
             }
         }
+
     }
 
-    //ham di chuyentile theo chieu doc
+    // Hàm di chuyển tile theo chiều dọc
     void MoveTileVertically(int direction)
     {
         for (int x = 0; x < 3; x++)
         {
             GameObject tempTile;
 
-            if (direction > 0)
+            if (direction > 0) // Di chuyển lên trên
             {
+                // Lưu tile ở hàng dưới
                 tempTile = rows[0].columns[x];
 
+                // Di chuyển các tile xuống dưới
                 for (int y = 0; y < 2; y++)
                 {
                     rows[y].columns[x] = rows[y + 1].columns[x];
                 }
+
+                // Đặt tile đã lưu vào hàng trên
                 rows[2].columns[x] = tempTile;
 
                 if (tempTile != null)
                 {
-                    // Đặt vị trí mới dựa trên vị trí của tile trung tâm
-                    tempTile.transform.position = CalculateTilePosition(x, 2);
+                    tempTile.transform.position = new Vector3(tempTile.transform.position.x, tempTile.transform.position.y + 3 * tileSize / 2, 0);
                 }
-
             }
-
-            else
+            else // Di chuyển xuống dưới
             {
+                // Lưu tile ở hàng trên
                 tempTile = rows[2].columns[x];
 
+                // Di chuyển các tile lên trên
                 for (int y = 2; y > 0; y--)
                 {
                     rows[y].columns[x] = rows[y - 1].columns[x];
-
                 }
 
+                // Đặt tile đã lưu vào hàng dưới
                 rows[0].columns[x] = tempTile;
+
                 if (tempTile != null)
                 {
-                    // Đặt vị trí mới dựa trên vị trí của tile trung tâm
-                    tempTile.transform.position = CalculateTilePosition(x, 0);
+                    tempTile.transform.position = new Vector3(tempTile.transform.position.x, tempTile.transform.position.y - 3 * tileSize / 2, 0);
                 }
             }
-
         }
     }
-
 }

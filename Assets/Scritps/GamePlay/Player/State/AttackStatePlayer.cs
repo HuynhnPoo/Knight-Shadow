@@ -9,8 +9,6 @@ public class AttackStatePlayer :IState
     float timer;
     public AttackStatePlayer(Weapon weapon)
     {
-
-    
      this.weapon = weapon;
     }
 
@@ -22,13 +20,14 @@ public class AttackStatePlayer :IState
     public void Execute()
     {
         timer -= Time.deltaTime;
-        if (timer >= 0) return;
+        if (timer > 0) return;
         this.weapon.Attacking();
+        timer = cooldown;
     }
 
     public void Exit()
     {
-        timer = cooldown;   
+       
        // Debug.Log("thuc hien eixt attack");
     }
 

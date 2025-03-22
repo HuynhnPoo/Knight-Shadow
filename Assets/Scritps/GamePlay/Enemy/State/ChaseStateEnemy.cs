@@ -6,27 +6,37 @@ using UnityEngine;
 public class ChaseStateEnemy : IState
 {
 
-    [SerializeField] private EnemyStateCrtl enemyMove;
+    private EnemyStateCrtl enemyMove;
+    private AnimationEnity enemyAni;
 
-    public ChaseStateEnemy(EnemyStateCrtl enemyMove)
+    bool isMove = false;
+    public ChaseStateEnemy(EnemyStateCrtl enemyMove, AnimationEnity enemyAni)
     {
         this.enemyMove = enemyMove;
+
+        this.enemyAni = enemyAni;
     }
 
     public void Enter()
     {
 
-       // Debug.Log("enter enenmy");
+        isMove = true;
+        // Debug.Log("enter enenmy");
     }
 
     public void Execute()
     {
-        enemyMove.chaseToPlayer();
+        if (isMove)
+        {
+            enemyMove.chaseToPlayer();
+            enemyAni.MoveAni(isMove, enemyMove.DirectionEnemy);
+        }
     }
 
     public void Exit()
     {
-     
-       // Debug.Log("exit enenmy");
+
+        isMove = false;
+        // Debug.Log("exit enenmy");
     }
 }

@@ -6,18 +6,13 @@ public class StateManager : MonoBehaviour
 {
     private IState currentState;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     public void ChangeState(IState state)
     {
-        if (currentState != null && state.GetType() == this.currentState.GetType()) return;
+        if (currentState != null && state.GetType() == this.currentState.GetType()) return; // neu cung state se return 
 
         if (currentState != null) currentState.Exit();
-        currentState = state;
+        currentState = state; // chuyeen sang state khac
 
         if (currentState != null) currentState.Enter();
     }

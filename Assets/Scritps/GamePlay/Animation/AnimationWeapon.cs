@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AnimationWeapon : MonoBehaviour
@@ -42,6 +41,8 @@ public class AnimationWeapon : MonoBehaviour
             {
                 child.gameObject.SetActive(true);
                 charcterAni = GetComponentInChildren<Animator>();
+
+                GameManager.Instance.PlayerCrtl.GetcompomentWeaponSelected();
             }
             else
             {
