@@ -6,7 +6,7 @@ using UnityEngine;
 public class AttackStateEnemy : IState
 {
     private EnemyStateCrtl enemyStateCrtl;
-    private int time = 3;
+    //private int time = 3;
     private float coolDown = 0;
     private bool isAtack = false;
 
@@ -28,7 +28,8 @@ public class AttackStateEnemy : IState
             coolDown -= Time.deltaTime;
             if (coolDown > 0) return;
             this.enemyStateCrtl.AttackPlayer();
-            coolDown = time;
+            coolDown = enemyStateCrtl.GetRapidAttack();
+          //  Debug.Log("hie thi ra toc danh cacs con quai"+ enemyStateCrtl.GetRapidAttack());
         }
     }
 

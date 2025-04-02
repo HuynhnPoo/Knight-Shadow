@@ -10,22 +10,27 @@ public class ItemController : MonoBehaviour
     float timer = 0;
     int coolDown = 5;
 
-   [SerializeField] private AssetLabelReference labelIEm;
-   public ItemData item;
+    [SerializeField] private AssetLabelReference labelIEm;
+    public ItemData ItemData;
+    private int value;
 
     private void OnEnable()
     {
-        GameManagerAssetsLoad.LoadingGameAssetByLabel(labelIEm,gameObject.name,this,LoadSOItem);
+        if (ItemData == null)
+            GameManagerAssetsLoad.LoadingGameAssetByLabel(labelIEm, gameObject.name, this, LoadSOItem);// load SO cho item bằng addressable
+        else value = ItemData.value;
+
     }
+
 
     void LoadSOItem(ScriptableObject scriptableObject)
     {
-        item = scriptableObject as ItemData;
+        ItemData = scriptableObject as ItemData;
     }
 
     void DesTroyByTime()
     {
-        timer +=1 * Time.deltaTime;// cong thoi gian len
+        timer += 1 * Time.deltaTime;// cong thoi gian len
 
         // neu time tang len qua coolDown se destroy vat
         if (timer > coolDown)
@@ -44,15 +49,21 @@ public class ItemController : MonoBehaviour
 
     IEnumerator DestroyCollison(Collider2D collision)
     {
-       yield return new WaitForSeconds(0.5f);
-        if (gameObject.CompareTag(TagInGame.experice) && collision.gameObject.CompareTag(TagInGame.player))
+        yield return new WaitForSeconds(0.5f); // sau 0. sẽ thuc hien
+                                               //neu game object có cung tag khi cham sẽ xoa
+        if (this.gameObject.CompareTag(TagInGame.experice) && collision.gameObject.CompareTag(TagInGame.player))
         {
+            GameManager.Instance.AddExperice(ItemData.value);
+
             Destroy(this.gameObject);
         }
-        if (gameObject.CompareTag(TagInGame.gold) && collision.gameObject.CompareTag(TagInGame.player))
+        if (this.gameObject.CompareTag(TagInGame.gold) && collision.gameObject.CompareTag(TagInGame.player))
         {
+            GameManager.Instance.AddGold(ItemData.value);
+
             Destroy(this.gameObject);
         }
+
     }
 
 }

@@ -28,7 +28,6 @@ public class AttackStatePlayer :IState
     public void Exit()
     {
        
-       // Debug.Log("thuc hien eixt attack");
     }
 
    

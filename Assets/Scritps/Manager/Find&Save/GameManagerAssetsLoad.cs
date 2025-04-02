@@ -32,16 +32,18 @@ public static class GameManagerAssetsLoad
         //  onComplete?.Invoke();
     }
 
-    public static void LoadingGameAssetByLabel(AssetLabelReference  labelRef, string obj, MonoBehaviour coroutineRuner, Action<ScriptableObject> onComplete)//, Action action)
+    public static void LoadingGameAssetByLabel(AssetLabelReference labelRef, string obj, MonoBehaviour coroutineRuner, Action<ScriptableObject> onComplete)//, Action action)
     {
-        coroutineRuner.StartCoroutine(LoadingGameAssetByLabelCoroutine(labelRef, obj,onComplete));
+        coroutineRuner.StartCoroutine(LoadingGameAssetByLabelCoroutine(labelRef, obj, onComplete));
     }
 
     public static IEnumerator LoadingGameAssetByLabelCoroutine(AssetLabelReference labelRef, string objName, Action<ScriptableObject> onComplete)
     {
-       /// Load tất cả assets với label đã chỉ định
+
+        string cleanName = objName.Replace("(Clone)", "");
+        /// Load tất cả assets với label đã chỉ định
         var handle = Addressables.LoadAssetsAsync<ScriptableObject>(
-            labelRef.labelString, // Chỉ cần truyền label
+            labelRef, // Chỉ cần truyền label
             null   // Không cần callback cho mỗi asset
         );
 
@@ -54,9 +56,10 @@ public static class GameManagerAssetsLoad
             // Tìm ScriptableObject có tên trùng khớp
             foreach (var obj in handle.Result)
             {
-                if (obj.name == objName)
+                if (obj.name == cleanName)
                 {
                     targetObj = obj;
+
                     break;
                 }
             }
@@ -77,7 +80,7 @@ public static class GameManagerAssetsLoad
         }
         else
         {
-           // Debug.LogError($"Failed to load assets with label '{label}'");
+            // Debug.LogError($"Failed to load assets with label '{label}'");
             onComplete?.Invoke(null);
         }
     }

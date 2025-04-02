@@ -104,14 +104,12 @@ public class InfinixMap : MonoBehaviour
             MoveTileHorizontally(1);
             horizontalThresholds[1] += horizontalTriggerDistance;
             horizontalThresholds[0] += horizontalTriggerDistance;
-            Debug.Log($"Moved tiles right, new thresholds: {horizontalThresholds[0]} / {horizontalThresholds[1]}");
         }
         else if (currentPosition.x < horizontalThresholds[0])
         {
             MoveTileHorizontally(-1);
             horizontalThresholds[0] -= horizontalTriggerDistance;
             horizontalThresholds[1] -= horizontalTriggerDistance;
-            Debug.Log($"Moved tiles left, new thresholds: {horizontalThresholds[0]} / {horizontalThresholds[1]}");
         }
 
         // Kiểm tra và di chuyển tile theo chiều dọc
@@ -120,14 +118,12 @@ public class InfinixMap : MonoBehaviour
             MoveTileVertically(1);
             verticalThresholds[1] += verticalTriggerDistance;
             verticalThresholds[0] += verticalTriggerDistance;
-            Debug.Log($"Moved tiles up, new thresholds: {verticalThresholds[0]} / {verticalThresholds[1]}");
         }
         else if (currentPosition.y < verticalThresholds[0])
         {
             MoveTileVertically(-1);
             verticalThresholds[0] -= verticalTriggerDistance;
             verticalThresholds[1] -= verticalTriggerDistance;
-            Debug.Log($"Moved tiles down, new thresholds: {verticalThresholds[0]} / {verticalThresholds[1]}");
         }
     }
 
@@ -157,7 +153,6 @@ public class InfinixMap : MonoBehaviour
                 if (tempTile != null)
                 {
                     tempTile.transform.position = new Vector3(tempTile.transform.position.x + 9 * tileSize/2 , tempTile.transform.position.y, 0);
-
                 }
             }
             else // Di chuyển sang trái

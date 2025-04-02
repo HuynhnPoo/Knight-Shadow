@@ -21,10 +21,6 @@ public class SliderLoadScene : SliderBase
             slider.value = amount;
             Debug.Log("Loading progress: " + ((float)amount * 100) + "%");
         }
-        else
-        {
-            Debug.LogError("loi ow day");
-        }
     }
 
     IEnumerator LoadSceneAsync()

@@ -8,7 +8,6 @@ public class CharacterInfo : MonoBehaviour, IDameable
 {
     [SerializeField] private PlayerData player;
 
-
     public int Dame { get => currentDame; }
     public float Speed { get => currentSpeed; }
     public float Mana { get => currentMana; set => currentMana = value; }
@@ -74,15 +73,12 @@ public class CharacterInfo : MonoBehaviour, IDameable
             if (currentMana <= 0)
             {
                 currentMana = 0;
-
             }
         }
     }
 
     public void RegenMana()
     {
-
-
         isRegenRating = true;
 
         StartCoroutine(RegenManaCoroutine());

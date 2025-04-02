@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ICompoment 
 {
 
     [SerializeField] private StateManager stateManager; // trang thai cua nhan vat 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -56,18 +56,16 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.U) && (horizontal != 0 || vertical != 0))
         {
-            stateManager.ChangeState(new DashStatePlayer(playerPhysics,characterInfo, horizontal, vertical));
+            stateManager.ChangeState(new DashStatePlayer(playerPhysics, characterInfo, horizontal, vertical));
         }
         else if (horizontal != 0 || vertical != 0)
         {
-            stateManager.ChangeState(new WalkStatePlayer(playerPhysics,characterAni));
+            stateManager.ChangeState(new WalkStatePlayer(playerPhysics, characterAni));
         }
         else if (Input.GetKeyUp(KeyCode.H))
         {
-            characterAni.AtkAni(); 
+            characterAni.AtkAni();
             stateManager.ChangeState(new AttackStatePlayer(weapon));
-
-            //this.weapon.Attacking();
         }
         else
         {
@@ -79,5 +77,8 @@ public class PlayerController : MonoBehaviour
         return characterInfo.Dame;
     }
 
-
+    void ICompoment.GetComponentsEnity()
+    {
+        throw new System.NotImplementedException();
+    }
 }

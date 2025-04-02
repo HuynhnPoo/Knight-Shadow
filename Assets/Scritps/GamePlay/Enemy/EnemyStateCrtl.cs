@@ -68,6 +68,11 @@ public class EnemyStateCrtl : MonoBehaviour
         }
     }
 
+
+    public float GetRapidAttack()
+    {
+        return enemyInfo.RapidAttack;   
+    }
    /* private void OnDrawGizmosSelected()
     {
      //   Gizmos.DrawWireSphere(transform.position,enemyInfo.RangeAttack); 

@@ -16,14 +16,12 @@ public class MeleeWeapon : Weapon
 
         foreach (Collider2D enemies in hitEnemis)
         {
-            Debug.LogWarning("hien thi enemy" + enemies.name);
             //mỗi lần va chạm sẽ giảm máu quái vật
 
             int dame = GameManager.Instance.PlayerCrtl.DameAttack() + dameWeapon;
             enemies.GetComponent<EnemyInfo>().TakeDame(dame);
         }
 
-        Debug.Log("day là kiem dang đanh");
     }
 
     private void OnDrawGizmosSelected()

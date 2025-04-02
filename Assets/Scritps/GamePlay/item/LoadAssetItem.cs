@@ -11,13 +11,14 @@ public class LoadAssetItem : MonoBehaviour
 
     private void OnEnable()
     {
-
-        GameManagerAssetsLoad.LoadingGameAsset(itemAssets, list, this);
+        GameManagerAssetsLoad.LoadingGameAsset(itemAssets, list, this); // load các item bang addressable
     }
 
+
+    // ham sinh item
     public void SpawnItem(int index,Transform posEnemy)
     {
-        GameObject obj = Instantiate(list[index],posEnemy.position,Quaternion.identity);
+        GameObject obj = Instantiate(list[index],posEnemy.position,Quaternion.identity); 
     }
 
 }

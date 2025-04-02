@@ -254,7 +254,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   labelIEm:
     m_LabelString: item
-  item: {fileID: 0}
+  ItemData: {fileID: 0}
 --- !u!1 &7304419151986631937
 GameObject:
   m_ObjectHideFlags: 0

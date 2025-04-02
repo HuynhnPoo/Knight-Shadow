@@ -22,12 +22,8 @@ public class PlayerPhysics : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
-
+    // ham di chuyen nhan vat
     public void Moving(float directionX, float directionY)
     {
         Vector2 playerDirection = new Vector2(directionX, directionY);
@@ -35,6 +31,7 @@ public class PlayerPhysics : MonoBehaviour
 
     }
 
+    // ham luots cua nhan vat
     public void Dashing(float directionX, float directionY)
     {
         StartCoroutine(DashingCoroutine(directionX, directionY));
@@ -43,11 +40,12 @@ public class PlayerPhysics : MonoBehaviour
     public IEnumerator DashingCoroutine(float directionX, float directionY)
     {
 
-        Debug.Log("thuc hien dashing");
         Vector2 dashDirection = new Vector2(directionX, directionY).normalized;
         playerRB2D.velocity = dashDirection * (dashPower) * 50;
+
         playerTR.emitting = true;
         yield return new WaitForSeconds(timeDashing);
+
         VelocityToZero();
         playerTR.emitting = false;
     }

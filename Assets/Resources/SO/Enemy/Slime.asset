@@ -16,5 +16,5 @@ MonoBehaviour:
   HP: 200
   Speed: 10
   dame: 100
-  rapidAttack: 0
+  rapidAttack: 2
   rangeAttack: 0.5

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b0bb791b355b6e4a8437bb964748a1a, type: 3}
   m_Name: ExpericeL
   m_EditorClassIdentifier: 
-  value: 0
-  frequency: 0
+  value: 50
+  timeDestroys: 0

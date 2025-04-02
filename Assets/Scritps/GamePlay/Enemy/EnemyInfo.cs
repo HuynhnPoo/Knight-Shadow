@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEditor.Build.Pipeline;
 using UnityEngine;
 
-public class EnemyInfo : MonoBehaviour, IDameable
+public class EnemyInfo : MonoBehaviour, IDameable,ICompoment
 {
     [SerializeField] private EnemyData enemyData;
-    [SerializeField] private ObjectPoolList poolList;
     [SerializeField] private LoadAssetItem itemAsset;
+
+    [SerializeField] private SpawnEnemy spawnEnemy;
 
     // data info enemy
 
@@ -24,6 +25,10 @@ public class EnemyInfo : MonoBehaviour, IDameable
     public float RangeAttack { get => rangeAttack; }
 
 
+    private float rapidAttack;
+    public float RapidAttack { get => rapidAttack; }
+
+
     private void Awake()
     {
         if (enemyData == null)
@@ -38,8 +43,16 @@ public class EnemyInfo : MonoBehaviour, IDameable
 
     private void OnEnable()
     {
-        if (itemAsset == null) itemAsset = GetComponentInParent<LoadAssetItem>();
-        if (poolList == null) poolList = GetComponentInParent<ObjectPoolList>();
+        GetComponentsEnity();
+    }
+
+    public void GetComponentsEnity()
+    {
+        if (itemAsset == null && spawnEnemy == null)
+        {
+            itemAsset = GetComponentInParent<LoadAssetItem>();
+            spawnEnemy = GetComponentInParent<SpawnEnemy>();
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -54,10 +67,10 @@ public class EnemyInfo : MonoBehaviour, IDameable
         {
             currentHeath = enemyData.HP;
             speed = enemyData.Speed;
-            dame = enemyData.dame;
-            nameEnemy = enemyData.name;
+            dame = enemyData.dame;// khia bao dame
+            nameEnemy = enemyData.name;// ten quai vat
 
-            rangeAttack = enemyData.rangeAttack;
+            rangeAttack = enemyData.rangeAttack;//  khi bao pham vi tan cong
         }
 
     }
@@ -79,10 +92,12 @@ public class EnemyInfo : MonoBehaviour, IDameable
     void DisableEnemy()
     {
         Debug.Log("giet quais thanh cong");
-        poolList.ReturnToPool(this.gameObject);
+        spawnEnemy.ReturnToPool(this.gameObject); // dua liaj vao pool
         DropItem();
     }
 
+
+    // giet quai xong se hien roi ra item
 
     void DropItem()
     {
@@ -91,10 +106,9 @@ public class EnemyInfo : MonoBehaviour, IDameable
             case "Slime":
             case "Sekeleton":
             case "Orc":
-                Debug.Log("hien thi " + gameObject.name);
 
-                itemAsset.SpawnItem(0,this.transform);
-                itemAsset.SpawnItem(4, this.transform);
+                itemAsset.SpawnItem(0, this.transform);
+                itemAsset.SpawnItem(1, this.transform);
                 break;
 
             case "Vampire":
@@ -103,7 +117,13 @@ public class EnemyInfo : MonoBehaviour, IDameable
                 itemAsset.SpawnItem(5, this.transform);
                 break;
 
+            default:
+
+                Debug.LogWarning("Không dung quái");
+                break;
+
         }
     }
 
+    
 }

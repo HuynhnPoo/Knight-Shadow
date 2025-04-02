@@ -18,17 +18,17 @@ MonoBehaviour:
   m_GUID: 0c4d940636df61841833298576a57837
   m_SerializeEntries:
   - m_GUID: 1926fec0527167b409a0e20218379fff
-    m_Address: Assets/Prefabs/GamePlay/Item/Item ExperienceS.prefab
+    m_Address: Assets/Prefabs/GamePlay/Item/ExpericeS.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8bc194f9d712821459631a2bf8eecaf1
-    m_Address: Assets/Prefabs/GamePlay/Item/Item ExperienceM.prefab
+    m_Address: Assets/Prefabs/GamePlay/Item/ExpericeM.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8def6843377445b49a5bda7a6a33dd5f
-    m_Address: Assets/Prefabs/GamePlay/Item/Item ExperienceL.prefab
+    m_Address: Assets/Prefabs/GamePlay/Item/ExpericeL.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
