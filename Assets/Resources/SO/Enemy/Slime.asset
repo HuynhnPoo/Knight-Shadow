@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Slime
   HP: 200
-  Speed: 10
-  dame: 100
+  Speed: 4
+  dame: 3
   rapidAttack: 2
   rangeAttack: 0.5

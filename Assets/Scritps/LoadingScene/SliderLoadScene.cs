@@ -9,7 +9,7 @@ public class SliderLoadScene : SliderBase
     {
         base.Start();
         StartCoroutine(LoadSceneAsync());
-
+        slider.minValue = 0;
     }
 
     //hiện thay đổi ra giá trị bằng slider
@@ -18,7 +18,8 @@ public class SliderLoadScene : SliderBase
 
         if (slider != null)
         {
-            slider.value = amount;
+           
+            slider.value =amount;
             Debug.Log("Loading progress: " + ((float)amount * 100) + "%");
         }
     }
@@ -38,7 +39,8 @@ public class SliderLoadScene : SliderBase
         asyncOperation.allowSceneActivation = false;
         while (!asyncOperation.isDone)
         {
-            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f);
+            float progress = Mathf.Clamp01(asyncOperation.progress / 0.9f); 
+           
             OnChange(progress);
             if (progress >= 1)
             {

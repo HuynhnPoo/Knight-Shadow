@@ -7,13 +7,15 @@ using UnityEngine;
 public class CharacterInfo : MonoBehaviour, IDameable
 {
     [SerializeField] private PlayerData player;
+    private int currentDame;
+    private float currentMana, currentSpeed, currentHp;
 
     public int Dame { get => currentDame; }
     public float Speed { get => currentSpeed; }
     public float Mana { get => currentMana; set => currentMana = value; }
+    public float Heath { get => currentHp; set => currentHp = value; }
 
-    private int currentDame;
-    private float currentMana, currentSpeed, currentHp;
+   
 
     private float manaRate = 5, maxMana;
     private bool isRegenRating = false;

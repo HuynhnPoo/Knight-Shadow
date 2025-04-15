@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Experice
   - Gold
+  - Enemy
   layers:
   - Default
   - TransparentFX

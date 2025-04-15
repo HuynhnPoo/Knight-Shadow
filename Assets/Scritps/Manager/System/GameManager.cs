@@ -16,24 +16,42 @@ public class GameManager : SingletonBase<GameManager>
     public int CurrentExperice { get { return currentExperice; } }
 
     int totalGold = 0;
+
     public int TotalGold { get => totalGold; set => totalGold = value; }
-    
+
+    int saveGold = 0;
+
+    public int SaveGold { get => saveGold; set => saveGold = value; }
+
+
+
     private int currentLevel = 1;
     public int CurrentLevel => currentLevel;
    
+
+    private bool isPaused=false;
+    public bool IsPaused { get => isPaused; set => isPaused = value; }
+
+    private bool isGameOver = false;
+    public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
+
     protected override void Awake()
     {
         base.Awake();
+
+        saveGold = PlayerPrefs.GetInt("GoldSave");
+
     }
 
 
     public void GameStart()
     { 
+
     }
 
     public void GameOver() 
     {
-        Debug.Log("game over");
+        //PlayerPrefs.SetInt("GoldSave", totalGold);
     }
 
 
@@ -52,7 +70,9 @@ public class GameManager : SingletonBase<GameManager>
     public void AddGold(int goldScore)
     {
         totalGold += goldScore;
-       // Debug.Log("hien thi vang " + totalGold);
+        saveGold += totalGold;
+        Debug.Log("hien thi save Gold"+ saveGold);
+        PlayerPrefs.SetInt("GoldSave", saveGold);
     }
 
     void UpLevel()

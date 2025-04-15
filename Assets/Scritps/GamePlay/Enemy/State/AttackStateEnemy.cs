@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackStateEnemy : IState
@@ -18,7 +17,6 @@ public class AttackStateEnemy : IState
     public void Enter()
     {
         isAtack = true;
-        coolDown = 0;
     }
 
     public void Execute()
@@ -26,10 +24,13 @@ public class AttackStateEnemy : IState
         if (isAtack)
         {
             coolDown -= Time.deltaTime;
+          //  Debug.Log("hien thi 1" + coolDown);
             if (coolDown > 0) return;
             this.enemyStateCrtl.AttackPlayer();
             coolDown = enemyStateCrtl.GetRapidAttack();
-          //  Debug.Log("hie thi ra toc danh cacs con quai"+ enemyStateCrtl.GetRapidAttack());
+
+
+           // Debug.Log("hien thi 2"+coolDown);
         }
     }
 

@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build.Pipeline;
+using System.ComponentModel.Design.Serialization;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class EnemyInfo : MonoBehaviour, IDameable,ICompoment
+public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 {
     [SerializeField] private EnemyData enemyData;
     [SerializeField] private LoadAssetItem itemAsset;
@@ -13,6 +15,7 @@ public class EnemyInfo : MonoBehaviour, IDameable,ICompoment
     // data info enemy
 
     private string nameEnemy;
+    public string NameEnemy =>nameEnemy;
     private int currentHeath, speed, dame;
 
     public int CurrentHeath { get => currentHeath; set => currentHeath = value; }
@@ -60,7 +63,6 @@ public class EnemyInfo : MonoBehaviour, IDameable,ICompoment
         InitData();
     }
 
-
     void InitData()
     {
         if (enemyData != null)
@@ -71,6 +73,7 @@ public class EnemyInfo : MonoBehaviour, IDameable,ICompoment
             nameEnemy = enemyData.name;// ten quai vat
 
             rangeAttack = enemyData.rangeAttack;//  khi bao pham vi tan cong
+            rapidAttack = enemyData.rapidAttack;//  khi bao pham vi tan cong
         }
 
     }
@@ -79,7 +82,6 @@ public class EnemyInfo : MonoBehaviour, IDameable,ICompoment
     {
         currentHeath -= dame;
 
-        Debug.Log(currentHeath);
         if (currentHeath <= 0)
         {
             DisableEnemy();
@@ -101,29 +103,52 @@ public class EnemyInfo : MonoBehaviour, IDameable,ICompoment
 
     void DropItem()
     {
+
+        System.Random random = new System.Random();
+
         switch (nameEnemy)
         {
             case "Slime":
             case "Sekeleton":
             case "Orc":
 
-                itemAsset.SpawnItem(0, this.transform);
-                itemAsset.SpawnItem(1, this.transform);
+                Debug.Log("hien thi ra radom " + random.NextDouble());
+                if (random.NextDouble() <= 0.3)
+                {
+                    Debug.Log("thuc hien tanh cong spawn otem ddac biet" + random.NextDouble());
+                    itemAsset.SpawnItem(0, this.transform);
+                    itemAsset.SpawnItem(3, this.transform);
+                }
+
+                else
+                {
+                    itemAsset.SpawnItem(1, this.transform);
+                    itemAsset.SpawnItem(4, this.transform);
+                }
                 break;
 
             case "Vampire":
             case "Plant":
-                itemAsset.SpawnItem(2, this.transform);
-                itemAsset.SpawnItem(5, this.transform);
+                if (random.NextDouble() <= 0.5)
+                {
+                    Debug.Log("thuc hien tanh cong spawn otem ddac biet o ham danh xa" + random.NextDouble());
+                    itemAsset.SpawnItem(0, this.transform);
+                    itemAsset.SpawnItem(3, this.transform);
+
+                }
+                else
+                {
+                    itemAsset.SpawnItem(2, this.transform);
+                    itemAsset.SpawnItem(5, this.transform);
+                }
                 break;
 
             default:
-
                 Debug.LogWarning("Không dung quái");
                 break;
 
         }
     }
 
-    
+
 }

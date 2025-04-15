@@ -5,7 +5,7 @@ using UnityEngine;
 public class IdleStatePlayer : IState
 {
 
-    private int threshholdScore = 10;
+    private int threshHoldScore = 10;
 
     private bool isIdle = false;
 
@@ -26,9 +26,9 @@ public class IdleStatePlayer : IState
 
     public void Execute()
     {
-        if (characterInfo.Mana<threshholdScore  && isIdle)
+        if (characterInfo.Mana<threshHoldScore  && isIdle)
         {
-            characterInfo.RegenMana();
+            characterInfo.RegenMana(); // khi manna duoi  threshholdscore se thuc hien hoi phuc mana
         }
     }
 

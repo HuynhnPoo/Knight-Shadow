@@ -1,25 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class PlayerController : MonoBehaviour, ICompoment 
 {
 
     [SerializeField] private StateManager stateManager; // trang thai cua nhan vat 
+
+
     [SerializeField] private CharacterInfo characterInfo;// thong chi so nhan vat
+    [SerializeField] public CharacterInfo CharacterInfo { get => characterInfo; }
+
+
+
     [SerializeField] private PlayerPhysics playerPhysics;
     [SerializeField] private AnimationEnity characterAni;
     [SerializeField] private Weapon weapon;
     [SerializeField] private LayerMask enemy;
     [Range(0.1f, 5f)] public float rangeAttack;
 
-
     private void OnEnable()
     {
         GetComponentsEnity();
     }
 
-    void GetComponentsEnity()
+    public void GetComponentsEnity()
     {
         this.stateManager = GetComponent<StateManager>();
         this.playerPhysics = GetComponent<PlayerPhysics>();
@@ -30,16 +36,10 @@ public class PlayerController : MonoBehaviour, ICompoment
 
         this.stateManager.ChangeState(new IdleStatePlayer(characterInfo));
     }
-
+   
     public void GetcompomentWeaponSelected()
     {
         this.weapon = GetComponentInChildren<Weapon>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
@@ -75,10 +75,5 @@ public class PlayerController : MonoBehaviour, ICompoment
     public int DameAttack()
     {
         return characterInfo.Dame;
-    }
-
-    void ICompoment.GetComponentsEnity()
-    {
-        throw new System.NotImplementedException();
     }
 }

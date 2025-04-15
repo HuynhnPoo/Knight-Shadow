@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Orc
   HP: 300
-  Speed: 10
-  dame: 0
+  Speed: 5
+  dame: 5
   rapidAttack: 2
   rangeAttack: 0.5

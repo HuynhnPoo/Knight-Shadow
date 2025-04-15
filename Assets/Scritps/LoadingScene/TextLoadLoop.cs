@@ -6,11 +6,12 @@ public class TextLoadLoop : TextBase
 {
   
     // Start is called before the first frame update
-    protected override void Start()
+    protected override  void Start()
     {
         StartCoroutine(LoopText());
     }
 
+   
     IEnumerator LoopText()
     {
         while (true)

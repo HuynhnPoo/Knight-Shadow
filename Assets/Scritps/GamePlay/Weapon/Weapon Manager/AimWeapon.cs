@@ -9,13 +9,7 @@ public class AimWeapon : MonoBehaviour
 
     float distance = 0.5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+       // Update is called once per frame
     void Update()
     {
 
@@ -58,13 +52,6 @@ public class AimWeapon : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, tagerget, 3);
 
-        /*  Quaternion targetRotation= Quaternion.Euler(0,0,angle);    
-          transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed*Time.deltaTime);*/
-
-        /*  Vector3 offset =Quaternion.Euler(0,0,angle) * Vector3.right *0.5f;
-
-          Vector3 tranformTarget = transform.parent.position + offset;
-          transform.position = Vector3.Lerp(transform.position, tranformTarget,3);*/
         transform.eulerAngles = new Vector3(0, 0, angle);
     }
 

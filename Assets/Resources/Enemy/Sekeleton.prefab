@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 1157869034960838583}
   m_Layer: 7
   m_Name: Sekeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,8 +283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
   enemyAni: {fileID: 0}
-  rangeAttack: 0.98
-  rangeDetection: 5
   playerLM:
     serializedVersion: 2
     m_Bits: 256
@@ -301,8 +299,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
-  poolList: {fileID: 0}
   itemAsset: {fileID: 0}
+  spawnEnemy: {fileID: 0}
 --- !u!114 &8621271056062378202
 MonoBehaviour:
   m_ObjectHideFlags: 0

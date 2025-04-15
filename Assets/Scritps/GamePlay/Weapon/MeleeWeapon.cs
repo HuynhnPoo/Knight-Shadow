@@ -17,7 +17,6 @@ public class MeleeWeapon : Weapon
         foreach (Collider2D enemies in hitEnemis)
         {
             //mỗi lần va chạm sẽ giảm máu quái vật
-
             int dame = GameManager.Instance.PlayerCrtl.DameAttack() + dameWeapon;
             enemies.GetComponent<EnemyInfo>().TakeDame(dame);
         }

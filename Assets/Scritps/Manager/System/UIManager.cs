@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,24 +7,15 @@ public class UIManager : SingletonBase<UIManager>
 {
 
     public SceneType currentScene = SceneType.NONE;
+    private GameObject menuPause;
+    public GameObject MenuPause=> menuPause;
 
-    [SerializeField]private GameObject menuSetting;
-
-    public GameObject MenuSetting { get => menuSetting; }
-
-    [SerializeField]private GameObject menuPause;
-
-    public GameObject MenuPause { get => menuPause; }
-
-
-    protected override void Awake()
+    private GameObject menuSetting;
+    public GameObject MenuSetting=> menuSetting;
+    private void OnEnable()
     {
-        base.Awake();
-
         menuPause = FindGameObjectByNameHide.FindGameObjectByName("Menu-Pause");
         menuSetting = FindGameObjectByNameHide.FindGameObjectByName("Menu-Setting");
-
-
     }
 
     //danh sach cac scene

@@ -10,6 +10,7 @@ public class DashStatePlayer : IState
     float vertical;
     private float dashDuration = 0.5f;
     private float dashTimer = 0f;
+    private int manaUse = 20;
     private bool isDashing = false;
 
     public DashStatePlayer(PlayerPhysics player,CharacterInfo character,float horizontal,float vertical)
@@ -18,13 +19,12 @@ public class DashStatePlayer : IState
         this.character = character;
         this.horizontal = horizontal;   
         this.vertical = vertical;
-        
     }
 
     public void Enter()
     {
         Debug.Log("Bắt đầu dash");
-       this.character.ReductionMana(50);
+       this.character.ReductionMana(manaUse);
         isDashing = true;
         dashTimer = dashDuration;
     }
@@ -51,8 +51,6 @@ public class DashStatePlayer : IState
         Debug.Log("Kết thúc dash");
         isDashing = false;
         dashTimer = 0f;
-
-
     }
 
     

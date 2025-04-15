@@ -40,6 +40,8 @@ public class ObjectPool<TCollection>
         else Debug.LogError("TCollection must be Stack<GameObject>, Queue<GameObject>, or List<GameObject>");
     }
 
+
+    // khoi tao pool vaf dua vao trong game object vafo trong pool
     private void PreloadObjects(int count)
     {
         for (int i = 0; i < count; i++)
@@ -80,6 +82,7 @@ public class ObjectPool<TCollection>
         return ActivateObject(obj);
     }
 
+    //trả  gameovject vào grong pool
     public void ReturnObject(GameObject obj)
     {
         obj.SetActive(false);
@@ -92,12 +95,15 @@ public class ObjectPool<TCollection>
             list.Add(obj);
     }
 
+    
     private GameObject ActivateObject(GameObject obj)
     {
         obj.SetActive(true);
         return obj;
     }
 
+
+    // kiem tra các object đã bị tat het hay chưa
     public bool HasActiveObject()
     {
 
@@ -118,5 +124,42 @@ public class ObjectPool<TCollection>
         }
 
         return hasActiveObjects;
+    }
+
+    public void ClearAllObject() 
+    {
+        if (pool is Stack<GameObject> stack)
+        {
+            while (stack.Count > 0)
+            {
+                GameObject obj = stack.Pop();
+                if (obj != null) Object.Destroy(obj);
+            }
+        }
+        else if (pool is Queue<GameObject> queue)
+        {
+            while (queue.Count > 0)
+            {
+                GameObject obj = queue.Dequeue();
+                if (obj != null) Object.Destroy(obj);
+
+            }
+        }
+        else if (pool is List<GameObject> list)
+        {
+            foreach(var obj in list)
+            {
+                if(obj != null) Object.Destroy(obj);     
+            }
+            list.Clear();
+        }
+    }
+
+    public void ChangeObjectInPool(GameObject newoObject)
+    {
+       ClearAllObject();
+        this.prefabs = new GameObject[] { newoObject };
+        PreloadObjects(10);
+
     }
 }

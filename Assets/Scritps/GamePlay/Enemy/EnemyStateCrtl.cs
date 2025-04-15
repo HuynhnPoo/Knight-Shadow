@@ -6,13 +6,13 @@ public class EnemyStateCrtl : MonoBehaviour
 {
     [SerializeField] private Transform playerPos;
     [SerializeField]private AnimationEnity enemyAni;
+    private EnemyAttack enemyAttack;
     private EnemyInfo enemyInfo;
     private StateManager stateManager;
    
 //private int speed = 10;
 
   //  [Range(0.1f, 5f)] public float rangeAttack=3;
-    [SerializeField]private LayerMask playerLM;
     Vector3 direction;
     public Vector3 DirectionEnemy { get => direction; set => direction = value; }
     private void OnEnable()
@@ -23,13 +23,9 @@ public class EnemyStateCrtl : MonoBehaviour
     {
         playerPos = GameObject.FindGameObjectWithTag(TagInGame.player).transform;
         enemyInfo = GetComponent<EnemyInfo>();
+        enemyAttack= GetComponentInParent<EnemyAttack>();
         stateManager = GetComponent<StateManager>();
         enemyAni = GetComponent<AnimationEnity>();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -48,33 +44,54 @@ public class EnemyStateCrtl : MonoBehaviour
         }
     }
 
+  
+
     public void chaseToPlayer()
     {
-         direction = (playerPos.transform.position - transform.position).normalized;
+        direction = DirectionOfEnemy();
 
     //    Debug.Log("hien thi direction" + direction.x+"hgfgfg"+ direction.y);
         transform.Translate(direction * enemyInfo.Speed * Time.deltaTime);
     }
 
-    public void AttackPlayer()
+    Vector2 DirectionOfEnemy()
     {
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(transform.position,enemyInfo.RangeAttack,playerLM);
-
-        foreach (Collider2D player in hitPlayers)
-        {
-           // Debug.Log("hirn thi"+player.name);
-
-            player.GetComponentInChildren<CharacterInfo>().TakeDame(enemyInfo.Dame);
-        }
+        return (playerPos.transform.position - transform.position).normalized;
     }
 
+    public void AttackPlayer()
+    {
+        switch (enemyInfo.NameEnemy)
+        {
+            case "Slime":
+            case "Sekeleton":
+            case "Orc":
+                enemyAttack.MeleeAttackPlayer(enemyInfo.Dame, enemyInfo.RangeAttack, this.transform.position);
 
+                break;
+
+            case "Plant":
+            case "Vampire":
+                enemyAttack.RangedAttackPlayer(this.transform.position, DirectionOfEnemy(),this);
+                break;
+
+            default:
+                Debug.LogError("hien thi loi ");
+                break;
+        }
+    }
     public float GetRapidAttack()
     {
         return enemyInfo.RapidAttack;   
     }
-   /* private void OnDrawGizmosSelected()
+
+    public void GetObjectToPool(GameObject obj)
     {
-     //   Gizmos.DrawWireSphere(transform.position,enemyInfo.RangeAttack); 
-    }*/
+        enemyAttack.ReturnToPoolBulletE(obj);
+    }
+
+    public int GetDameOfEnemy()
+    {
+        return enemyInfo.Dame;
+    }
 }

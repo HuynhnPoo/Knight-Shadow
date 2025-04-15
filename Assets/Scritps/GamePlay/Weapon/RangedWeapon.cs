@@ -1,22 +1,74 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class RangedWeapon : Weapon
 {
-
+    [SerializeField]private Bullet[] bulletPrefabs;
     [SerializeField] private Bullet bullet;
-    int size = 10;
     private ObjectPool<Queue<GameObject>> pool;
     [SerializeField] private Transform holderBullet;
+    int currentBulletIndex=0;
+    int size = 10;
+
+
     Quaternion quaternion;
     private void Awake()
     {
-        pool = new ObjectPool<Queue<GameObject>>(bullet.gameObject,size,holderBullet); // khoi tạo pool
+        InitPool();
     }
+
+    void InitPool()
+    {
+        if (pool == null)
+        {
+            pool = new ObjectPool<Queue<GameObject>>(bulletPrefabs[currentBulletIndex].gameObject, size, holderBullet); // khoi tạo pool
+        }
+        else
+        {
+            pool.ChangeObjectInPool(bulletPrefabs[currentBulletIndex].gameObject);
+        }
+
+    }
+
+    private void Update()
+    {
+
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            NextToBullet();
+        } 
+        if (Input.GetKey(KeyCode.Alpha5))
+        {
+            PrevioustoBullet();
+        }
+    }
+
+
+
+
     public override void Attacking()
     {
         SpawnBullet();
+    }
+
+
+    void NextToBullet()
+    {
+        currentBulletIndex = (currentBulletIndex + 1) % bulletPrefabs.Length;
+
+        InitPool();
+
+        Debug.Log("hien thi va thuc hien "+ bulletPrefabs[currentBulletIndex].gameObject.name);
+    }
+
+    void PrevioustoBullet()
+    {
+        currentBulletIndex=(currentBulletIndex -1 + bulletPrefabs.Length) % bulletPrefabs.Length;
+        InitPool();
+        Debug.Log("hien thi va thuc hien " + bulletPrefabs[currentBulletIndex].gameObject.name);
     }
 
     // ham sinh dan

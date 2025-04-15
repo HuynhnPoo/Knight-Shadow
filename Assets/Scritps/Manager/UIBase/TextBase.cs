@@ -10,11 +10,9 @@ public class TextBase : MonoBehaviour
     protected virtual void Awake()
     {
         LoadComponment();
-        
     }
-    protected virtual void Start()
-    {
-    }
+
+    protected virtual void Start(){}
 
     //load componemet text
     void LoadComponment()

@@ -6,7 +6,7 @@ public class AttackStatePlayer :IState
 {
     private Weapon weapon;
     int cooldown = 2;
-    float timer;
+    float timer=0;
     public AttackStatePlayer(Weapon weapon)
     {
      this.weapon = weapon;
@@ -14,7 +14,7 @@ public class AttackStatePlayer :IState
 
     public void Enter()
     {
-        timer = 0;
+       
     }
 
     public void Execute()

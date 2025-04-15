@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 2426265885976696008}
   m_Layer: 7
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,8 +205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
-  poolList: {fileID: 0}
   itemAsset: {fileID: 0}
+  spawnEnemy: {fileID: 0}
 --- !u!114 &2426265885976696008
 MonoBehaviour:
   m_ObjectHideFlags: 0

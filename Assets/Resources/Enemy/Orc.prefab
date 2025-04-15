@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 3368003749326048260}
   m_Layer: 7
   m_Name: Orc
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,11 +283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
   enemyAni: {fileID: 0}
-  rangeAttack: 0.5
-  rangeDetection: 5
-  playerLM:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &4360466232373982351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,8 +296,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
-  poolList: {fileID: 0}
   itemAsset: {fileID: 0}
+  spawnEnemy: {fileID: 0}
 --- !u!114 &1878241384708635716
 MonoBehaviour:
   m_ObjectHideFlags: 0

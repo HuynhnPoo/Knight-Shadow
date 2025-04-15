@@ -18,18 +18,18 @@ public class CharactorSelector : MonoBehaviour
         selectedCharacterIndex = PlayerPrefs.GetInt(StringSave.selectionCharacter, 0);
         UpdateButtonSelection();
     }
-
+                                        
     public void SelectCharacter(int index)
     {
         selectedCharacterIndex = index;
         PlayerPrefs.SetInt(StringSave.selectionCharacter, selectedCharacterIndex);
         UpdateButtonSelection();
     }
-
+/*
     public void StartGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGameScene"); // Replace with your main game scene name
-    }
+    }*/
 
     void UpdateButtonSelection()
     {

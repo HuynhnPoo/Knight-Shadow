@@ -10,6 +10,7 @@ public class Arrow : Bullet
         base.OnEnable();
         speed = 70;
         distanceMax = 4;
+        dameWeapon = 3;
     }
 
     // ham di chuyen vien đạn
@@ -23,4 +24,21 @@ public class Arrow : Bullet
         base.CheckDistance(distanceMax);    
     }
 
+    public override void HitObject(Collider2D collider, int dameWeapon)
+    {
+        if (collider.gameObject.CompareTag(TagInGame.enemy))
+        {
+
+            Debug.Log(" hirn thi quai vat" + collider.gameObject.name);
+            int dame = GameManager.Instance.PlayerCrtl.DameAttack() + dameWeapon;
+            collider.GetComponent<EnemyInfo>().TakeDame(dame);
+
+            this.rangedWeapon.ReturnToPool(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        HitObject(collision,dameWeapon);
+    }
 }

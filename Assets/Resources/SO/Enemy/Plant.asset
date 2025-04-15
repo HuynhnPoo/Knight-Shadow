@@ -15,6 +15,6 @@ MonoBehaviour:
   enemyName: Plant
   HP: 150
   Speed: 2
-  dame: 136
-  rapidAttack: 5
+  dame: 10
+  rapidAttack: 6
   rangeAttack: 5
