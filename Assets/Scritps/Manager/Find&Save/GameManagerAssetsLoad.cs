@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using System;
+using System.Linq;
 
 public static class GameManagerAssetsLoad
 {
@@ -12,7 +13,7 @@ public static class GameManagerAssetsLoad
         itemInstance.Clear();
         coroutineRuner.StartCoroutine(LoadingGameAssetCoroutine(itemAssets, itemInstance));//, action));
     }
-    public static IEnumerator LoadingGameAssetCoroutine(AssetReference[] itemAssets, List<GameObject> itemInstance)//, Action onComplete)
+    static IEnumerator LoadingGameAssetCoroutine(AssetReference[] itemAssets, List<GameObject> itemInstance)//, Action onComplete)
     {
         foreach (AssetReference asset in itemAssets)
         {
@@ -37,7 +38,7 @@ public static class GameManagerAssetsLoad
         coroutineRuner.StartCoroutine(LoadingGameAssetByLabelCoroutine(labelRef, obj, onComplete));
     }
 
-    public static IEnumerator LoadingGameAssetByLabelCoroutine(AssetLabelReference labelRef, string objName, Action<ScriptableObject> onComplete)
+    static IEnumerator LoadingGameAssetByLabelCoroutine(AssetLabelReference labelRef, string objName, Action<ScriptableObject> onComplete)
     {
 
         string cleanName = objName.Replace("(Clone)", "");
@@ -81,6 +82,32 @@ public static class GameManagerAssetsLoad
         else
         {
             // Debug.LogError($"Failed to load assets with label '{label}'");
+            onComplete?.Invoke(null);
+        }
+    }
+
+    // New method to load all ScriptableObjects for a label
+    public static void LoadingGameAssetByLabel(AssetLabelReference labelRef, MonoBehaviour coroutineRunner, Action<List<ScriptableObject>> onComplete)
+    {
+        coroutineRunner.StartCoroutine(LoadingGameAssetByLabelCoroutine(labelRef, onComplete));
+    }
+
+    // Coroutine for loading all ScriptableObjects
+    static IEnumerator LoadingGameAssetByLabelCoroutine(AssetLabelReference labelRef, Action<List<ScriptableObject>> onComplete)
+    {
+        var handle = Addressables.LoadAssetsAsync<ScriptableObject>(labelRef, null);
+        yield return handle;
+
+        if (handle.Status == AsyncOperationStatus.Succeeded)
+        {
+            List<ScriptableObject> loadedObjects = new List<ScriptableObject>(handle.Result);
+            Debug.Log($"Loaded {loadedObjects.Count} ScriptableObjects for label '{labelRef.labelString}'");
+            onComplete?.Invoke(loadedObjects);
+            Addressables.Release(handle);
+        }
+        else
+        {
+            Debug.LogError($"Failed to load assets with label '{labelRef.labelString}'");
             onComplete?.Invoke(null);
         }
     }

@@ -25,12 +25,12 @@ public class CharactorSelector : MonoBehaviour
         PlayerPrefs.SetInt(StringSave.selectionCharacter, selectedCharacterIndex);
         UpdateButtonSelection();
     }
+
 /*
     public void StartGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainGameScene"); // Replace with your main game scene name
     }*/
-
     void UpdateButtonSelection()
     {
         for (int i = 0; i < characterButtons.Length; i++)
