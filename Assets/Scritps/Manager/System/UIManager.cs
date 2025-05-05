@@ -12,6 +12,8 @@ public class UIManager : SingletonBase<UIManager>
 
     private GameObject menuSetting;
     public GameObject MenuSetting=> menuSetting;
+
+    public static bool isNewGame=false;
     private void OnEnable()
     {
         menuPause = FindGameObjectByNameHide.FindGameObjectByName("Menu-Pause");

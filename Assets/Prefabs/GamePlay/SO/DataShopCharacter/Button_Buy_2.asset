@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd71c3c9311c06140ba278ae838a41ce, type: 3}
   m_Name: Button_Buy_2
   m_EditorClassIdentifier: 
-  nameCharacter: 444444
+  nameCharacter: 5555
   characterSprite: {fileID: 0}
   isBought: 0
-  price: 1000000
+  price: 100

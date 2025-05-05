@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -16,18 +14,12 @@ public class ShopManager : MonoBehaviour
 
     [SerializeField] private AssetLabelReference labelShopData;
 
-    private void Awake()
-    {
-        GameManagerAssetsLoad.LoadingGameAssetByLabel(labelShopData, this, LoadShopData);
-    }
-
-
     // Callback to handle loaded ScriptableObjects
     void LoadShopData(List<ScriptableObject> loadedObjects)
     {
+
         if (loadedObjects != null && loadedObjects.Count > 0)
         {
-            // Convert List<ScriptableObject> to CharacterShopData[]
             shopData = loadedObjects
                 .OfType<CharacterShopData>() // Ensure only CharacterShopData objects are included
                 .ToArray();
@@ -44,6 +36,7 @@ public class ShopManager : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManagerAssetsLoad.LoadingGameAssetByLabel(labelShopData, this, LoadShopData);
         buyButton = GetComponentsInChildren<Button>();
         currentCoin = PlayerPrefs.GetInt(StringSave.coinSave, 0);
     }
@@ -62,19 +55,37 @@ public class ShopManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Z))
         {
+            PlayerPrefs.SetInt(StringSave.coinSave, 0); // set coin ve khong
+            PlayerPrefs.Save();
             for (int i = 0; i < shopData.Length; i++)
             {
                 shopData[i].isBought = false;
-                buyButton[i].gameObject.SetActive(true);
+                buyButton[i].gameObject.SetActive(true); // bat tat ca cac nut
+
             }
+        }
+    }
+
+    public void NewGame()
+    {
+        PlayerPrefs.SetInt(StringSave.coinSave, 0); // set coin ve khong
+        PlayerPrefs.Save();
+        for (int i = 0; i < shopData.Length; i++)
+        {
+            shopData[i].isBought = false;
+            buyButton[i].gameObject.SetActive(true); // bat tat ca cac nut
+
         }
     }
 
 
     public void PurchaseCharacter(int index)
     {
+        Debug.Log("hien thi " + 1);
         if (currentCoin >= shopData[index].price && !shopData[index].isBought)
         {
+
+            Debug.Log("hien thi " + 2);
             shopData[index].isBought = true;
             currentCoin -= shopData[index].price;
             PlayerPrefs.SetInt(StringSave.coinSave, currentCoin);
@@ -92,6 +103,7 @@ public class ShopManager : MonoBehaviour
             Debug.Log(index);
             buyButton[index].gameObject.SetActive(false);
         }
+
     }
 
 }

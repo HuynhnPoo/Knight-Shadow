@@ -18,25 +18,19 @@ MonoBehaviour:
   m_GUID: d3ff7ae7631fa424e93536cc3dc88411
   m_SerializeEntries:
   - m_GUID: 7727830bf601fc144bfca32849d1a8a6
-    m_Address: Assets/Prefabs/GamePlay/SO/DataShopCharacter/Data4.asset
+    m_Address: Assets/Prefabs/GamePlay/SO/DataShopCharacter/Button_Buy_2.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - DataCharacterShop
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8aef885302da5d24e95c24766edac40b
-    m_Address: Assets/Prefabs/GamePlay/SO/DataShopCharacter/Data3.asset
+    m_Address: Assets/Prefabs/GamePlay/SO/DataShopCharacter/Button_Buy_1.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - DataCharacterShop
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a710ff3f9a3c360468e56c62005eb9fe
-    m_Address: Assets/Prefabs/GamePlay/SO/DataShopCharacter/Data2.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - DataCharacterShop
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f5d1b3fa52c4098459e3c61d0dea652b
-    m_Address: Assets/Prefabs/GamePlay/SO/DataShopCharacter/Data1.asset
+    m_Address: Assets/Prefabs/GamePlay/SO/DataShopCharacter/Button_Buy_0.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - DataCharacterShop
