@@ -13,8 +13,9 @@ public class SldHeathBar : SliderBase
     }
 
     private void Update()
-    {
-      
+    { 
         slider.value= GameManager.Instance.PlayerCrtl.CharacterInfo.Heath;
+
+        //Debug.Log($"hien ra thanh slider {slider.value}    {GameManager.Instance.PlayerCrtl.CharacterInfo.Heath} ");
     }
 }

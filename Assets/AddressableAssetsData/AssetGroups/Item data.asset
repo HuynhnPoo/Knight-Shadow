@@ -29,6 +29,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - item
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 312cda5002d68ac4d9cf8325b00577cd
+    m_Address: Assets/Prefabs/GamePlay/SO/Item/Sowrd.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - item
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a25d721a2515204a99eedb335768155
     m_Address: SO/Item/GoldS
     m_ReadOnly: 0
@@ -43,6 +49,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b7de63d96b4c83947b84043110392b55
     m_Address: SO/Item/ExpericeS
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - item
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0933d319e4a0aa48aee84ecbbad0fb2
+    m_Address: Assets/Prefabs/GamePlay/SO/Item/Bow.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - item

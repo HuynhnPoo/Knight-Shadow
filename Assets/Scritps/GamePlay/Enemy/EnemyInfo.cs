@@ -8,14 +8,16 @@ using UnityEngine;
 public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 {
     [SerializeField] private EnemyData enemyData;
-    [SerializeField] private LoadAssetItem itemAsset;
+   
 
     [SerializeField] private SpawnEnemy spawnEnemy;
+
+    private DeathEnemy deathEnemy;
 
     // data info enemy
 
     private string nameEnemy;
-    public string NameEnemy =>nameEnemy;
+    public string NameEnemy => nameEnemy;
     private int currentHeath, speed, dame;
 
     public int CurrentHeath { get => currentHeath; set => currentHeath = value; }
@@ -51,10 +53,10 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 
     public void GetComponentsEnity()
     {
-        if (itemAsset == null && spawnEnemy == null)
+        if (spawnEnemy == null && deathEnemy ==null)
         {
-            itemAsset = GetComponentInParent<LoadAssetItem>();
             spawnEnemy = GetComponentInParent<SpawnEnemy>();
+            deathEnemy = GetComponent<DeathEnemy>();
         }
     }
     // Start is called before the first frame update
@@ -95,60 +97,7 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
     {
         Debug.Log("giet quais thanh cong");
         spawnEnemy.ReturnToPool(this.gameObject); // dua liaj vao pool
-        DropItem();
+       deathEnemy.DropItem();
     }
-
-
-    // giet quai xong se hien roi ra item
-
-    void DropItem()
-    {
-
-        System.Random random = new System.Random();
-
-        switch (nameEnemy)
-        {
-            case "Slime":
-            case "Sekeleton":
-            case "Orc":
-
-                Debug.Log("hien thi ra radom " + random.NextDouble());
-                if (random.NextDouble() <= 0.3)
-                {
-                    Debug.Log("thuc hien tanh cong spawn otem ddac biet" + random.NextDouble());
-                    itemAsset.SpawnItem(0, this.transform);
-                    itemAsset.SpawnItem(3, this.transform);
-                }
-
-                else
-                {
-                    itemAsset.SpawnItem(1, this.transform);
-                    itemAsset.SpawnItem(4, this.transform);
-                }
-                break;
-
-            case "Vampire":
-            case "Plant":
-                if (random.NextDouble() <= 0.5)
-                {
-                    Debug.Log("thuc hien tanh cong spawn otem ddac biet o ham danh xa" + random.NextDouble());
-                    itemAsset.SpawnItem(0, this.transform);
-                    itemAsset.SpawnItem(3, this.transform);
-
-                }
-                else
-                {
-                    itemAsset.SpawnItem(2, this.transform);
-                    itemAsset.SpawnItem(5, this.transform);
-                }
-                break;
-
-            default:
-                Debug.LogWarning("Không dung quái");
-                break;
-
-        }
-    }
-
-
+   
 }

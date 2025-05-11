@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class AimWeapon : MonoBehaviour
 {
-    // private int speed = 100;
-
+  
     float distance = 0.5f;
 
        // Update is called once per frame

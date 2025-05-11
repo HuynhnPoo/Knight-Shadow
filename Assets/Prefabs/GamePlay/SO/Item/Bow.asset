@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21cf1c59054bb047ab2ef6d8a3ae87c, type: 3}
-  m_Name: Player1
+  m_Script: {fileID: 11500000, guid: 4b0bb791b355b6e4a8437bb964748a1a, type: 3}
+  m_Name: Bow
   m_EditorClassIdentifier: 
-  characterName: tom
-  hp: 110
-  mp: 100
-  speed: 10
-  dame: 50
+  value: 1
+  timeDestroys: 0

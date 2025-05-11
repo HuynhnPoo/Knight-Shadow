@@ -52,13 +52,14 @@ public class GameManager : SingletonBase<GameManager>
     public void GameOver() 
     {
         //PlayerPrefs.SetInt("GoldSave", totalGold);
+
+        Debug.Log("hien thi game over");
     }
 
 
     //ham tang diem kinh nghiem
     public void AddExperice(int expericeScore)
     {
-
         currentExperice += expericeScore;
         if(currentExperice > maxExperice)
         {
@@ -71,6 +72,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         totalGold += goldScore;
         saveGold += totalGold;
+        Debug.Log("hien thi total gold"+totalGold);
         Debug.Log("hien thi save Gold"+ saveGold);
         PlayerPrefs.SetInt("GoldSave", saveGold);
     }

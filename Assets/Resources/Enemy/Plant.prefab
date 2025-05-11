@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1080427484776650730}
   - component: {fileID: 8654285996429622984}
   - component: {fileID: 1497629409343480439}
+  - component: {fileID: 5690143076502191436}
   m_Layer: 7
   m_Name: Plant
   m_TagString: Enemy
@@ -190,7 +191,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
-  itemAsset: {fileID: 0}
   spawnEnemy: {fileID: 0}
 --- !u!114 &8654285996429622984
 MonoBehaviour:
@@ -218,6 +218,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charcterAni: {fileID: 0}
   weapon: {fileID: 0}
+--- !u!114 &5690143076502191436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 508158811361339890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908ec9df9ad89e8469b7001aae11c964, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemAsset: {fileID: 0}
 --- !u!1 &8948946808934256517
 GameObject:
   m_ObjectHideFlags: 0

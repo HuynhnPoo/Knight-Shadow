@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
 using UnityEngine;
 
 
@@ -8,7 +7,7 @@ public class CharacterInfo : MonoBehaviour, IDameable
 {
     [SerializeField] private PlayerData player;
     private int currentDame;
-    private float currentMana, currentSpeed, currentHp;
+    private static float currentMana, currentSpeed, currentHp;
 
     public int Dame { get => currentDame; }
     public float Speed { get => currentSpeed; }
@@ -19,7 +18,6 @@ public class CharacterInfo : MonoBehaviour, IDameable
 
     private float manaRate = 5, maxMana;
     private bool isRegenRating = false;
-    // public float CurrentHP { get => currentHp; set => currentHp = value; }
 
     int index;
    
@@ -48,16 +46,13 @@ public class CharacterInfo : MonoBehaviour, IDameable
     // Update is called once per frame
     void Update()
     {
-        //if (currentMana < maxMana && currentMana<20 )
-        //{
-        //    RegenMana();
-        //}
+        
     }
 
     public void TakeDame(int dame)
     {
-        currentHp -= dame; // trừ máu hiện tại theo dame
-
+        currentHp -= dame; // trừ máu hiện tại theo dame'
+        //
         // Debug.Log("hien thi current dame"+ currentHp);
         if (currentHp <= 0)
         {
@@ -92,8 +87,9 @@ public class CharacterInfo : MonoBehaviour, IDameable
         // nếu đúng  điều kiện  và isRegenRating bằng true
         while (currentDame < maxMana && isRegenRating)
         {
-            yield return new WaitForSeconds(0.5f);  
+            yield return new WaitForSeconds(0.5f);
             currentMana += manaRate * Time.deltaTime;
+          
             if (currentMana >= maxMana)
             {
                 currentMana = maxMana; // nếu mana bằng hoặc hơn maxMana thì sẽ cho bằng maxMana

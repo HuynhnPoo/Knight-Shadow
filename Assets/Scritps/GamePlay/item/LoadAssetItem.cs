@@ -8,8 +8,6 @@ public class LoadAssetItem : MonoBehaviour
     public List<GameObject> list = new List<GameObject>();
     public AssetReference[] itemAssets;
   
-
-
     private void Awake()
     {
         GameManagerAssetsLoad.LoadingGameAsset(itemAssets, list, this); // load các item bang addressable

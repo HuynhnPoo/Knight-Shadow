@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ed635deb8a927b47a3e2caa93369404
+    m_Address: Assets/Prefabs/GamePlay/Item/Bow.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8bc194f9d712821459631a2bf8eecaf1
     m_Address: Assets/Prefabs/GamePlay/Item/ExpericeM.prefab
     m_ReadOnly: 0
@@ -29,6 +34,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8def6843377445b49a5bda7a6a33dd5f
     m_Address: Assets/Prefabs/GamePlay/Item/ExpericeL.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97d53401a19d77347b27abe2a3579e17
+    m_Address: Assets/Prefabs/GamePlay/Item/Sowrd.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

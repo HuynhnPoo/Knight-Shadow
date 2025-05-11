@@ -13,6 +13,7 @@ public class TagInGame
     public static string sekeleton = "Sekeleton";
     public static string slime = "Slime";
 
+    public static string item = "Item";
 
     public static string gold = "Gold";
     public static string experice = "Experice";

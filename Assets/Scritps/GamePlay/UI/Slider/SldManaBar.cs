@@ -16,7 +16,8 @@ public class SldManaBar : SliderBase
     // Update is called once per frame
     void Update()
     {
-        slider.value = GameManager.Instance.PlayerCrtl.CharacterInfo.Mana; 
+        slider.value = GameManager.Instance.PlayerCrtl.CharacterInfo.Mana;
+
     }
 
    

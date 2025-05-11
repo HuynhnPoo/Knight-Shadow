@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour, ICompoment
     void Update()
     {
         PlayerState();
+
     }
 
     //ham kie tra va thuc cac trang thai nhan vat

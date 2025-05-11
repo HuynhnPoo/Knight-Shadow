@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Experice
-  - Gold
   - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX

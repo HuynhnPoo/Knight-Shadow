@@ -39,6 +39,7 @@ public class ShopManager : MonoBehaviour
         GameManagerAssetsLoad.LoadingGameAssetByLabel(labelShopData, this, LoadShopData);
         buyButton = GetComponentsInChildren<Button>();
         currentCoin = PlayerPrefs.GetInt(StringSave.coinSave, 0);
+
     }
 
     // Start is called before the first frame update
@@ -81,11 +82,8 @@ public class ShopManager : MonoBehaviour
 
     public void PurchaseCharacter(int index)
     {
-        Debug.Log("hien thi " + 1);
         if (currentCoin >= shopData[index].price && !shopData[index].isBought)
         {
-
-            Debug.Log("hien thi " + 2);
             shopData[index].isBought = true;
             currentCoin -= shopData[index].price;
             PlayerPrefs.SetInt(StringSave.coinSave, currentCoin);

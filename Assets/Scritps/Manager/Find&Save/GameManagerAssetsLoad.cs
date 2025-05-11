@@ -40,7 +40,7 @@ public static class GameManagerAssetsLoad
 
     static IEnumerator LoadingGameAssetByLabelCoroutine(AssetLabelReference labelRef, string objName, Action<ScriptableObject> onComplete)
     {
-
+      //  Debug.Log("hien thi tét khi va chạm vat thể3");
         string cleanName = objName.Replace("(Clone)", "");
         /// Load tất cả assets với label đã chỉ định
         var handle = Addressables.LoadAssetsAsync<ScriptableObject>(

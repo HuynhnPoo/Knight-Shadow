@@ -27,8 +27,6 @@ public class ButtonPlay : ButtonBase
         newGameButton.SetActive(true);
         UIManager.Instance.currentScene = UIManager.SceneType.MAINMENU;
         UIManager.Instance.ChangeScene(UIManager.SceneType.LOADING);// chuyen sang scene loading6
-
-
     }
 
 
