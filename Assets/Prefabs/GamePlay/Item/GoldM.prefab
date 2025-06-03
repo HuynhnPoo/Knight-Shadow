@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 4065978699366712703}
   - component: {fileID: 7829457395630731586}
   - component: {fileID: 6401698617934121675}
-  - component: {fileID: 6081864915524771832}
+  - component: {fileID: 8984171619280880066}
   m_Layer: 0
   m_Name: GoldM
   m_TagString: Item
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: {fileID: 0}
   dataItem: {fileID: 0}
---- !u!114 &6081864915524771832
+--- !u!114 &8984171619280880066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

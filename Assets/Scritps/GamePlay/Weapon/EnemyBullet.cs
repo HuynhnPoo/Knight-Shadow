@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,17 +6,27 @@ public class EnemyBullet : Bullet
 {
     [SerializeField] EnemyStateCrtl enemyStateCrtl;
 
-    Vector3 posSpawn; 
+   
     protected override void OnEnable()
     {
         base.OnEnable();
-        posSpawn = this.transform.position;
+
         distanceMax = 9;
         dameWeapon = 3;
         speed = 80;
+
     }
 
-    public void EnemyStateCrtl(EnemyStateCrtl enemyStateCrtl)
+
+
+    public void Init(Vector3 spawnPosition)
+    {
+        spawnPos = spawnPosition;
+        transform.position = spawnPosition;
+
+       
+    }
+    public void SetEnemyStateCrtl(EnemyStateCrtl enemyStateCrtl)
     {
         this.enemyStateCrtl = enemyStateCrtl;
     }
@@ -32,11 +42,18 @@ public class EnemyBullet : Bullet
         }
     }
 
+    protected override void Update()
+    {
+        CheckDistance(9);
+    }
+
     public override void CheckDistance(int distanceMax)
     {
         float distance = Vector3.Distance(spawnPos,transform.position);
+      //  Debug.Log("hien thi tắt "+distance);
 
         if (distance > distanceMax) {
+
             enemyStateCrtl.GetObjectToPool(this.gameObject);// tra ve trong pool
         }
     }

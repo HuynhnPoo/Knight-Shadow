@@ -20,6 +20,7 @@ public class EnemyAttack : MonoBehaviour
     }
 
 
+    //thuc hien danhga
     public void MeleeAttackPlayer(int dame, float rangeAttack, Vector2 posAttack)
     {
 
@@ -30,19 +31,24 @@ public class EnemyAttack : MonoBehaviour
             player.GetComponentInChildren<CharacterInfo>().TakeDame(dame);
         }
     }
+
     public void RangedAttackPlayer(Vector2 posSpawn, Vector2 direction, EnemyStateCrtl enemyStateCrtl)
     {
+
         if (pool == null) return;
-        GameObject bullet = pool.GetObject();
+        GameObject bullet = pool.GetObject(); // lay bullet ra khoi pool
+
+
         if (bullet == null) return;
-        bullet.transform.position = posSpawn;
+        bullet.transform.position = posSpawn; // cap nhat vi tri cua bullet
 
         EnemyBullet enemyBullet = bullet.GetComponent<EnemyBullet>();
         if (enemyBullet != null)
         {
 
-            enemyBullet.EnemyStateCrtl(enemyStateCrtl);
+            enemyBullet.SetEnemyStateCrtl(enemyStateCrtl);
             enemyBullet.Move(direction);
+            enemyBullet.Init(bullet.transform.position);
         }
     }
 

@@ -1,13 +1,13 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AttackStateEnemy : IState
 {
     private EnemyStateCrtl enemyStateCrtl;
-    //private int time = 3;
     private float coolDown = 0;
-    private bool isAtack = false;
+    private bool isAttack = false;
+    private float initialDelay = 0.5f; // Delay ban đầu khi vào trạng thái Attack
 
     public AttackStateEnemy(EnemyStateCrtl enemyStateCrtl)
     {
@@ -16,28 +16,27 @@ public class AttackStateEnemy : IState
 
     public void Enter()
     {
-        isAtack = true;
+        isAttack = true;
+        // Thiết lập delay ban đầu để tránh tấn công ngay lập tức
+        coolDown = initialDelay;
     }
 
     public void Execute()
     {
-        if (isAtack)
+        if (isAttack)
         {
             coolDown -= Time.deltaTime;
-          //  Debug.Log("hien thi 1" + coolDown);
-            if (coolDown > 0) return;
-            this.enemyStateCrtl.AttackPlayer();
-            coolDown = enemyStateCrtl.GetRapidAttack();
 
-
-           // Debug.Log("hien thi 2"+coolDown);
+            if (coolDown <= 0)
+            {
+                this.enemyStateCrtl.AttackPlayer();
+                coolDown = enemyStateCrtl.GetRapidAttack();
+            }
         }
     }
 
     public void Exit()
     {
-        isAtack = false;
+        isAttack = false;
     }
-
-
 }

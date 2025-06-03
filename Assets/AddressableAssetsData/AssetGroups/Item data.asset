@@ -35,8 +35,26 @@ MonoBehaviour:
     m_SerializedLabels:
     - item
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3fde4ea7bdb90ca4e96d981c76af3cd0
+    m_Address: Assets/Prefabs/GamePlay/SO/Item/HeathS.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - item
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a018b08ccf0a9047a6516b9ecd18631
+    m_Address: Assets/Prefabs/GamePlay/SO/Item/ManaL.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - item
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a25d721a2515204a99eedb335768155
     m_Address: SO/Item/GoldS
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - item
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76a21d0a36b7de149a7aab1e92512d7d
+    m_Address: Assets/Prefabs/GamePlay/SO/Item/HeathL.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - item
@@ -46,6 +64,17 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - item
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a38ca57c171b8604dae1130d52470dd2
+    m_Address: Assets/Prefabs/GamePlay/SO/Item/ManaS.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - item
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae202116d5537a04194758775a852544
+    m_Address: Assets/Prefabs/GamePlay/SO/Item/Magic.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b7de63d96b4c83947b84043110392b55
     m_Address: SO/Item/ExpericeS

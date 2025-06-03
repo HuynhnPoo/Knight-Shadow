@@ -8,7 +8,7 @@ using UnityEngine;
 public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 {
     [SerializeField] private EnemyData enemyData;
-   
+
 
     [SerializeField] private SpawnEnemy spawnEnemy;
 
@@ -24,16 +24,16 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
     public int Speed { get => speed; set => speed = value; }
     public int Dame { get => dame; set => dame = value; }
 
-
     private float rangeAttack;
-
     public float RangeAttack { get => rangeAttack; }
-
-
     private float rapidAttack;
     public float RapidAttack { get => rapidAttack; }
 
+    private bool isBoss;
+    public bool IsBoss => isBoss;
 
+    private int numberTimeAtk;
+    public int NumberTimeAtk => numberTimeAtk;
     private void Awake()
     {
         if (enemyData == null)
@@ -53,7 +53,7 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 
     public void GetComponentsEnity()
     {
-        if (spawnEnemy == null && deathEnemy ==null)
+        if (spawnEnemy == null && deathEnemy == null)
         {
             spawnEnemy = GetComponentInParent<SpawnEnemy>();
             deathEnemy = GetComponent<DeathEnemy>();
@@ -73,9 +73,12 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
             speed = enemyData.Speed;
             dame = enemyData.dame;// khia bao dame
             nameEnemy = enemyData.name;// ten quai vat
+            isBoss = enemyData.isBoss;
 
             rangeAttack = enemyData.rangeAttack;//  khi bao pham vi tan cong
-            rapidAttack = enemyData.rapidAttack;//  khi bao pham vi tan cong
+            rapidAttack = enemyData.rapidAttack;//  khi bao toc do tan cong
+
+            numberTimeAtk = enemyData.numberTimesAtk;
         }
 
     }
@@ -97,7 +100,7 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
     {
         Debug.Log("giet quais thanh cong");
         spawnEnemy.ReturnToPool(this.gameObject); // dua liaj vao pool
-       deathEnemy.DropItem();
+        deathEnemy.DropItem();
     }
-   
+
 }

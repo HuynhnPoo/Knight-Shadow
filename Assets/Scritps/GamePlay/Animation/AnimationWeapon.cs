@@ -19,8 +19,9 @@ public class AnimationWeapon : MonoBehaviour
     {
         //  int ooo = selectWeapon;
 
-        if (Input.GetKey(KeyCode.Alpha1)) SelectWeapon(0);
-        if (Input.GetKey(KeyCode.Alpha2) && transform.childCount >= 2) SelectWeapon(1);
+        if (Input.GetKey(KeyCode.Alpha1)) SelectWeapon(1);
+        if (Input.GetKey(KeyCode.Alpha2) && transform.childCount >= 2) SelectWeapon(2);
+        if (Input.GetKey(KeyCode.Alpha3) && transform.childCount >= 3) SelectWeapon(3);
 
     }
 

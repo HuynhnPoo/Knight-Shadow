@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6542313179738033348}
   - component: {fileID: 5984354599973141383}
   - component: {fileID: 3520628041808664163}
-  - component: {fileID: 6997162304363031432}
   - component: {fileID: 5796772016974414867}
+  - component: {fileID: -1144460751253713373}
   m_Layer: 0
   m_Name: Diamond
   m_TagString: Item
@@ -99,19 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: {fileID: 0}
   dataItem: {fileID: 0}
---- !u!114 &6997162304363031432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3100796582089900226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12fdc792b66870e46b52c2c70f024ed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemTypeList: 0
 --- !u!114 &5796772016974414867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +114,19 @@ MonoBehaviour:
   labelIEm:
     m_LabelString: item
   ItemData: {fileID: 0}
+--- !u!114 &-1144460751253713373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3100796582089900226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12fdc792b66870e46b52c2c70f024ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemTypeList: 0
 --- !u!1 &4642275337381081557
 GameObject:
   m_ObjectHideFlags: 0

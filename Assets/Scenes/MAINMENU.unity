@@ -5784,7 +5784,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Button: {fileID: 0}
-  shopManager: {fileID: 0}
 --- !u!1 &1320854970
 GameObject:
   m_ObjectHideFlags: 0

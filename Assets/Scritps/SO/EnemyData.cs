@@ -13,4 +13,8 @@ public class EnemyData : ScriptableObject
 
     public float rapidAttack;
     public float rangeAttack;
+
+    public bool isBoss;
+    public int numberTimesAtk;
+
 }

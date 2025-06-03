@@ -6,69 +6,55 @@ using UnityEngine;
 
 public class RangedWeapon : Weapon
 {
-    [SerializeField]private Bullet[] bulletPrefabs;
+    [SerializeField] private Bullet[] bulletPrefabs;
     [SerializeField] private Bullet bullet;
     private ObjectPool<Queue<GameObject>> pool;
     [SerializeField] private Transform holderBullet;
-    int currentBulletIndex=0;
     int size = 10;
 
-
-    Quaternion quaternion;
-    private void Awake()
+    enum TypeBullet
     {
-        InitPool();
+        Fireball,
+        Bullet
     }
 
-    void InitPool()
+    Quaternion quaternion;
+   
+    void InitPool(int index)
     {
         if (pool == null)
         {
-            pool = new ObjectPool<Queue<GameObject>>(bulletPrefabs[currentBulletIndex].gameObject, size, holderBullet); // khoi tạo pool
+            pool = new ObjectPool<Queue<GameObject>>(bulletPrefabs[index].gameObject, size, holderBullet); // khoi tạo pool
         }
         else
         {
-            pool.ChangeObjectInPool(bulletPrefabs[currentBulletIndex].gameObject);
+            pool.ChangeObjectInPool(bulletPrefabs[index].gameObject);
         }
 
     }
 
+    private void OnEnable()
+    {
+        if (gameObject.name == "Magic")
+        {
+            InitPool((int) TypeBullet.Fireball);
+        }
+
+        else if (gameObject.name == "bow")
+        {
+            InitPool((int)TypeBullet.Bullet);
+        }
+    }
+
+    // chuyen bullet
     private void Update()
     {
 
-        if (Input.GetKey(KeyCode.Alpha4))
-        {
-            NextToBullet();
-        } 
-        if (Input.GetKey(KeyCode.Alpha5))
-        {
-            PrevioustoBullet();
-        }
     }
-
-
-
 
     public override void Attacking()
     {
         SpawnBullet();
-    }
-
-
-    void NextToBullet()
-    {
-        currentBulletIndex = (currentBulletIndex + 1) % bulletPrefabs.Length;
-
-        InitPool();
-
-        Debug.Log("hien thi va thuc hien "+ bulletPrefabs[currentBulletIndex].gameObject.name);
-    }
-
-    void PrevioustoBullet()
-    {
-        currentBulletIndex=(currentBulletIndex -1 + bulletPrefabs.Length) % bulletPrefabs.Length;
-        InitPool();
-        Debug.Log("hien thi va thuc hien " + bulletPrefabs[currentBulletIndex].gameObject.name);
     }
 
     // ham sinh dan
@@ -77,7 +63,6 @@ public class RangedWeapon : Weapon
         Spawning(transform.position);
         return bullet;
     }
-
 
     //Lấy viên đạn ra khoi pool
     public void Spawning(Vector2 posSpawn)
@@ -103,7 +88,6 @@ public class RangedWeapon : Weapon
         }
 
     }
-
 
     // di chuyen bullet vào pool 
     public void ReturnToPool(GameObject obj)

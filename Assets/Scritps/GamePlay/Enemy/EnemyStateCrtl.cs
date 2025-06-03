@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,11 +9,13 @@ public class EnemyStateCrtl : MonoBehaviour
     private EnemyAttack enemyAttack;
     private EnemyInfo enemyInfo;
     private StateManager stateManager;
-   
-//private int speed = 10;
-
-  //  [Range(0.1f, 5f)] public float rangeAttack=3;
+  
     Vector3 direction;
+
+    int normalAttackCount;
+
+
+
     public Vector3 DirectionEnemy { get => direction; set => direction = value; }
     private void OnEnable()
     {
@@ -26,6 +28,12 @@ public class EnemyStateCrtl : MonoBehaviour
         enemyAttack= GetComponentInParent<EnemyAttack>();
         stateManager = GetComponent<StateManager>();
         enemyAni = GetComponent<AnimationEnity>();
+
+        if (enemyInfo.IsBoss)
+        {
+            normalAttackCount = 0;
+        }
+      
     }
 
     // Update is called once per frame
@@ -34,23 +42,17 @@ public class EnemyStateCrtl : MonoBehaviour
         float distanceToPlayer = Vector2.Distance(transform.position,playerPos.transform.position);
         if (distanceToPlayer <= enemyInfo.RangeAttack)
         {
-           // Debug.Log("hien thi distance"+ distanceToPlayer);
             stateManager.ChangeState(new AttackStateEnemy(this));
         }
-        //if (distanceToPlayer < rangeDetection) { }
         else 
         { 
             stateManager.ChangeState(new ChaseStateEnemy(this,enemyAni));
         }
     }
 
-  
-
     public void chaseToPlayer()
     {
         direction = DirectionOfEnemy();
-
-    //    Debug.Log("hien thi direction" + direction.x+"hgfgfg"+ direction.y);
         transform.Translate(direction * enemyInfo.Speed * Time.deltaTime);
     }
 
@@ -61,13 +63,24 @@ public class EnemyStateCrtl : MonoBehaviour
 
     public void AttackPlayer()
     {
+        if (enemyInfo.IsBoss)
+        {
+            HandleBossAttack();
+        }
+        else
+        {
+            HandleNormalEnemyAttack();
+        }
+    }
+
+    public void HandleNormalEnemyAttack()
+    {
         switch (enemyInfo.NameEnemy)
         {
             case "Slime":
             case "Sekeleton":
             case "Orc":
                 enemyAttack.MeleeAttackPlayer(enemyInfo.Dame, enemyInfo.RangeAttack, this.transform.position);
-
                 break;
 
             case "Plant":
@@ -80,6 +93,36 @@ public class EnemyStateCrtl : MonoBehaviour
                 break;
         }
     }
+
+    // quan lis trang thais tan con cua boss
+    private void HandleBossAttack()
+    {
+        enemyAni.AttackBossAni();
+        if (normalAttackCount >=enemyInfo.NumberTimeAtk)
+        {
+            normalAttackCount = 0;
+        }
+        
+        else
+        {
+            switch (enemyInfo.NameEnemy)
+            {
+                case "Lucifer_Boss": 
+                      enemyAttack.MeleeAttackPlayer(enemyInfo.Dame, enemyInfo.RangeAttack, this.transform.position);
+                    break;
+                default:
+                    // Mặc định cho boss nếu không có trường hợp cụ thể, dùng melee
+                   // enemyAttack.RangedAttackPlayer(this.transform.position, DirectionOfEnemy(), this);
+
+                    break;
+            }
+            normalAttackCount++;
+          
+        }
+
+       
+    }
+
     public float GetRapidAttack()
     {
         return enemyInfo.RapidAttack;   

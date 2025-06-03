@@ -26,17 +26,17 @@ public class ChaseStateEnemy : IState
 
     public void Execute()
     {
-        if (isMove)
+        if (isMove && enemyAni != null)
         {
             enemyMove.chaseToPlayer();
             enemyAni.MoveAni(isMove, enemyMove.DirectionEnemy);
         }
+
+       
     }
 
     public void Exit()
     {
-
         isMove = false;
-        // Debug.Log("exit enenmy");
     }
 }

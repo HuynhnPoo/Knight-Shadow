@@ -10,7 +10,6 @@ public class LoadDataItem : MonoBehaviour
 
     [SerializeField] private AssetLabelReference labelIEm;
     public ItemData ItemData;
-    private int value;
 
 
 

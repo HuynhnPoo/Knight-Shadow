@@ -14,13 +14,13 @@ public class CharacterInfo : MonoBehaviour, IDameable
     public float Mana { get => currentMana; set => currentMana = value; }
     public float Heath { get => currentHp; set => currentHp = value; }
 
-   
 
-    private float manaRate = 5, maxMana;
+
+    private float  manaRate = 5, maxMana, maxHeath;
     private bool isRegenRating = false;
 
     int index;
-   
+
     private void Awake()
     {
         index = PlayerPrefs.GetInt(StringSave.selectionCharacter);
@@ -41,12 +41,7 @@ public class CharacterInfo : MonoBehaviour, IDameable
 
 
         maxMana = currentMana;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        maxHeath = currentHp;
     }
 
     public void TakeDame(int dame)
@@ -89,13 +84,13 @@ public class CharacterInfo : MonoBehaviour, IDameable
         {
             yield return new WaitForSeconds(0.5f);
             currentMana += manaRate * Time.deltaTime;
-          
+
             if (currentMana >= maxMana)
             {
                 currentMana = maxMana; // nếu mana bằng hoặc hơn maxMana thì sẽ cho bằng maxMana
 
-                isRegenRating= false;
-            } 
+                isRegenRating = false;
+            }
 
             Debug.Log(currentMana);
 
@@ -103,6 +98,19 @@ public class CharacterInfo : MonoBehaviour, IDameable
         }
 
         isRegenRating = false;
+    }
+
+    public void AddHeath(int value)
+    {
+        currentHp += value;
+        if (currentHp >= maxHeath)
+            currentHp = maxHeath;
+    }
+    public void AddMana(int value)
+    {
+        currentMana += value;
+        if(currentMana >= maxMana)
+            currentMana = maxMana;
     }
 }
 

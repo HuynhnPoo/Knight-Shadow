@@ -6,12 +6,12 @@ public class AnimationEnity : MonoBehaviour
 {
 
     [SerializeField] private Animator charcterAni;
-  [SerializeField]  private AnimationWeapon weapon;
-   
-    private readonly string MOVE_X="MoveX";
-    private readonly string MOVE_Y="MoveY";
+    [SerializeField] private AnimationWeapon weapon;
+
+    private readonly string MOVE_X = "MoveX";
+    private readonly string MOVE_Y = "MoveY";
     private readonly string IS_MOVE = "Move";
-   
+
     private void Awake()
     {
         if (charcterAni == null)
@@ -20,11 +20,11 @@ public class AnimationEnity : MonoBehaviour
 
     private void Start()
     {
-       
+
     }
     public void MoveAni(bool isMove, Vector2 direction)
     {
-        if (charcterAni == null) return; 
+        if (charcterAni == null) return;
         charcterAni.SetBool(IS_MOVE, isMove);// sẽ dung dang di chuyern sẽ thục hiện blen tree di chuyển 4 hướng
 
         if (direction.x > 0) charcterAni.SetFloat(MOVE_X, direction.x);
@@ -34,10 +34,20 @@ public class AnimationEnity : MonoBehaviour
 
     }
 
+    //ham thuc hien attack
     public void AtkAni()
     {
         weapon.WeaponAttack();
+
     }
+
+    //attack cua boss
+    public void AttackBossAni()
+    {
+        charcterAni.SetTrigger("TrigAtk");
+    }
+    
+
 
 
 }

@@ -10,7 +10,7 @@ public class CollisionItem : MonoBehaviour
     int coolDown = 5;
     [SerializeField] private ItemType itemType;
     [SerializeField] LoadDataItem dataItem;
- 
+
     private float contactTimer = 0f;
     private bool isPlayerContact = false;
 
@@ -31,12 +31,12 @@ public class CollisionItem : MonoBehaviour
     {
         if (isPlayerContact && itemType.itemTypeList == ItemTypeList.WEAPON)
         {
-            AnimationWeapon selectWeapon=GameManager.Instance.PlayerCrtl.gameObject.GetComponentInChildren<AnimationWeapon>();
+            AnimationWeapon selectWeapon = GameManager.Instance.PlayerCrtl.gameObject.GetComponentInChildren<AnimationWeapon>();
             contactTimer += Time.deltaTime;
             if (contactTimer >= 2.0f)
             {
 
-                selectWeapon.SelectWeapon(dataItem.ItemData.value);
+                selectWeapon.SelectWeapon(dataItem.ItemData.value); // item value để chưa index của vũ khí
                 Destroy(this.gameObject);
                 contactTimer = 0f;
                 isPlayerContact = false;
@@ -87,18 +87,24 @@ public class CollisionItem : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); // sau 0.5s sẽ thực hiện
 
-            switch (itemType.itemTypeList)
-            {
-                case ItemTypeList.GOLD:
-                    GameManager.Instance.AddGold(dataItem.ItemData.value);
-                    break;
-                case ItemTypeList.EXPERINCE:
-                    GameManager.Instance.AddExperice(dataItem.ItemData.value);
-                    break;
-                default:
-                    break;
-            }
+        switch (itemType.itemTypeList)
+        {
+            case ItemTypeList.GOLD:
+                GameManager.Instance.AddGold(dataItem.ItemData.value);
+                break;
+            case ItemTypeList.EXPERINCE:
+                GameManager.Instance.AddExperice(dataItem.ItemData.value);
+                break;
+            case ItemTypeList.POTIONHEATH:
+                GameManager.Instance.PlayerCrtl.CharacterInfo.AddHeath(dataItem.ItemData.value);
+                break;
+            case ItemTypeList.POTIONMANA:
+                GameManager.Instance.PlayerCrtl.CharacterInfo.AddHeath(dataItem.ItemData.value);
+                break;
+            default:
+                break;
+        }
 
-            Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
 }

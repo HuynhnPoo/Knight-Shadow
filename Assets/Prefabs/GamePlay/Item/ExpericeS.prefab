@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 9157647269296413055}
   - component: {fileID: 4754318108101156910}
   - component: {fileID: 2356309108072105381}
-  - component: {fileID: 6642612368249373656}
+  - component: {fileID: -4246316463829906173}
   m_Layer: 0
   m_Name: ExpericeS
   m_TagString: Item
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: {fileID: 0}
   dataItem: {fileID: 0}
---- !u!114 &6642612368249373656
+--- !u!114 &-4246316463829906173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

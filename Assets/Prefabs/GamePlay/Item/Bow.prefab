@@ -94,9 +94,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3691306314020745849}
   - component: {fileID: 1625911989278108872}
-  - component: {fileID: 6002639668309207934}
   - component: {fileID: 466393594838662391}
   - component: {fileID: 2785838652001561617}
+  - component: {fileID: -6105881895890271156}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Item
@@ -134,19 +134,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: {fileID: 0}
   dataItem: {fileID: 0}
---- !u!114 &6002639668309207934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 486484943180956450}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12fdc792b66870e46b52c2c70f024ed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemTypeList: 2
 --- !u!61 &466393594838662391
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -207,3 +194,16 @@ MonoBehaviour:
   labelIEm:
     m_LabelString: item
   ItemData: {fileID: 0}
+--- !u!114 &-6105881895890271156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 486484943180956450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12fdc792b66870e46b52c2c70f024ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemTypeList: 2
