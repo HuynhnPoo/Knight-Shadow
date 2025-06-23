@@ -7,17 +7,9 @@ public class AnimationWeapon : MonoBehaviour
     [SerializeField] private Animator charcterAni;
 
     int selectWeapon;
-   // [SerializeField] private Animator charcterAni2;
-    private void OnEnable()
-    {
-        /* foreach (Transform child in transform)
-         {
-             child.gameObject.SetActive(false);
-         }*/
-    }
+   
     void Update()
     {
-        //  int ooo = selectWeapon;
 
         if (Input.GetKey(KeyCode.Alpha1)) SelectWeapon(1);
         if (Input.GetKey(KeyCode.Alpha2) && transform.childCount >= 2) SelectWeapon(2);

@@ -1,21 +1,12 @@
-﻿using JetBrains.Annotations;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
-public class SpawnEnemy : MonoBehaviour, ISpawn
+public class CommonEnemySpawn : SpawnEnemy
 {
-
-    [SerializeField] private GameObject[] enemyPrefabs;
-
-    int size = 100;
-    private int spawnSize = 5;
     private int waveNumber = 0;
-
-    private ObjectPool<List<GameObject>> pool;
-
-    [SerializeField] private Transform hoderObject;
-
+    private int spawnSize = 5;
     private void Awake()
     {
         enemyPrefabs = Resources.LoadAll<GameObject>(TagInGame.enemy);
@@ -23,28 +14,14 @@ public class SpawnEnemy : MonoBehaviour, ISpawn
         hoderObject = transform.Find("HolderEnemy");
     }
 
-    // Start is called before the first frame update
     private void OnEnable()
     {
         pool = new ObjectPool<List<GameObject>>(enemyPrefabs, size, hoderObject);
     }
-
-
+    // Start is called before the first frame update
     void Start()
     {
         SpawmByWave(spawnSize);
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        // ta cac gaem object torng pool
-        if (!pool.HasActiveObject())
-        {
-            SpawmByWave(spawnSize);
-        }
     }
 
     // hàm sinh enemy theo lượt
@@ -68,17 +45,18 @@ public class SpawnEnemy : MonoBehaviour, ISpawn
         }
     }
 
-    public void Spawning(Vector2 posSpawn)
+    // Update is called once per frame
+    void Update()
     {
-        GameObject enemy = pool.GetObject(); // lay ra enemy tu pool
-        if (enemy != null)
-        {
-            enemy.transform.position = posSpawn;// khoi taoj vi tri cho enemy
-        }
-    }
 
-    public void ReturnToPool(GameObject obj)
-    {
-        pool.ReturnObject(obj);
+        if(Input.GetKey(KeyCode.X))
+        {
+            SpawmByWave(spawnSize);
+        }
+        // ta cac gaem object torng pool
+        if (!pool.HasActiveObject())
+        {
+            SpawmByWave(spawnSize);
+        }
     }
 }

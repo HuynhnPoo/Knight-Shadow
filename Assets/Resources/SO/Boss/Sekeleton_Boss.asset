@@ -18,4 +18,5 @@ MonoBehaviour:
   dame: 0
   rapidAttack: 0
   rangeAttack: 0
-  isBoss: 0
+  isBoss: 1
+  numberTimesAtk: 0

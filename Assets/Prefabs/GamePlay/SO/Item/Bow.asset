@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 6
   weigth: 20
-  value: 1
+  value: 2
   timeDestroys: 0
   timeStart: 0
   type: 2

@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,15 +10,25 @@ public class EnemyAttack : MonoBehaviour
     private Transform hoderBulletEnemy;
     [SerializeField] private GameObject bullet;
     private ObjectPool<Queue<GameObject>> pool;
+
+   private EnemyAttackZone zone;
+
     private int size = 50;
 
     private void OnEnable()
     {
         if (hoderBulletEnemy != null) return;
-        hoderBulletEnemy = transform.Find("HoderBulletEnemy");
+          hoderBulletEnemy = transform.Find("HoderBulletEnemy");
+
+        if (hoderBulletEnemy == null)
+            hoderBulletEnemy = transform.Find("HoderBulletBoss");
+
+        zone = GetComponentInChildren<EnemyAttackZone>();
 
         pool = new ObjectPool<Queue<GameObject>>(bullet, size, hoderBulletEnemy);
     }
+
+
 
 
     //thuc hien danhga
@@ -55,5 +66,22 @@ public class EnemyAttack : MonoBehaviour
     public void ReturnToPoolBulletE(GameObject obj)
     {
         pool.ReturnObject(obj);
+    }
+
+    public IEnumerator ExecuteSkillOfBoss(bool isUseSkill, int normalAttackCount, Transform skill)
+    {
+        isUseSkill = true;
+        zone.ShowcircleZone();
+       
+        yield return new WaitForSeconds(0.5f);
+
+        skill.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2);
+        skill.gameObject.SetActive(false);
+        zone.HideCircleZone();
+        
+       
+
     }
 }

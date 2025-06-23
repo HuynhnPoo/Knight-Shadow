@@ -8,12 +8,12 @@ using System.Linq;
 
 public static class GameManagerAssetsLoad
 {
-    public static void LoadingGameAsset(AssetReference[] itemAssets, List<GameObject> itemInstance, MonoBehaviour coroutineRuner)//, Action action)
+    public static void LoadingGameAsset(AssetReference[] itemAssets, List<GameObject> itemInstance, MonoBehaviour coroutineRuner, Action action=null)
     {
         itemInstance.Clear();
-        coroutineRuner.StartCoroutine(LoadingGameAssetCoroutine(itemAssets, itemInstance));//, action));
+        coroutineRuner.StartCoroutine(LoadingGameAssetCoroutine(itemAssets, itemInstance, action));
     }
-    static IEnumerator LoadingGameAssetCoroutine(AssetReference[] itemAssets, List<GameObject> itemInstance)//, Action onComplete)
+    static IEnumerator LoadingGameAssetCoroutine(AssetReference[] itemAssets, List<GameObject> itemInstance,Action action=null)
     {
         foreach (AssetReference asset in itemAssets)
         {
@@ -30,7 +30,7 @@ public static class GameManagerAssetsLoad
                 Debug.LogWarning("Failed to load asset.");
             }
         }
-        //  onComplete?.Invoke();
+         action?.Invoke();
     }
 
     public static void LoadingGameAssetByLabel(AssetLabelReference labelRef, string obj, MonoBehaviour coroutineRuner, Action<ScriptableObject> onComplete)//, Action action)
@@ -42,10 +42,9 @@ public static class GameManagerAssetsLoad
     {
       //  Debug.Log("hien thi tét khi va chạm vat thể3");
         string cleanName = objName.Replace("(Clone)", "");
-        /// Load tất cả assets với label đã chỉ định
         var handle = Addressables.LoadAssetsAsync<ScriptableObject>(
-            labelRef, // Chỉ cần truyền label
-            null   // Không cần callback cho mỗi asset
+            labelRef, 
+            null 
         );
 
         yield return handle;

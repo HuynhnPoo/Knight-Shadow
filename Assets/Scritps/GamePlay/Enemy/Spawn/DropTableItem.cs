@@ -56,17 +56,25 @@ public class DropTableItem
     }
     public void DropItem(LoadAssetItem itemAsset,Transform posSpawn,bool isMeleeEnemy)
     {
-        double randPercent = Random.Range(0f, 100f); // Ngắn gọn hơn
+        double randPercent = Random.Range(0f, 100f); 
 
-        // Luôn spawn Gold và Exp
+       
         SpawnByType(ItemTypeList.GOLD,itemAsset,posSpawn, isMeleeEnemy);
         SpawnByType(ItemTypeList.EXPERINCE,itemAsset,posSpawn, isMeleeEnemy);
+        if (randPercent>=15 && randPercent<20) 
+        {
+            SpawnByType(ItemTypeList.POTIONHEATH, itemAsset, posSpawn, isMeleeEnemy);
+            SpawnByType(ItemTypeList.POTIONMANA, itemAsset, posSpawn, isMeleeEnemy);
+        }
 
-        // Nếu random dưới 10%, spawn thêm weapon
-        if (randPercent < 10f)
+       
+       else if (randPercent<15)
         {
             Debug.Log("Random < 10%, sinh thêm vũ khí");
             SpawnByType(ItemTypeList.WEAPON,itemAsset,posSpawn, isMeleeEnemy);
+
+            SpawnByType(ItemTypeList.POTIONHEATH, itemAsset, posSpawn, isMeleeEnemy);
+            SpawnByType(ItemTypeList.POTIONMANA, itemAsset, posSpawn, isMeleeEnemy);
         }
     }
 }

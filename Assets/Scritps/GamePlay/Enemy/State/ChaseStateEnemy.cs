@@ -19,7 +19,6 @@ public class ChaseStateEnemy : IState
 
     public void Enter()
     {
-
         isMove = true;
         // Debug.Log("enter enenmy");
     }
@@ -28,12 +27,14 @@ public class ChaseStateEnemy : IState
     {
         if (isMove && enemyAni != null)
         {
+            if (!enemyMove.GetIsBoss()) enemyAni.MoveAni(isMove, enemyMove.DirectionEnemy);
             enemyMove.chaseToPlayer();
-            enemyAni.MoveAni(isMove, enemyMove.DirectionEnemy);
         }
 
        
     }
+
+   
 
     public void Exit()
     {

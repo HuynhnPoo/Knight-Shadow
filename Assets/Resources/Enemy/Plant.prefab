@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
   enemyAni: {fileID: 0}
+  enemyAttack: {fileID: 0}
 --- !u!114 &1080427484776650730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908ec9df9ad89e8469b7001aae11c964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropTableItem:
+    dropItem: []
   itemAsset: {fileID: 0}
 --- !u!1 &8948946808934256517
 GameObject:

@@ -6,67 +6,54 @@ using UnityEngine.AddressableAssets;
 
 public class DeathEnemy : MonoBehaviour
 {
-    [SerializeField] private DropTableItem dropTableItem = new DropTableItem();
-
+    private DropTableItem dropTableItem = new DropTableItem();
     [SerializeField] private LoadAssetItem itemAsset;
     private AssetLabelReference labelReference = new AssetLabelReference { labelString = "item" };
     private EnemyInfo enemyInfo;
-    float minSpawnMele = 0.05f;
-    float minSpawnRange = 0.08f;
-    float maxSpawn = 0.2f;
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.N))
-        {
-            dropTableItem.DropItem(itemAsset, this.transform,true);
-        }
-        /* if (Input.GetKey(KeyCode.M))
-         {
 
-
-             itemAsset.SpawnItem(8, this.transform);
-
-         }*/
     }
 
 
     private void OnEnable()
     {
-        if (itemAsset == null)
-        {
-            enemyInfo = GetComponent<EnemyInfo>();
-            itemAsset = GetComponentInParent<LoadAssetItem>();
+        enemyInfo = GetComponent<EnemyInfo>();
+        itemAsset = GetComponentInParent<LoadAssetItem>();
 
-            GameManagerAssetsLoad.LoadingGameAssetByLabel(labelReference, this, itemsLoading =>
-            {
-                if (itemsLoading != null) dropTableItem.SetItems(itemsLoading);
-            });
-            //dropTableItem.SetItems(loadedItems);
-        }
+        GameManagerAssetsLoad.LoadingGameAssetByLabel(labelReference, this, itemsLoading =>
+        {
+            if (itemsLoading != null) dropTableItem.SetItems(itemsLoading);
+        });
+        //dropTableItem.SetItems(loadedItems);
     }
 
-
-
-
-    // private void OnItemsLoaded(AsyncOperationHandle<IList<ItemData>> handle) {    }
     public void DropItem()
     {
-       bool isMeleeEnemy;
 
+        bool isMeleeEnemy = false;
+
+        if (enemyInfo.IsBoss) DeathingBoss(isMeleeEnemy);
+
+        else if (!enemyInfo.IsBoss) DeathingOfEnemy(isMeleeEnemy);
+    }
+
+    void DeathingOfEnemy(bool isMeleeEnemy)
+    {
         switch (enemyInfo.NameEnemy)
         {
             case "Slime":
             case "Sekeleton":
             case "Orc":
                 isMeleeEnemy = true;
-                dropTableItem.DropItem(itemAsset, this.transform,isMeleeEnemy);
+                dropTableItem.DropItem(itemAsset, this.transform, isMeleeEnemy);
                 break;
 
             case "Vampire":
             case "Plant":
                 isMeleeEnemy = false;
-                dropTableItem.DropItem(itemAsset, this.transform,isMeleeEnemy);
+                dropTableItem.DropItem(itemAsset, this.transform, isMeleeEnemy);
 
                 break;
 
@@ -75,6 +62,31 @@ public class DeathEnemy : MonoBehaviour
                 break;
 
         }
-
     }
+
+
+
+    public void DeathingBoss(bool isMeleeEnemy)
+    {
+        Vector2 posItemSpawn=new Vector2(this.transform.position.x,this.transform.position.y);
+        switch (enemyInfo.NameEnemy)
+        {
+            case "Lucifer_Boss":
+                isMeleeEnemy = true;
+                for (int i = 0; i <4 ; i++)
+                {
+                    posItemSpawn=Random.insideUnitCircle * 6;
+
+                    dropTableItem.DropItem(itemAsset, this.transform, isMeleeEnemy);
+                }
+                break;
+            default:
+                // Mặc định cho boss nếu không có trường hợp cụ thể, dùng melee
+                // enemyAttack.RangedAttackPlayer(this.transform.position, DirectionOfEnemy(), this);
+
+                break;
+        }
+    }
+   
 }
+

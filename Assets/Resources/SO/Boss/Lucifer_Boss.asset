@@ -19,4 +19,4 @@ MonoBehaviour:
   rapidAttack: 1
   rangeAttack: 3
   isBoss: 1
-  numberTimesAtk: 3
+  numberTimesAtk: 4

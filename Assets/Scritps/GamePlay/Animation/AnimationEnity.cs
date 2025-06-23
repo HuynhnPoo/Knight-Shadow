@@ -8,9 +8,9 @@ public class AnimationEnity : MonoBehaviour
     [SerializeField] private Animator charcterAni;
     [SerializeField] private AnimationWeapon weapon;
 
-    private readonly string MOVE_X = "MoveX";
-    private readonly string MOVE_Y = "MoveY";
-    private readonly string IS_MOVE = "Move";
+    private const string MOVE_X = "MoveX";
+    private const string MOVE_Y = "MoveY";
+    private const string IS_MOVE = "Move";
 
     private void Awake()
     {
@@ -18,10 +18,6 @@ public class AnimationEnity : MonoBehaviour
             charcterAni = GetComponentInChildren<Animator>();
     }
 
-    private void Start()
-    {
-
-    }
     public void MoveAni(bool isMove, Vector2 direction)
     {
         if (charcterAni == null) return;

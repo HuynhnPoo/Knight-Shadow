@@ -99,7 +99,8 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
     void DisableEnemy()
     {
         Debug.Log("giet quais thanh cong");
-        spawnEnemy.ReturnToPool(this.gameObject); // dua liaj vao pool
+        if (IsBoss) Destroy(this.gameObject); 
+        else  spawnEnemy.ReturnToPool(this.gameObject); // dua liaj vao pool
         deathEnemy.DropItem();
     }
 

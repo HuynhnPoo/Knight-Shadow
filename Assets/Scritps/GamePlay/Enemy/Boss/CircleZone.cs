@@ -1,22 +1,20 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
-
-public class EnemyAttackZone : MonoBehaviour
+public class CircleZone
 {
-    [SerializeField] private int radius = 64;              // Bán kính vòng tròn
-    [SerializeField] private Color color = new Color(1, 0, 0, 0.5f); // Màu đỏ trong suốt
-
-    private SpriteRenderer spriteRenderer;
+    int radius;
+    private Color color = new Color(1, 0, 0, 0.5f); // Màu đỏ trong suốt
     private Texture2D texture;
+    private SpriteRenderer spriteRenderer;
 
-    void Start()
+    public CircleZone(SpriteRenderer spriteRenderer, int radius)
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        DrawCircle();
+        this.spriteRenderer = spriteRenderer;
+        this.radius = radius;
     }
 
-    void DrawCircle()
+   public void DrawCircle()
     {
         int size = radius * 2;
         texture = new Texture2D(size, size);
@@ -43,30 +41,11 @@ public class EnemyAttackZone : MonoBehaviour
         Sprite circleSprite = Sprite.Create(texture, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), 100f);
         spriteRenderer.sprite = circleSprite;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Hide();
-        }
-    }
 
-
-
-    public void Show()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void Hide()
-    {
-        gameObject.SetActive(false);
-    }
-
-    void OnDestroy()
+  /*  void OnDestroy()
     {
         if (texture != null)
             Destroy(texture);
-    }
+    }*/
 }
-  
+    
