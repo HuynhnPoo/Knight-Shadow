@@ -48,6 +48,7 @@ public class DropTableItem
             currentRand += modifiedWeight;
             if (currentRand >= rand)
             {
+               
                 itemAsset.SpawnItem(item.itemID, posSpawn);
                 break;
             }

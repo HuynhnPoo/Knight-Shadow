@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class RangedWeapon : Weapon
@@ -46,12 +45,7 @@ public class RangedWeapon : Weapon
         }
     }
 
-    // chuyen bullet
-    private void Update()
-    {
-
-    }
-
+    
     public override void Attacking()
     {
         SpawnBullet();
@@ -88,6 +82,35 @@ public class RangedWeapon : Weapon
         }
 
     }
+
+
+    public void SpawningCircle(Vector2 posSpawn, int bulletCount)
+    {
+        float angleStep = 360f / bulletCount;
+        float angle = 0f;
+
+        for (int i = 0; i < bulletCount; i++)
+        {
+            float dirX = Mathf.Cos(angle * Mathf.Deg2Rad);
+            float dirY = Mathf.Sin(angle * Mathf.Deg2Rad);
+            Vector2 direction = new Vector2(dirX, dirY).normalized;
+
+            GameObject obj = pool.GetObject();
+            obj.transform.position = posSpawn;
+            obj.transform.rotation = Quaternion.identity;
+
+            bullet = obj.GetComponent<Bullet>();
+
+            if (bullet != null)
+            {
+                bullet.SetWeapon(this);
+                bullet.Move(direction); // dùng chính hướng từ góc tạo ra
+            }
+
+            angle += angleStep;
+        }
+    }
+
 
     // di chuyen bullet vào pool 
     public void ReturnToPool(GameObject obj)

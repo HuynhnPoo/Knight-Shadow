@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
@@ -10,7 +11,7 @@ public class GameManager : SingletonBase<GameManager>
 
     private int maxExperice = 100;
     public int MaxExperice => maxExperice;
-    
+
 
     private int currentExperice = 0;
     public int CurrentExperice { get { return currentExperice; } }
@@ -27,33 +28,78 @@ public class GameManager : SingletonBase<GameManager>
 
     private int currentLevel = 1;
     public int CurrentLevel => currentLevel;
-   
 
-    private bool isPaused=false;
+
+    private bool isPaused = false;
     public bool IsPaused { get => isPaused; set => isPaused = value; }
 
     private bool isGameOver = false;
     public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
 
-    protected override void Awake()
-    {
-        base.Awake();
 
+    private bool isWinGame = false;
+    public bool IsWinGame { get => isWinGame; set => isWinGame = value; }
+
+
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode loadScene)
+    {
+        if (scene.name == "Bootstrap")
+        {
+            return;
+        }
+
+         if (scene.name ==UIManager.SceneType.GAMEPLAY.ToString()) // Hoặc enum nếu bạn dùng SceneType
+        {
+            PlayerCrtlInit();
+        }
+        else
+        {
+            playerCrtl = null; // Hoặc giữ nguyên nếu bạn cần lưu
+           
+        }
+    }
+
+    public void PlayerCrtlInit()
+    {
+
+
+        playerCrtl = GameObject.FindGameObjectWithTag(TagInGame.player).GetComponent<PlayerController>();
+    }
+    private void Start()
+    {
         saveGold = PlayerPrefs.GetInt("GoldSave");
 
     }
-
-
     public void GameStart()
-    { 
-
+    {
+        if (this.isGameOver == true || this.isWinGame == true)
+        {
+            UIManager.Instance.MenuGameOver.SetActive(true);
+        }
     }
 
-    public void GameOver() 
+    public void GameOver()
     {
         //PlayerPrefs.SetInt("GoldSave", totalGold);
 
         Debug.Log("hien thi game over");
+    }
+
+    public void WinGame()
+    {
+        Debug.Log("win game");
     }
 
 
@@ -61,9 +107,15 @@ public class GameManager : SingletonBase<GameManager>
     public void AddExperice(int expericeScore)
     {
         currentExperice += expericeScore;
-        if(currentExperice > maxExperice)
+        if (currentExperice > maxExperice)
         {
-            UpLevel(); 
+            UpLevel();
+        }
+
+        else if (currentExperice == 20)
+        {
+            isWinGame = true;
+            //this.GameOver();
         }
     }
 
@@ -72,8 +124,8 @@ public class GameManager : SingletonBase<GameManager>
     {
         totalGold += goldScore;
         saveGold += totalGold;
-        Debug.Log("hien thi total gold"+totalGold);
-        Debug.Log("hien thi save Gold"+ saveGold);
+        Debug.Log("hien thi total gold" + totalGold);
+        Debug.Log("hien thi save Gold" + saveGold);
         PlayerPrefs.SetInt("GoldSave", saveGold);
     }
 

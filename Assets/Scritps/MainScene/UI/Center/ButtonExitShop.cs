@@ -6,6 +6,7 @@ public class ButtonExitShop : ButtonShop
 {
     protected override void OnClick()
     {
+        shopPanelItem.SetActive(false);
         OpenShop();
     }
 }

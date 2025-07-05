@@ -13,7 +13,10 @@ public class DeathEnemy : MonoBehaviour
 
     private void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            dropTableItem.DropItem(itemAsset, this.transform, true);
+        }
     }
 
 
@@ -63,8 +66,6 @@ public class DeathEnemy : MonoBehaviour
 
         }
     }
-
-
 
     public void DeathingBoss(bool isMeleeEnemy)
     {

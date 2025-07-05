@@ -1,40 +1,29 @@
-using JetBrains.Annotations;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    [SerializeField] private LayerMask playerLM;
+    [SerializeField] protected LayerMask playerLM;
 
-    private Transform hoderBulletEnemy;
-    [SerializeField] private GameObject bullet;
-    private ObjectPool<Queue<GameObject>> pool;
+   [SerializeField] protected Transform hoderBulletEnemy;
+    [SerializeField] protected GameObject bullet;
 
-   private EnemyAttackZone zone;
+    protected ObjectPool<Queue<GameObject>> pool;
 
-    private int size = 50;
+    protected int size = 50;
 
     private void OnEnable()
     {
         if (hoderBulletEnemy != null) return;
-          hoderBulletEnemy = transform.Find("HoderBulletEnemy");
-
-        if (hoderBulletEnemy == null)
-            hoderBulletEnemy = transform.Find("HoderBulletBoss");
-
-        zone = GetComponentInChildren<EnemyAttackZone>();
-
-        pool = new ObjectPool<Queue<GameObject>>(bullet, size, hoderBulletEnemy);
+        hoderBulletEnemy = transform.Find("HoderBulletEnemy");
+        pool = new ObjectPool<Queue<GameObject>>(bullet, size, hoderBulletEnemy); //khoi tao pool bullet enemy
+       
     }
 
-
-
-
-    //thuc hien danhga
-    public void MeleeAttackPlayer(int dame, float rangeAttack, Vector2 posAttack)
+    //thuc hien danh gan
+    public virtual void MeleeAttackPlayer(int dame, float rangeAttack, Vector2 posAttack)
     {
-
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(posAttack, rangeAttack, playerLM);
 
         foreach (Collider2D player in hitPlayers)
@@ -43,9 +32,9 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    public void RangedAttackPlayer(Vector2 posSpawn, Vector2 direction, EnemyStateCrtl enemyStateCrtl)
+    public virtual void RangedAttackPlayer(Vector2 posSpawn, Vector2 direction, EnemyStateCrtl enemyStateCrtl)
     {
-
+       
         if (pool == null) return;
         GameObject bullet = pool.GetObject(); // lay bullet ra khoi pool
 
@@ -57,31 +46,17 @@ public class EnemyAttack : MonoBehaviour
         if (enemyBullet != null)
         {
 
-            enemyBullet.SetEnemyStateCrtl(enemyStateCrtl);
+            enemyBullet.SetEnemyStateCrtl(enemyStateCrtl);// chuyen enemy controll  vào trong enemybullet
             enemyBullet.Move(direction);
-            enemyBullet.Init(bullet.transform.position);
+            enemyBullet.Init(bullet.transform.position);// 
         }
     }
 
-    public void ReturnToPoolBulletE(GameObject obj)
+
+    public virtual void ReturnToPoolBulletE(GameObject obj)
     {
         pool.ReturnObject(obj);
     }
 
-    public IEnumerator ExecuteSkillOfBoss(bool isUseSkill, int normalAttackCount, Transform skill)
-    {
-        isUseSkill = true;
-        zone.ShowcircleZone();
-       
-        yield return new WaitForSeconds(0.5f);
-
-        skill.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(2);
-        skill.gameObject.SetActive(false);
-        zone.HideCircleZone();
-        
-       
-
-    }
+   
 }

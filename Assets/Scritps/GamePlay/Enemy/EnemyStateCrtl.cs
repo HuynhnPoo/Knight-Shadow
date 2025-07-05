@@ -10,7 +10,9 @@ public class EnemyStateCrtl : MonoBehaviour
     private EnemyInfo enemyInfo;
     private StateManager stateManager;
 
-   [SerializeField] private Transform skillBoss;
+    [SerializeField] private Transform skillBoss;
+    public  Transform SkillBoss => skillBoss;
+
 
     Vector3 direction;
 
@@ -44,8 +46,8 @@ public class EnemyStateCrtl : MonoBehaviour
     {
         if (enemyInfo.IsBoss)
         {
-
-            foreach (Transform child in this.transform)
+           
+            foreach (Transform child in this.transform)// duyet qua cac con của để tìm game object có tên là skill
             {
 
                 if (child.gameObject.name == "skill")
@@ -58,7 +60,19 @@ public class EnemyStateCrtl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, playerPos.transform.position);
+
+       /* if (Input.GetKeyDown(KeyCode.N))
+        {
+            enemyAttack.SpawningCircle(transform.position,8,this); 
+        }*/
+        ChangeStateOfEnemy();
+    }
+
+
+    //ham chuyen state cua enemy
+    public void ChangeStateOfEnemy()
+    {
+        float distanceToPlayer = GetDistanceEnemy();
         if (distanceToPlayer <= enemyInfo.RangeAttack)
         {
             stateManager.ChangeState(new AttackStateEnemy(this));
@@ -66,6 +80,24 @@ public class EnemyStateCrtl : MonoBehaviour
         else
         {
             stateManager.ChangeState(new ChaseStateEnemy(this, enemyAni));
+        }
+    }
+
+    public float GetDistanceEnemy()
+    {
+        return Vector2.Distance(transform.position, playerPos.transform.position);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (enemyInfo == null) return;
+
+
+        // Vẽ vùng skill nếu là boss
+        if (enemyInfo.IsBoss)
+        {
+            Gizmos.color = Color.red; // Màu khác để phân biệt
+            Gizmos.DrawWireSphere(transform.position, enemyInfo.RangeAttack);
         }
     }
 
@@ -117,30 +149,26 @@ public class EnemyStateCrtl : MonoBehaviour
     private void HandleBossAttack()
     {
 
-        Debug.Log("hien thi ra thoi gian danh " + normalAttackCount);
-        if (isUseSkill) return ;
+        if (isUseSkill) return;
 
         enemyAni.AttackBossAni();
         if (normalAttackCount >= enemyInfo.NumberTimeAtk)
         {
             // thuc hien skill cua boss
-
-            isUseSkill = false;
-            StartCoroutine(enemyAttack.ExecuteSkillOfBoss(isUseSkill,normalAttackCount,skillBoss));
+            stateManager.ChangeState(new AttackSkillStateEnemy(this,this.stateManager,this.enemyAttack));
             normalAttackCount = 0;
-          
         }
 
         else
         {
-            Debug.Log("hien thi ra thu hien dnah thuong lannnnn");
             switch (enemyInfo.NameEnemy)
             {
+               
                 case "Lucifer_Boss": 
-                case "Sekeleton-Boss":
+                case "Sekeleton_Boss":
                     enemyAttack.MeleeAttackPlayer(enemyInfo.Dame, enemyInfo.RangeAttack, this.transform.position);
                     break;
-                case "Rider-Boss":
+                case "Rider_Boss":
                     enemyAttack.RangedAttackPlayer(this.transform.position,DirectionOfEnemy(),this);
                     break;
                 default:
@@ -161,9 +189,17 @@ public class EnemyStateCrtl : MonoBehaviour
     {
         return enemyInfo.IsBoss;
     }
+    public string GetNameEnemy()
+    {
+        return enemyInfo.NameEnemy;
+    }
     public float GetRapidAttack()
     {
         return enemyInfo.RapidAttack;   
+    } 
+    public float GetRangedAttack()
+    {
+        return enemyInfo.RangeAttack; 
     }
 
     public void GetObjectToPool(GameObject obj)

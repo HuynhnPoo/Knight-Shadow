@@ -64,6 +64,8 @@ public class CharacterInfo : MonoBehaviour, IDameable
 
             if (currentMana <= 0)
             {
+                GameManager.Instance.IsGameOver = false;
+                //GameManager.Instance.GameOver();
                 currentMana = 0;
             }
         }

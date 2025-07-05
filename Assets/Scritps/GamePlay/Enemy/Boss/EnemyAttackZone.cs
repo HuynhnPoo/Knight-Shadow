@@ -4,18 +4,28 @@ using System.Collections;
 
 public class EnemyAttackZone : MonoBehaviour
 {
-   private int radius = 64;              // Bán kính vòng tròn
+   private float radius; // Bán kính vòng tròn
   
 
-    private SpriteRenderer spriteRenderer;
+    [SerializeField]private SpriteRenderer spriteRenderer;
+   [SerializeField] private EnemyStateCrtl enemyCrtl;
 
     private CircleZone CircleZone;
 
+    private void Awake()
+    {
+        enemyCrtl = GetComponentInParent<EnemyStateCrtl>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+       
+    }
+
     private void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        CircleZone = new CircleZone(spriteRenderer, radius);
+
+        radius = enemyCrtl.GetRangedAttack() * 100; // gan gia tri range cho radius
+        CircleZone = new CircleZone(spriteRenderer,(int) radius);
         CircleZone.DrawCircle();
+
         spriteRenderer.enabled = false; 
     }
 

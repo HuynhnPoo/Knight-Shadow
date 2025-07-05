@@ -25,6 +25,7 @@ public class CollisionItem : MonoBehaviour
     void Update()
     {
         ConTactWithWeapon();
+        DesTroyByTime();
     }
 
     void ConTactWithWeapon()

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Sekeleton_Boss
   m_EditorClassIdentifier: 
   enemyName: Sekeleton-Boss
-  HP: 0
-  Speed: 0
-  dame: 0
-  rapidAttack: 0
-  rangeAttack: 0
+  HP: 100
+  Speed: 1
+  dame: 1
+  rapidAttack: 2
+  rangeAttack: 2
   isBoss: 1
-  numberTimesAtk: 0
+  numberTimesAtk: 3

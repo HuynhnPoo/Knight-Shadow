@@ -2,6 +2,10 @@
 public class TagInGame 
 {
     public static string pnShop = "Pn_Shop";
+    public static string pnShopItem = "Pn_ShopItem";
+
+
+    public static string pnSetting = "Pn_Setting";
 
     public static string player = "Player";
 

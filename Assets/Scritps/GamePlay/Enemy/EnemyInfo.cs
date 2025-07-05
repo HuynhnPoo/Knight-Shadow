@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.Design.Serialization;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
@@ -18,7 +16,7 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 
     private string nameEnemy;
     public string NameEnemy => nameEnemy;
-    private int currentHeath, speed, dame;
+    private  int currentHeath, speed, dame;
 
     public int CurrentHeath { get => currentHeath; set => currentHeath = value; }
     public int Speed { get => speed; set => speed = value; }
@@ -43,6 +41,7 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
             string resourcePath = "SO/Enemy/" + enemyName;
             enemyData = Resources.Load<EnemyData>(resourcePath);
         }
+        InitData();
     }
 
 
@@ -59,11 +58,7 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
             deathEnemy = GetComponent<DeathEnemy>();
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        InitData();
-    }
+   
 
     void InitData()
     {

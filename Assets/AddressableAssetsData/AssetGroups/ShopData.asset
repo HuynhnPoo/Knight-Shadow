@@ -35,6 +35,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - DataCharacterShop
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c17c8b038adacf3439b204ecb1be854f
+    m_Address: Assets/Prefabs/GamePlay/SO/ItemShopData/ManaHaftData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemShop
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cb7c5e28db5416c47ac4f545f98f1be9
+    m_Address: Assets/Prefabs/GamePlay/SO/ItemShopData/HeathFullData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemShop
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fcec13da45dcf9a43a15ff6ca71dc0a6
+    m_Address: Assets/Prefabs/GamePlay/SO/ItemShopData/ManaFullData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemShop
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe1d0377bcb2af44889034d597d49a20
+    m_Address: Assets/Prefabs/GamePlay/SO/ItemShopData/HeathHaftData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - ItemShop
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 6522c6fefbed93542a69a40ef1b374d6, type: 2}
   m_SchemaSet:

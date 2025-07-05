@@ -6,17 +6,9 @@ public class ButtonShop : ButtonBase
 
     private static bool isOpenShop=false;
    
-    [SerializeField] private GameObject shopPanel;
+    [SerializeField] private GameObject shopPanel => UIManager.Instance?.PnShop;
+    [SerializeField] protected GameObject shopPanelItem => UIManager.Instance?.PnShopItem;
 
-    private void Awake()
-    {
-        LoadGameObject();
-    }
-    void LoadGameObject()
-    {
-        shopPanel = FindGameObjectByNameHide.FindGameObjectByName(TagInGame.pnShop);
-
-    }
 
     // Start is called before the first frame update
     protected override void OnClick()

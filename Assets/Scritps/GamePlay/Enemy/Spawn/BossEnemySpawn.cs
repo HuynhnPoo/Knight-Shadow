@@ -15,36 +15,25 @@ public class BossEnemySpawn : SpawnEnemy
 
     private void Awake()
     {
+        size = 5;
         positonOfWorld = new PositonOfWorld();
         GameManagerAssetsLoad.LoadingGameAsset(itemAssets, list, this, onLoadBoss); // load các item bang addressable
     }
 
     public void onLoadBoss()
     {
+
         hoderObject = transform.Find("HolderBoss");
         enemyPrefabs = list.ToArray();
-
-
         pool = new ObjectPool<List<GameObject>>(enemyPrefabs, size, hoderObject);
 
     }
 
 
-
-    private void OnEnable()
-    {
-        size = 5;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     void HandleSpawnBoss()
     {
         int curentLevel = GameManager.Instance.CurrentLevel;
-        if (curentLevel == milestoneOfBoss && positonOfWorld != null)
+        if (curentLevel == milestoneOfBoss && positonOfWorld != null)// neue maf level hie taij dudng ti sex sinh ra boss
         {
             milestoneOfBoss *= 2;
             Spawning(positonOfWorld.TakePositonOfWorld());
@@ -55,9 +44,6 @@ public class BossEnemySpawn : SpawnEnemy
     // Update is called once per frame
     void Update()
     {
-
         HandleSpawnBoss();
-
-
     }
 }

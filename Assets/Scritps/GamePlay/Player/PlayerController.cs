@@ -68,10 +68,26 @@ public class PlayerController : MonoBehaviour, ICompoment
             characterAni.AtkAni();
             stateManager.ChangeState(new AttackStatePlayer(weapon));
         }
+       else if (Input.GetKeyDown(KeyCode.V))
+        {/*
+            if (PotionSave.UsePotion())
+            {
+                Debug.Log("Potion used! Apply effect here.");
+            }*/
+
+          
+            Debug.Log("hien thi ra " + PotionSave.GetPotionCount("Heath-Full"));
+            Debug.Log("hien thi ra " + PotionSave.GetPotionCount("Mana-Full"));
+        }
+
+
+
         else
         {
             stateManager.ChangeState(new IdleStatePlayer(characterInfo));
         }
+
+       
     }
     public int DameAttack()
     {

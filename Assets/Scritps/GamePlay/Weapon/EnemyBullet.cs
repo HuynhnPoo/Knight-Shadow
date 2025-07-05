@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : Bullet
 {
-    [SerializeField] EnemyStateCrtl enemyStateCrtl;
-
-   
+    private EnemyStateCrtl enemyStateCrtl;
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -18,18 +16,20 @@ public class EnemyBullet : Bullet
     }
 
 
-
+    //ham khoi tạo thong số cho bullet 
     public void Init(Vector3 spawnPosition)
     {
         spawnPos = spawnPosition;
         transform.position = spawnPosition;
-
-       
     }
+    
+    //chuyen enemey state ctrl đẻ su dung
     public void SetEnemyStateCrtl(EnemyStateCrtl enemyStateCrtl)
     {
         this.enemyStateCrtl = enemyStateCrtl;
     }
+
+    //ham khi xu ly va cham với object
     public override void HitObject(Collider2D collider, int dameWeapon)
     {
         if (collider.gameObject.CompareTag(TagInGame.player))
@@ -50,10 +50,9 @@ public class EnemyBullet : Bullet
     public override void CheckDistance(int distanceMax)
     {
         float distance = Vector3.Distance(spawnPos,transform.position);
-      //  Debug.Log("hien thi tắt "+distance);
-
-        if (distance > distanceMax) {
-
+    
+        if (distance > distanceMax)// neu vị trí hen tại lớn hơn vị trí đã cho thi sẽ dua dạn vè pool 
+        {
             enemyStateCrtl.GetObjectToPool(this.gameObject);// tra ve trong pool
         }
     }

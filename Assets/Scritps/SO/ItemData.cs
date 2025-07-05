@@ -15,3 +15,4 @@ public class ItemData : ScriptableObject
     public int timeStart;
     public ItemTypeList type = ItemTypeList.GOLD;
 }
+        

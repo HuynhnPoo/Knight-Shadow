@@ -5,38 +5,51 @@ using UnityEngine;
 public class AttackSkillStateEnemy : IState
 {
     private EnemyStateCrtl enemyStateCrtl;
-    private float coolDown = 0;
-    private bool isAttack = false;
-    private float initialDelay = 0.5f; // Delay ban đầu khi vào trạng thái Attack
+    private StateManager stateManager;
+    private BossAttack enemyAttack;
+    // private Transform skillBoss;
+    private bool isAttackSkillFinshed = true;
 
-    public AttackSkillStateEnemy(EnemyStateCrtl enemyStateCrtl)
+    // bo dem thoi gian
+    float skillDuration = 2;
+    float elapsedTime = 0;
+    float damageInterval = 0.5f;
+
+    public AttackSkillStateEnemy(EnemyStateCrtl enemyStateCrtl, StateManager stateManager, EnemyAttack enemyAttack)
     {
         this.enemyStateCrtl = enemyStateCrtl;
+        this.stateManager = stateManager;
+        this.enemyAttack = enemyAttack as BossAttack;
+
+
+        
+        //this.skillBoss =enemyStateCrtl.SkillBoss;
     }
 
     public void Enter()
     {
-        isAttack = true;
+        isAttackSkillFinshed = false;
+
+        Debug.Log("hien thi ra 111"+ this.enemyStateCrtl + this.stateManager + this.enemyAttack); // khono loi
         // Thiết lập delay ban đầu để tránh tấn công ngay lập tức
-        coolDown = initialDelay;
+        enemyStateCrtl.StartCoroutine(ExecuteSkill());
+
     }
 
     public void Execute()
     {
-        if (isAttack)
+        if (isAttackSkillFinshed)
         {
-            coolDown -= Time.deltaTime;
-
-            if (coolDown <= 0)
-            {
-                this.enemyStateCrtl.AttackPlayer();
-                coolDown = enemyStateCrtl.GetRapidAttack();
-            }
+            enemyStateCrtl.ChangeStateOfEnemy();
         }
     }
 
-    public void Exit()
+    public void Exit() { }
+
+    IEnumerator ExecuteSkill()
     {
-        isAttack = false;
+        Debug.Log("thuc hien hàm skill");
+        yield return enemyAttack.ExecuteSkillOfBoss(enemyStateCrtl, skillDuration, damageInterval, elapsedTime);
+        isAttackSkillFinshed = true;
     }
 }

@@ -15,3 +15,16 @@ public class ItemType:MonoBehaviour
     public ItemTypeList itemTypeList;
 
 }
+
+public class TypePotion
+{
+    public enum TypePotionList
+    {
+        NONE,
+        POTIONFULL,
+        POTIONHAFT
+    }
+
+    public TypePotionList itemTypeList;
+}
+

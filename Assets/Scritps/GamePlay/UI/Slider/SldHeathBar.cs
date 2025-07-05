@@ -18,4 +18,6 @@ public class SldHeathBar : SliderBase
 
         //Debug.Log($"hien ra thanh slider {slider.value}    {GameManager.Instance.PlayerCrtl.CharacterInfo.Heath} ");
     }
+
+
 }

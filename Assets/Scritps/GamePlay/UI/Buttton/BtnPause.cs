@@ -7,40 +7,42 @@ public class BtnPause : ButtonBase
 {
     //  private static bool isPaused = false;
     //protected bool isPaused = false;
-    private GameObject menuSetting, menuPause;
+    [SerializeField] private GameObject menuSetting => UIManager.Instance?.MenuSetting;
+    private GameObject menuPause=> UIManager.Instance?.MenuPause;
     protected override void OnClick()
     {
         Pausing();
     }
 
-    //GameObject menuSetting;
-
     private void OnEnable()
     {
-        menuPause = UIManager.Instance.MenuPause;
-        menuSetting = UIManager.Instance.MenuSetting;
     }
 
     // bat menu pasue
     protected void Pausing()
     {
-        if (!GameManager.Instance.IsPaused)
+        if (!GameManager.Instance.IsPaused) 
         {
             GameManager.Instance.IsPaused = true;
-            menuPause.SetActive(true);
-            if (menuSetting.activeSelf == true)
-            {
-                GameManager.Instance.IsPaused = true;
-                menuPause.SetActive(false);
-            }
-            Time.timeScale = 0;
-
+            menuPause.SetActive(true);      
+            menuSetting.SetActive(false);  
+            Time.timeScale = 0;            
         }
-        else
+        else 
         {
-            GameManager.Instance.IsPaused = false;
-            menuPause.SetActive(false);
-            Time.timeScale = 1;
+            if (menuPause.activeSelf == true)
+            {
+                GameManager.Instance.IsPaused = false;
+                menuPause.SetActive(false);
+                Time.timeScale = 1;         
+            }
+          
+            else if (menuSetting.activeSelf == true)
+            {
+                menuSetting.SetActive(false); 
+                menuPause.SetActive(true); 
+            }
+           
         }
     }
 }
