@@ -80,11 +80,11 @@ public class GameManager : SingletonBase<GameManager>
     private void Start()
     {
         saveGold = PlayerPrefs.GetInt("GoldSave");
-        saveGold = 10000000;
+       /* saveGold = 10000000;
 
         PlayerPrefs.SetInt("GoldSave", saveGold);
 
-        PlayerPrefs.Save();
+        PlayerPrefs.Save();*/
     }
   
     public void GameOverWin()

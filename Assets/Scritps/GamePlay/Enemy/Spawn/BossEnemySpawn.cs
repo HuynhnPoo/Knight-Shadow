@@ -11,7 +11,7 @@ public class BossEnemySpawn : SpawnEnemy
     public AssetReference[] itemAssets;
     private List<GameObject> list = new List<GameObject>();
     private PositonOfWorld positonOfWorld;
-    private int milestoneOfBoss = 3;
+    private int milestoneOfBoss = 5;
 
     private void Awake()
     {
