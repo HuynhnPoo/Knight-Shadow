@@ -61,10 +61,7 @@ public class EnemyStateCrtl : MonoBehaviour
     void Update()
     {
 
-       /* if (Input.GetKeyDown(KeyCode.N))
-        {
-            enemyAttack.SpawningCircle(transform.position,8,this); 
-        }*/
+      
         ChangeStateOfEnemy();
     }
 
@@ -87,6 +84,7 @@ public class EnemyStateCrtl : MonoBehaviour
     {
         return Vector2.Distance(transform.position, playerPos.transform.position);
     }
+
 
     private void OnDrawGizmosSelected()
     {
@@ -184,6 +182,8 @@ public class EnemyStateCrtl : MonoBehaviour
 
 
     }
+
+   
 
     public bool GetIsBoss()
     {

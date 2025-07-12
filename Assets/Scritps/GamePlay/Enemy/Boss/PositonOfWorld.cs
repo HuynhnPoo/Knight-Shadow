@@ -7,8 +7,6 @@ public class PositonOfWorld
         Camera mainCamera = Camera.main;
         if (mainCamera != null)
         {
-
-
             // Góc trên bên phải của viewport (tọa độ thế giới)
             Vector3 topRightWorld = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, mainCamera.nearClipPlane));
 

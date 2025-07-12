@@ -27,7 +27,7 @@ public class IdleStatePlayer : IState
 
     public void Execute()
     {
-        Debug.Log("thuc hien enter execute");
+       
         if (characterInfo.Mana<threshHoldScore  && isIdle)
         {
             characterInfo.RegenMana(); // khi manna duoi  threshholdscore se thuc hien hoi phuc mana

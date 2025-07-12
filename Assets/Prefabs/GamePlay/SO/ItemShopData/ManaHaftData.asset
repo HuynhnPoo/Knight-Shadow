@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9194b24669aa25439551de3302b5ead, type: 3}
   m_Name: ManaHaftData
   m_EditorClassIdentifier: 
-  itemName: Mana-Haft
+  itemName: Mana
   price: 1000
-  value: 0
+  value: 50
   typePotion: 2
   quantity: 0
   maxQuantity: 5

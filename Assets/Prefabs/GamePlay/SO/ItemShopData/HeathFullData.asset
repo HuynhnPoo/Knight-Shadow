@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9194b24669aa25439551de3302b5ead, type: 3}
   m_Name: HeathFullData
   m_EditorClassIdentifier: 
-  itemName: Heath-Full
+  itemName: Heath
   price: 2000
-  value: 0
+  value: 100
   typePotion: 1
-  quantity: 1
+  quantity: 0
   maxQuantity: 5

@@ -6,9 +6,8 @@ using UnityEngine;
 public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 {
     [SerializeField] private EnemyData enemyData;
-
-
     [SerializeField] private SpawnEnemy spawnEnemy;
+    [SerializeField] private AnimationEnity aniDead;
 
     private DeathEnemy deathEnemy;
 
@@ -52,10 +51,11 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
 
     public void GetComponentsEnity()
     {
-        if (spawnEnemy == null && deathEnemy == null)
+        if (spawnEnemy == null && deathEnemy == null && aniDead ==null)
         {
             spawnEnemy = GetComponentInParent<SpawnEnemy>();
             deathEnemy = GetComponent<DeathEnemy>();
+            aniDead = GetComponent<AnimationEnity>();
         }
     }
    
@@ -82,19 +82,32 @@ public class EnemyInfo : MonoBehaviour, IDameable, ICompoment
     {
         currentHeath -= dame;
 
-        if (currentHeath <= 0)
-        {
-            DisableEnemy();
 
-            //itemAsset.SpawnItem();
+         if (currentHeath <= 0)
+        {
+           if(isBoss) aniDead.DeadBossAni(isBoss);
+            StartCoroutine(WaitAndDisable());
+
         }
     }
 
     // thuc hien chuyen cac enemy chet vao pool
+    private IEnumerator WaitAndDisable()
+    {
+        // giả sử animation boss chết là 1.5s
+        yield return new WaitForSeconds(0.5f);
+        DisableEnemy();
+    }
     void DisableEnemy()
     {
         Debug.Log("giet quais thanh cong");
-        if (IsBoss) Destroy(this.gameObject); 
+        if (IsBoss)
+        {
+            spawnEnemy = spawnEnemy as BossEnemySpawn;
+            Debug.Log("hien thi ras "+ spawnEnemy.name);
+            spawnEnemy.ReturnToPool(this.gameObject);
+            
+        }
         else  spawnEnemy.ReturnToPool(this.gameObject); // dua liaj vao pool
         deathEnemy.DropItem();
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpericeL
   m_EditorClassIdentifier: 
   itemID: 1
-  weigth: 10
+  weigth: 5
   value: 50
   timeDestroys: 0
   timeStart: 0

@@ -13,7 +13,7 @@ public class UIManager : SingletonBase<UIManager>
    [SerializeField] private GameObject menuSetting;
     public GameObject MenuSetting => menuSetting;
 
-    private GameObject menuGameOver;
+   [SerializeField] private GameObject menuGameOver;
     public GameObject MenuGameOver=> menuGameOver;
 
     private GameObject pnShop;
@@ -59,7 +59,7 @@ public class UIManager : SingletonBase<UIManager>
         menuPause = FindGameObjectByNameHide.FindGameObjectByName("Menu-Pause");
         menuSetting = FindGameObjectByNameHide.FindGameObjectByName("Menu-Setting");
 
-        menuGameOver = FindGameObjectByNameHide.FindGameObjectByName("Menu-GameOver");
+        menuGameOver = FindGameObjectByNameHide.FindGameObjectByName("Menu-GameOverWin");
 
         pnShop= FindGameObjectByNameHide.FindGameObjectByName(TagInGame.pnShop);
         pnShopItem= FindGameObjectByNameHide.FindGameObjectByName(TagInGame.pnShopItem);

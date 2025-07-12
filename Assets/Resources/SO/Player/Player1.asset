@@ -16,4 +16,4 @@ MonoBehaviour:
   hp: 110
   mp: 100
   speed: 10
-  dame: 50
+  dame: 10

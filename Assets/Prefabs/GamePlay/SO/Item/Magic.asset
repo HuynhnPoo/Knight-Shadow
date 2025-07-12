@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Magic
   m_EditorClassIdentifier: 
   itemID: 12
-  weigth: 0
+  weigth: 20
   value: 3
   timeDestroys: 0
   timeStart: 0

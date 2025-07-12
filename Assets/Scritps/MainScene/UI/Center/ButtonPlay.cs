@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ButtonPlay : ButtonBase
 {
@@ -21,6 +20,7 @@ public class ButtonPlay : ButtonBase
 
     protected override void OnClick()
     {
+        SoundManager.Instance.PlaySfx(TagInGame.buttonClick);
         PlayerPrefs.SetInt("NewGame", 0);
         PlayerPrefs.Save();
 

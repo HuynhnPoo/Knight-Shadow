@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Rider_Boss
   m_EditorClassIdentifier: 
   enemyName: Rider-Boss
-  HP: 10000
+  HP: 450
   Speed: 2
-  dame: 1
+  dame: 6
   rapidAttack: 1
-  rangeAttack: 3
+  rangeAttack: 4
   isBoss: 1
-  numberTimesAtk: 6
+  numberTimesAtk: 8

@@ -23,7 +23,7 @@ public class SliderLoadScene : SliderBase
         if (slider != null)
         {
             slider.value = amount;
-            Debug.Log("Loading progress: " + ((float)amount * 100) + "%");
+          //  Debug.Log("Loading progress: " + ((float)amount * 100) + "%");
         }
     }
 

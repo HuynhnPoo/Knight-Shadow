@@ -16,6 +16,12 @@ public abstract class SpawnEnemy : MonoBehaviour, ISpawn
     
     public virtual void Spawning(Vector2 posSpawn)
     {
+        if (pool == null)
+        {
+            Debug.LogError("Pool rong!");
+            return;
+        }
+
         GameObject enemy = pool.GetObject(); // lay ra enemy tu pool
         if (enemy != null)
         {

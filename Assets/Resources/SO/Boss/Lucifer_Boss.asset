@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Lucifer_Boss
   m_EditorClassIdentifier: 
   enemyName: Lucifer-Boss
-  HP: 1000
-  Speed: 1
-  dame: 1
+  HP: 500
+  Speed: 3
+  dame: 8
   rapidAttack: 1
   rangeAttack: 3
   isBoss: 1

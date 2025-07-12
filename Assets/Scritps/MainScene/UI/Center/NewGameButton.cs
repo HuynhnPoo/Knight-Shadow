@@ -25,6 +25,7 @@ public class NewGameButton : ButtonBase
 
     protected override void OnClick()
     {
+        SoundManager.Instance.PlaySfx(TagInGame.buttonClick);
         foreach (ShopManager shop in shopManager)
         {
             shop.NewGame();

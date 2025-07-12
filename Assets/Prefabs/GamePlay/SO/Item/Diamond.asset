@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Diamond
   m_EditorClassIdentifier: 
   itemID: 0
-  weigth: 1
+  weigth: 5
   value: 50
   timeDestroys: 0
+  timeStart: 0
+  type: 0

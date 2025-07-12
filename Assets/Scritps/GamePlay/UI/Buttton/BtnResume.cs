@@ -7,6 +7,7 @@ public class BtnResume : BtnPause
     protected override void OnClick()
     {
         // base.OnClick();
+        SoundManager.Instance.PlaySfx(TagInGame.buttonClick);
         Pausing();
     }
 }

@@ -13,10 +13,10 @@ public class DeathEnemy : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        /*if (Input.GetKeyDown(KeyCode.M))
         {
             dropTableItem.DropItem(itemAsset, this.transform, true);
-        }
+        }*/
     }
 
 
@@ -29,7 +29,6 @@ public class DeathEnemy : MonoBehaviour
         {
             if (itemsLoading != null) dropTableItem.SetItems(itemsLoading);
         });
-        //dropTableItem.SetItems(loadedItems);
     }
 
     public void DropItem()
@@ -73,6 +72,8 @@ public class DeathEnemy : MonoBehaviour
         switch (enemyInfo.NameEnemy)
         {
             case "Lucifer_Boss":
+            case "Sekeleton_Boss":
+
                 isMeleeEnemy = true;
                 for (int i = 0; i <4 ; i++)
                 {
@@ -81,10 +82,18 @@ public class DeathEnemy : MonoBehaviour
                     dropTableItem.DropItem(itemAsset, this.transform, isMeleeEnemy);
                 }
                 break;
-            default:
-                // Mặc định cho boss nếu không có trường hợp cụ thể, dùng melee
-                // enemyAttack.RangedAttackPlayer(this.transform.position, DirectionOfEnemy(), this);
+            case "Rider_Boss":
 
+                isMeleeEnemy = true;
+                for (int i = 0; i <6 ; i++)
+                {
+                    posItemSpawn=Random.insideUnitCircle * 6;
+
+                    dropTableItem.DropItem(itemAsset, this.transform, isMeleeEnemy);
+                }
+                break;
+            default:
+                Debug.LogWarning("hien thi không có ten boss hop lệ");
                 break;
         }
     }

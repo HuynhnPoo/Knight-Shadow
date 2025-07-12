@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class BuyItemButton : ButtonBase
 {
-    private ShopItem shopBuy;
+    [SerializeField] private ShopItem shopBuy;
     public int index;
     protected override void OnClick()
     {
+        Debug.Log("hien thi ra thuc hien");
         shopBuy.PurchasingEnity(index);
     }
 

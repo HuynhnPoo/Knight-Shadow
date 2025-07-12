@@ -43,6 +43,14 @@ public class AnimationEnity : MonoBehaviour
         charcterAni.SetTrigger("TrigAtk");
     }
     
+    public void DeadBossAni(bool isBoss)
+    {
+
+        Debug.Log("thuc hien chet bos");
+        charcterAni.SetTrigger("Dead");
+        charcterAni.SetBool("IsBoss",isBoss);
+    }
+    
 
 
 

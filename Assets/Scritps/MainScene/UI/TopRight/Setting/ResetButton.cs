@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class ResetButton : ButtonBase
 {
-    protected override void OnClick()
-    {
-       // throw new System.NotImplementedException();
-    }
+    protected override void OnClick() => SoundManager.Instance.ResetMusicAll();
 }

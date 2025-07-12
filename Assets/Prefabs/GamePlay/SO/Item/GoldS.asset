@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: GoldS
   m_EditorClassIdentifier: 
   itemID: 5
-  weigth: 50
+  weigth: 100
   value: 10
   timeDestroys: 0
+  timeStart: 0
+  type: 0

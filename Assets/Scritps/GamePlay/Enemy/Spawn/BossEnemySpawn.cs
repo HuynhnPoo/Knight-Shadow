@@ -11,12 +11,13 @@ public class BossEnemySpawn : SpawnEnemy
     public AssetReference[] itemAssets;
     private List<GameObject> list = new List<GameObject>();
     private PositonOfWorld positonOfWorld;
-    private int milestoneOfBoss = 2;
+    private int milestoneOfBoss = 3;
 
     private void Awake()
     {
         size = 5;
         positonOfWorld = new PositonOfWorld();
+        list.Clear();
         GameManagerAssetsLoad.LoadingGameAsset(itemAssets, list, this, onLoadBoss); // load các item bang addressable
     }
 
@@ -24,8 +25,11 @@ public class BossEnemySpawn : SpawnEnemy
     {
 
         hoderObject = transform.Find("HolderBoss");
-        enemyPrefabs = list.ToArray();
-        pool = new ObjectPool<List<GameObject>>(enemyPrefabs, size, hoderObject);
+        if (list != null && list.Count > 0)
+        {
+            enemyPrefabs = list.ToArray();
+            pool = new ObjectPool<List<GameObject>>(enemyPrefabs, size, hoderObject);
+        }
 
     }
 
@@ -36,14 +40,31 @@ public class BossEnemySpawn : SpawnEnemy
         if (curentLevel == milestoneOfBoss && positonOfWorld != null)// neue maf level hie taij dudng ti sex sinh ra boss
         {
             milestoneOfBoss *= 2;
-            Spawning(positonOfWorld.TakePositonOfWorld());
+
+            Spawning(positonOfWorld.TakePositonOfWorld());// boosss 
         }
     }
 
-
+    private void OnDisable()
+    {
+        if (list != null)
+        {
+            list.Clear();
+        }
+    }
     // Update is called once per frame
     void Update()
     {
+
+        StartCoroutine(WaitHandleSpawnBoss());
+    }
+
+    private IEnumerator WaitHandleSpawnBoss()
+    {
+        // giả sử animation boss chết là 1.5s
+        yield return new WaitForSeconds(1);
         HandleSpawnBoss();
     }
+
+
 }

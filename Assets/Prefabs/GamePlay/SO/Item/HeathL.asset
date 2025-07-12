@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeathL
   m_EditorClassIdentifier: 
   itemID: 8
-  weigth: 15
+  weigth: 10
   value: 20
   timeDestroys: 0
   timeStart: 0

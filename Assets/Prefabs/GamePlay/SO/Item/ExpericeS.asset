@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpericeS
   m_EditorClassIdentifier: 
   itemID: 3
-  weigth: 50
+  weigth: 100
   value: 10
   timeDestroys: 0
   timeStart: 0

@@ -13,7 +13,7 @@ public class BtnSetting : ButtonBase
 
     void SettingActive()
     {
-
+        SoundManager.Instance.PlaySfx(TagInGame.buttonClick);
         if (!GameManager.Instance.IsPaused) 
         {
             GameManager.Instance.IsPaused = true;

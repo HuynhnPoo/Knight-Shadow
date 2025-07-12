@@ -48,13 +48,13 @@ public class CommonEnemySpawn : SpawnEnemy
     // Update is called once per frame
     void Update()
     {
+        StartCoroutine(CheckActiveObject());
+    }
 
-        if(Input.GetKey(KeyCode.X))
-        {
-            SpawmByWave(spawnSize);
-        }
-        // ta cac gaem object torng pool
-        if (!pool.HasActiveObject())
+    IEnumerator CheckActiveObject()
+    {
+        yield return new WaitForSeconds(1);
+        if (!pool.HasActiveObject()) // ta cac gaem object torng pool
         {
             SpawmByWave(spawnSize);
         }

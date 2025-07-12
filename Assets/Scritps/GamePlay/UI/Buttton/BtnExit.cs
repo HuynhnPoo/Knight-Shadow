@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
+
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class BtnExit : ButtonBase
 {
@@ -12,9 +12,16 @@ public class BtnExit : ButtonBase
 
     void ExittingGame()
     {
+        SoundManager.Instance.PlaySfx(TagInGame.buttonClick);
         Time.timeScale = 1;
+        GameManager.Instance.IsPaused = false;
+        GameManager.Instance.IsGameOver = false;
+
+       
         UIManager.Instance.currentScene = UIManager.SceneType.GAMEPLAY;
         UIManager.Instance.ChangeScene(UIManager.SceneType.LOADING);
+
+
     }
 }
    

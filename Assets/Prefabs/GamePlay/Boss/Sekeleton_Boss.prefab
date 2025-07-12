@@ -1597,6 +1597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: 0ebb3c6ed2d0d46429bc2986ff39b40e, type: 2}
   spawnEnemy: {fileID: 0}
+  aniDead: {fileID: 0}
 --- !u!114 &2205160725401365314
 MonoBehaviour:
   m_ObjectHideFlags: 0

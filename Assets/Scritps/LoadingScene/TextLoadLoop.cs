@@ -23,7 +23,6 @@ public class TextLoadLoop : TextBase
             text.text = "loading....";
             yield return new WaitForSeconds(0.2f);
 
-            Debug.Log("hien thi looop text");
         }
 
     }

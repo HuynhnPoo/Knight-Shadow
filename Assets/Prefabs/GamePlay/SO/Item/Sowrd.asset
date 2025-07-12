@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sowrd
   m_EditorClassIdentifier: 
   itemID: 7
-  weigth: 0
+  weigth: 10
   value: 1
   timeDestroys: 0
   timeStart: 0

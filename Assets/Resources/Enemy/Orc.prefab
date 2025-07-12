@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2011803519, guid: f89807c18218ac7499885ec60709217d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -285,6 +285,7 @@ MonoBehaviour:
   playerPos: {fileID: 0}
   enemyAni: {fileID: 0}
   enemyAttack: {fileID: 0}
+  skillBoss: {fileID: 0}
 --- !u!114 &4360466232373982351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 0}
   spawnEnemy: {fileID: 0}
+  aniDead: {fileID: 0}
 --- !u!114 &1878241384708635716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +339,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 908ec9df9ad89e8469b7001aae11c964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropTableItem:
-    dropItem: []
   itemAsset: {fileID: 0}

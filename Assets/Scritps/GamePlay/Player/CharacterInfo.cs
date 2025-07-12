@@ -51,7 +51,9 @@ public class CharacterInfo : MonoBehaviour, IDameable
         // Debug.Log("hien thi current dame"+ currentHp);
         if (currentHp <= 0)
         {
-            GameManager.Instance.GameOver(); //máu bằng 0 sẽ game over
+            SoundManager.Instance.PlaySfx(TagInGame.gameOver);
+            GameManager.Instance.IsGameOver = true;
+            GameManager.Instance.GameOverWin(); //máu bằng 0 sẽ game over
         }
 
     }

@@ -21,4 +21,9 @@ public class TagInGame
 
     public static string gold = "Gold";
     public static string experice = "Experice";
+
+    public static string hit = "Hit";
+    public static string levelUp = "LevelUp";
+    public static string gameOver = "GameOver";
+    public static string buttonClick = "ButtonClick";
 }

@@ -28,6 +28,7 @@ public class CollisionItem : MonoBehaviour
         DesTroyByTime();
     }
 
+    // ham thuc hien nhatj vu ki
     void ConTactWithWeapon()
     {
         if (isPlayerContact && itemType.itemTypeList == ItemTypeList.WEAPON)
@@ -39,6 +40,8 @@ public class CollisionItem : MonoBehaviour
 
                 selectWeapon.SelectWeapon(dataItem.ItemData.value); // item value để chưa index của vũ khí
                 Destroy(this.gameObject);
+
+                SoundManager.Instance.PlaySfx(TagInGame.levelUp);
                 contactTimer = 0f;
                 isPlayerContact = false;
             }
@@ -100,7 +103,7 @@ public class CollisionItem : MonoBehaviour
                 GameManager.Instance.PlayerCrtl.CharacterInfo.AddHeath(dataItem.ItemData.value);
                 break;
             case ItemTypeList.POTIONMANA:
-                GameManager.Instance.PlayerCrtl.CharacterInfo.AddHeath(dataItem.ItemData.value);
+                GameManager.Instance.PlayerCrtl.CharacterInfo.AddMana(dataItem.ItemData.value);
                 break;
             default:
                 break;

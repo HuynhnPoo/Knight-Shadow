@@ -15,6 +15,8 @@ MonoBehaviour:
   enemyName: Vampire
   HP: 100
   Speed: 5
-  dame: 10
+  dame: 3
   rapidAttack: 5
-  rangeAttack: 5
+  rangeAttack: 6
+  isBoss: 0
+  numberTimesAtk: 0

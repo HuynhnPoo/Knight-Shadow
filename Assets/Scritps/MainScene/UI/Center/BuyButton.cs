@@ -14,11 +14,11 @@ public class BuyButton : ButtonBase
 
     private void OnEnable()
     {
+
         if (shopBuy == null)
         {
             // Tìm ShopCharacter trước
             shopBuy = GetComponentInParent<ShopCharacter>();
-            
         }
 
     }

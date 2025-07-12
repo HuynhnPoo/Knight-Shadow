@@ -63,6 +63,8 @@ public class GameManager : SingletonBase<GameManager>
          if (scene.name ==UIManager.SceneType.GAMEPLAY.ToString()) // Hoặc enum nếu bạn dùng SceneType
         {
             PlayerCrtlInit();
+            currentLevel = 1;
+
         }
         else
         {
@@ -73,33 +75,29 @@ public class GameManager : SingletonBase<GameManager>
 
     public void PlayerCrtlInit()
     {
-
-
         playerCrtl = GameObject.FindGameObjectWithTag(TagInGame.player).GetComponent<PlayerController>();
     }
     private void Start()
     {
         saveGold = PlayerPrefs.GetInt("GoldSave");
+        saveGold = 10000000;
 
-    }
-    public void GameStart()
-    {
-        if (this.isGameOver == true || this.isWinGame == true)
-        {
-            UIManager.Instance.MenuGameOver.SetActive(true);
-        }
-    }
+        PlayerPrefs.SetInt("GoldSave", saveGold);
 
-    public void GameOver()
+        PlayerPrefs.Save();
+    }
+  
+    public void GameOverWin()
     {
         //PlayerPrefs.SetInt("GoldSave", totalGold);
+        if (this.isGameOver == true || this.isWinGame == true)
+        {
 
-        Debug.Log("hien thi game over");
-    }
+            Time.timeScale = 0;
+            UIManager.Instance.MenuGameOver.SetActive(true);
+        }
 
-    public void WinGame()
-    {
-        Debug.Log("win game");
+
     }
 
 
@@ -115,7 +113,7 @@ public class GameManager : SingletonBase<GameManager>
         else if (currentExperice == 20)
         {
             isWinGame = true;
-            //this.GameOver();
+            this.GameOverWin();
         }
     }
 
@@ -123,10 +121,11 @@ public class GameManager : SingletonBase<GameManager>
     public void AddGold(int goldScore)
     {
         totalGold += goldScore;
-        saveGold += totalGold;
-        Debug.Log("hien thi total gold" + totalGold);
-        Debug.Log("hien thi save Gold" + saveGold);
+        saveGold += goldScore;
+       /* Debug.Log("hien thi total gold" + totalGold);
+        Debug.Log("hien thi save Gold" + saveGold);*/
         PlayerPrefs.SetInt("GoldSave", saveGold);
+        PlayerPrefs.Save();
     }
 
     void UpLevel()
@@ -134,5 +133,7 @@ public class GameManager : SingletonBase<GameManager>
         currentExperice = 0;
         maxExperice *= 2;
         currentLevel++;
+
+        SoundManager.Instance.PlaySfx(TagInGame.levelUp);
     }
 }

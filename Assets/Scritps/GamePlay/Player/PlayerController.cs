@@ -65,22 +65,20 @@ public class PlayerController : MonoBehaviour, ICompoment
         }
         else if (Input.GetKeyUp(KeyCode.H))
         {
+            SoundManager.Instance.PlaySfx(TagInGame.hit);
             characterAni.AtkAni();
             stateManager.ChangeState(new AttackStatePlayer(weapon));
         }
-       else if (Input.GetKeyDown(KeyCode.V))
-        {/*
-            if (PotionSave.UsePotion())
-            {
-                Debug.Log("Potion used! Apply effect here.");
-            }*/
-
-          
-            Debug.Log("hien thi ra " + PotionSave.GetPotionCount("Heath-Full"));
-            Debug.Log("hien thi ra " + PotionSave.GetPotionCount("Mana-Full"));
+       else if (Input.GetKeyDown(KeyCode.Y))
+        {
+            characterInfo.AddHeath(PotionSave.UsePotion("Heath"));
+            
         }
-
-
+        else if (Input.GetKeyDown(KeyCode.U))
+        {
+            characterInfo.AddHeath(PotionSave.UsePotion("Mana"));
+            
+        }
 
         else
         {

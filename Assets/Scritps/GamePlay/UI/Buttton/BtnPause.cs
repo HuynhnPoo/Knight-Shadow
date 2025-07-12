@@ -11,16 +11,15 @@ public class BtnPause : ButtonBase
     private GameObject menuPause=> UIManager.Instance?.MenuPause;
     protected override void OnClick()
     {
+        SoundManager.Instance.PlaySfx(TagInGame.buttonClick);
         Pausing();
     }
 
-    private void OnEnable()
-    {
-    }
-
+   
     // bat menu pasue
     protected void Pausing()
     {
+        Debug.Log("hien thi ra " + menuPause.name + menuSetting.name+ GameManager.Instance.IsPaused);
         if (!GameManager.Instance.IsPaused) 
         {
             GameManager.Instance.IsPaused = true;

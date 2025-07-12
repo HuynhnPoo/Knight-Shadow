@@ -21,7 +21,7 @@ public class EnemyAttackZone : MonoBehaviour
 
     private void Start()
     {
-
+        Debug.Log("hien thi ra "+ enemyCrtl +spriteRenderer);
         radius = enemyCrtl.GetRangedAttack() * 100; // gan gia tri range cho radius
         CircleZone = new CircleZone(spriteRenderer,(int) radius);
         CircleZone.DrawCircle();

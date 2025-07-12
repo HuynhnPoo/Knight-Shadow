@@ -21,6 +21,8 @@ public class ButtonSetting : ButtonBase
     // Start is called before the first frame update
     protected override void OnClick()
     {
+        SoundManager.Instance.PlaySfx(TagInGame.buttonClick);
+
         OpenShop();
     }
 
